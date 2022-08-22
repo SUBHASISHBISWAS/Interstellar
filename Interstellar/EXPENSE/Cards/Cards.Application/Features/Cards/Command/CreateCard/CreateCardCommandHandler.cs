@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AutoMapper;
+
 using Cards.Application.Contracts.Persistance;
 using Cards.Domain.Entity;
 
@@ -12,7 +13,7 @@ using MediatR;
 
 using Microsoft.Extensions.Logging;
 
-namespace Cards.Application.Features.Cards.Command
+namespace Cards.Application.Features.Cards.Command.CreateCard
 {
     public class CreateCardCommandHandler : IRequestHandler<CreateCardCommand, int>
     {
@@ -30,7 +31,7 @@ namespace Cards.Application.Features.Cards.Command
         public async Task<int> Handle(CreateCardCommand request, CancellationToken cancellationToken)
         {
             var cardEntity = _mapper.Map<Card>(request);
-            var newCard= await _cardRepository.AddAsync(cardEntity);
+            var newCard = await _cardRepository.AddAsync(cardEntity);
             _logger.LogInformation($"Card {newCard.CardId} is successfully created");
             return newCard.Id;
         }
