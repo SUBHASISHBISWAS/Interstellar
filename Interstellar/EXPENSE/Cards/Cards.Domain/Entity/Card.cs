@@ -25,9 +25,6 @@ namespace Cards.Domain.Entity
 
         public DateTime CardStatementDate { get; set; }
 
-        public static implicit operator Card(Card v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
