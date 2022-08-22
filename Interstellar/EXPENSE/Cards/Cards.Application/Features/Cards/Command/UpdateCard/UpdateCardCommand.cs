@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Cards.Application.Features.Cards.Command.UpdateCard
 {
-    internal class UpdateCardCommand:IRequest
+    public class UpdateCardCommand:IRequest
     {
         public Guid CardId { get; set; }
 
