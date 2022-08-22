@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using Cards.Application.Contracts.Persistance;
+using Cards.Application.Exceptions;
 using Cards.Application.Features.Cards.Command.CreateCard;
 using Cards.Domain.Entity;
 
@@ -35,7 +36,7 @@ namespace Cards.Application.Features.Cards.Command.UpdateCard
             if (cardToUpdate==null)
             {
                 _logger.LogError("Card does not Exist in database");
-                //throw new NotFoundException(nameof(Order), request.Id);
+                throw new NotFoundException(nameof(Card), request.CardId);
             }
 
             _mapper.Map(request, cardToUpdate, typeof(UpdateCardCommand), typeof(Card));

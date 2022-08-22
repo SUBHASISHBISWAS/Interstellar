@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using Cards.Application.Contracts.Persistance;
+using Cards.Application.Exceptions;
 using Cards.Application.Features.Cards.Command.CreateCard;
+using Cards.Domain.Entity;
 
 using MediatR;
 
@@ -34,6 +36,7 @@ namespace Cards.Application.Features.Cards.Command.DeleteCard
             if (cardToDelete == null)
             {
                 _logger.LogError("Card does not Exist in database");
+                throw new NotFoundException(nameof(Card), request.CardId);
             }
 
             await _cardRepository.DeleteAsync(cardToDelete);
