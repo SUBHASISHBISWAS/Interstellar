@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
-using Cards.Application.Features.Cards.Command;
+using Cards.Application.Features.Cards.Command.CreateCard;
 using Cards.Application.Features.Cards.Queries.GetCards;
 using Cards.Domain.Entity;
 

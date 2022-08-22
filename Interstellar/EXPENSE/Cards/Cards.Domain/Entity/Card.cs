@@ -11,7 +11,7 @@ namespace Cards.Domain.Entity
 {
     public class Card:EntityBase
     {
-        public Guid? CardId { get; set; }
+        public Guid CardId { get; set; }
         
         public string? CardName { get; set; }
        
@@ -24,5 +24,10 @@ namespace Cards.Domain.Entity
         public DateTime CardExpieryDate { get; set; }
 
         public DateTime CardStatementDate { get; set; }
+
+        public static implicit operator Card(Card v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

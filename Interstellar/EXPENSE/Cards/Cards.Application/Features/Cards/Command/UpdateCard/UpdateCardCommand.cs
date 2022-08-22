@@ -8,9 +8,9 @@ using Cards.Domain.Enums;
 
 using MediatR;
 
-namespace Cards.Application.Features.Cards.Command.CreateCard
+namespace Cards.Application.Features.Cards.Command.UpdateCard
 {
-    public class CreateCardCommand : IRequest<int>
+    internal class UpdateCardCommand:IRequest
     {
         public Guid CardId { get; set; }
 
