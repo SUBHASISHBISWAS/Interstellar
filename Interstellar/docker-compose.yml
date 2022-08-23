@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:                 
+  cardsdb:
+    image: mongo
+
+  cards.api:
+    image: ${DOCKER_REGISTRY-}cardsapi
+    build:
+      context: .
+      dockerfile: EXPENSE/Cards/Cards.API/Dockerfile
+volumes:
+  mongo_data:

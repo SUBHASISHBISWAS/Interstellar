@@ -19,7 +19,7 @@ namespace Cards.Infrastructure.Repository
 
         public Task<IEnumerable<Card>> GetAllCards(CardTypes cardTypes)
         {
-            throw new NotImplementedException();
+            return GetAllAsync();
         }
     }
 }
