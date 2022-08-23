@@ -31,7 +31,7 @@ namespace Cards.API.Controllers
         {
             CardTypes CardTypeEnum;
             Enum.TryParse<CardTypes>(cardType, true, out CardTypeEnum);
-            var query = new GetCardListQuery(CardTypeEnum);
+            var query = new GetCardListByCardTypeQuery(CardTypeEnum);
             var cards=await _mediator.Send(query);
             return Ok(cards);
         }

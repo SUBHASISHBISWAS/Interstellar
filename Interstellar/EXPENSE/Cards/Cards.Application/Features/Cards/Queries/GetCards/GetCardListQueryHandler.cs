@@ -12,7 +12,7 @@ using MediatR;
 
 namespace Cards.Application.Features.Cards.Queries.GetCards
 {
-    public class GetCardListQueryHandler : IRequestHandler<GetCardListQuery, List<CardVm>>
+    public class GetCardListQueryHandler : IRequestHandler<GetCardListByCardTypeQuery, List<CardVm>>
     {
         private readonly ICardRepository _cardRepository;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace Cards.Application.Features.Cards.Queries.GetCards
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<List<CardVm>> Handle(GetCardListQuery request, CancellationToken cancellationToken)
+        public async Task<List<CardVm>> Handle(GetCardListByCardTypeQuery request, CancellationToken cancellationToken)
         {
             var cardList= await _cardRepository.GetAllCards(request.CardTypes);
             return _mapper.Map<List<CardVm>>(cardList);

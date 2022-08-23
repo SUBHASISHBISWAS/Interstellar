@@ -10,11 +10,11 @@ using MediatR;
 
 namespace Cards.Application.Features.Cards.Queries.GetCards
 {
-    public class GetCardListQuery:IRequest<List<CardVm>>
+    public class GetCardListByCardTypeQuery:IRequest<List<CardVm>>
     {
         public CardTypes CardTypes { get; set; }
 
-        public GetCardListQuery(CardTypes cardTypes)
+        public GetCardListByCardTypeQuery(CardTypes cardTypes)
         {
             CardTypes = cardTypes;
         }
