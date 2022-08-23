@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Cards.Application.Features.Cards.Command.CreateCard
 {
-    public class CreateCardCommand : IRequest<int>
+    public class CreateCardCommand : IRequest<string>
     {
         public Guid CardId { get; set; }
 

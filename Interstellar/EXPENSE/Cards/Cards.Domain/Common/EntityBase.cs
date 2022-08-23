@@ -13,7 +13,7 @@ namespace Cards.Domain.Common
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public int CardId { get; protected set; }
+        public string? CardId { get; protected set; }
         public string? CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public string? LastModifiedBy { get; set; }

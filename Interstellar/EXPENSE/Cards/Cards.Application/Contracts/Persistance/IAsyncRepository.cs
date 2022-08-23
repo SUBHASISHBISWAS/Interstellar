@@ -11,7 +11,7 @@ namespace Cards.Application.Contracts.Persistance
 {
     public interface IAsyncRepository<T> where T : EntityBase
     {
-		Task<IReadOnlyList<T>> GetAllAsync();
+		Task<IEnumerable<T>> GetAllAsync();
 
 		//Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate);
 
@@ -26,7 +26,7 @@ namespace Cards.Application.Contracts.Persistance
 		Task<T> GetByIdAsync(string id);
 
 		Task<T> AddAsync(T entity);
-		Task UpdateAsync(T entity);
-		Task DeleteAsync(T entity);
+		Task<bool?> UpdateAsync(T entity);
+		Task<bool?> DeleteAsync(T entity);
 	}
 }

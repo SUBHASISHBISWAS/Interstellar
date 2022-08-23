@@ -15,7 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Cards.Application.Features.Cards.Command.CreateCard
 {
-    public class CreateCardCommandHandler : IRequestHandler<CreateCardCommand, int>
+    public class CreateCardCommandHandler : IRequestHandler<CreateCardCommand, string>
     {
         private readonly ICardRepository _cardRepository;
         private readonly IMapper _mapper;
@@ -28,12 +28,12 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<int> Handle(CreateCardCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateCardCommand request, CancellationToken cancellationToken)
         {
             var cardEntity = _mapper.Map<Card>(request);
             var newCard = await _cardRepository.AddAsync(cardEntity);
             _logger.LogInformation($"Card {newCard.CardId} is successfully created");
-            return newCard.CardId;
+            return newCard.CardId!;
         }
     }
 }
