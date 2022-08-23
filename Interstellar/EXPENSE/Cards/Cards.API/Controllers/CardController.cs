@@ -3,9 +3,9 @@
 using Cards.Application.Features.Cards.Command.CreateCard;
 using Cards.Application.Features.Cards.Command.DeleteCard;
 using Cards.Application.Features.Cards.Command.UpdateCard;
-using Cards.Application.Features.Cards.Queries.GetCards;
 using Cards.Application.Features.Cards.Queries.GetCards.GetAllCards;
 using Cards.Application.Features.Cards.Queries.GetCards.GetCardListByCardTypeQuery;
+using Cards.Application.Features.Cards.Queries.GetCards.ViewModel;
 using Cards.Domain.Enums;
 
 using MediatR;

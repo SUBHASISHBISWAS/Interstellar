@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Cards.Domain.Enums;
 
-namespace Cards.Application.Features.Cards.Queries.GetCards
+namespace Cards.Application.Features.Cards.Queries.GetCards.ViewModel
 {
     public class CardVm
     {

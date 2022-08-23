@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 
 using Cards.Application.Contracts.Persistance;
+using Cards.Application.Features.Cards.Queries.GetCards.ViewModel;
 
 using MediatR;
 
