@@ -58,7 +58,7 @@ namespace Cards.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> DeleteCard(Guid cardId)
+        public async Task<ActionResult> DeleteCard(string cardId)
         {
             var command = new DeleteCardCommand() { CardId = cardId };
             await _mediator.Send(command);

@@ -33,7 +33,7 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
             var cardEntity = _mapper.Map<Card>(request);
             var newCard = await _cardRepository.AddAsync(cardEntity);
             _logger.LogInformation($"Card {newCard.CardId} is successfully created");
-            return newCard.Id;
+            return newCard.CardId;
         }
     }
 }

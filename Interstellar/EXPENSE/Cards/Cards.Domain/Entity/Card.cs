@@ -11,7 +11,6 @@ namespace Cards.Domain.Entity
 {
     public class Card:EntityBase
     {
-        public Guid CardId { get; set; }
         
         public string? CardName { get; set; }
        

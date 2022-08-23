@@ -14,6 +14,9 @@ namespace Cards.Application.Features.Cards.Queries.GetCards
     {
         public CardTypes CardTypes { get; set; }
 
-        public GetCardListQuery(CardTypes cardTypes) => CardTypes = cardTypes;
+        public GetCardListQuery(CardTypes cardTypes)
+        {
+            CardTypes = cardTypes;
+        }
     }
 }

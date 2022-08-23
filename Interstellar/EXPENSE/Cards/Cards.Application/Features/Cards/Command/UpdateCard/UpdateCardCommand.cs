@@ -8,11 +8,16 @@ using Cards.Domain.Enums;
 
 using MediatR;
 
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
 namespace Cards.Application.Features.Cards.Command.UpdateCard
 {
     public class UpdateCardCommand:IRequest
     {
-        public Guid CardId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? CardId { get; set; }
 
         public string? CardName { get; set; }
 

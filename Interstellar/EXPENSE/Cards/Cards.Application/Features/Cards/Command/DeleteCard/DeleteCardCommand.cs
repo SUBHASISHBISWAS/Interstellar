@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 using MediatR;
 
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
 namespace Cards.Application.Features.Cards.Command.DeleteCard
 {
     public class DeleteCardCommand : IRequest
     {
-        public Guid CardId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? CardId { get; set; }
     }
 }

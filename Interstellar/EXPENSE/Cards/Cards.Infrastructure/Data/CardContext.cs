@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Cards.Domain.Entity;
+
+using Microsoft.Extensions.Configuration;
+
+using MongoDB.Driver;
+
+namespace Cards.Infrastructure.Data
+{
+    public class CardContext : ICardContext
+    {
+        public CardContext(IConfiguration configuration)
+        {
+            var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
+            var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
+            Cards = database.GetCollection<Card>(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
+
+            CardContextSeed.SeedData(Cards);
+        }
+        public IMongoCollection<Card> Cards { get; }
+    }
+}
