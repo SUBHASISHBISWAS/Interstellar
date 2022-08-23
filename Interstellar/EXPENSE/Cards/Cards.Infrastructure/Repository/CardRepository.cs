@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 using Cards.Application.Contracts.Persistance;
 using Cards.Domain.Entity;
 using Cards.Domain.Enums;
 using Cards.Infrastructure.Data;
+
+using MongoDB.Driver;
 
 namespace Cards.Infrastructure.Repository
 {
@@ -17,9 +20,10 @@ namespace Cards.Infrastructure.Repository
         {
         }
 
-        public Task<IEnumerable<Card>> GetAllCards(CardTypes cardTypes)
-        {
-            return GetAllAsync();
+        public async Task<IEnumerable<Card>> GetAllCards(CardTypes cardTypes)
+{
+            FilterDefinition<Card> filter = Builders<Card>.Filter.Eq(p => p.CardType, cardTypes);
+            return await _context.Cards.Find(filter).ToListAsync();
         }
     }
 }

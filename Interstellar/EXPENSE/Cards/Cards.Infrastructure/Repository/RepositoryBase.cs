@@ -15,7 +15,7 @@ namespace Cards.Infrastructure.Repository
 {
     public class RepositoryBase<T> : IAsyncRepository<Card> where T : EntityBase
     {
-        private readonly ICardContext _context;
+        protected readonly ICardContext _context;
 
         public RepositoryBase(ICardContext context)
         {
