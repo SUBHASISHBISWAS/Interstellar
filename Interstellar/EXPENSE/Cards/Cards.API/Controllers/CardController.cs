@@ -4,6 +4,7 @@ using Cards.Application.Features.Cards.Command.CreateCard;
 using Cards.Application.Features.Cards.Command.DeleteCard;
 using Cards.Application.Features.Cards.Command.UpdateCard;
 using Cards.Application.Features.Cards.Queries.GetCards;
+using Cards.Application.Features.Cards.Queries.GetCards.GetAllCards;
 using Cards.Application.Features.Cards.Queries.GetCards.GetCardListByCardTypeQuery;
 using Cards.Domain.Enums;
 
@@ -25,7 +26,17 @@ namespace Cards.API.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpGet("{cardType}", Name = "GetCards")]
+        [HttpGet(Name = "GetCards")]
+        [ProducesResponseType(typeof(IEnumerable<CardVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<CardVm>>> GetAllCards()
+        {
+            
+            var query = new GetCardListQuery();
+            var cards = await _mediator.Send(query);
+            return Ok(cards);
+        }
+
+        [HttpGet("{cardType}", Name = "GetCardsByCardType")]
         [ProducesResponseType(typeof(IEnumerable<CardVm>), (int)HttpStatusCode.OK)]
 
         public async Task<ActionResult<IEnumerable<CardVm>>> GetCardsByCardType(string cardType)
