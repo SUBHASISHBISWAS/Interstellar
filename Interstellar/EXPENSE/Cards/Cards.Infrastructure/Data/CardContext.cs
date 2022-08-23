@@ -16,7 +16,8 @@ namespace Cards.Infrastructure.Data
     {
         public CardContext(IConfiguration configuration)
         {
-            var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
+            var x = configuration.GetValue<string>("DatabaseSettings:ConnectionString");
+            var client = new MongoClient(x);
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
             Cards = database.GetCollection<Card>(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
 

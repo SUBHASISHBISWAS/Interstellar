@@ -10,7 +10,7 @@ namespace Cards.Application.Features.Cards.Queries.GetCards
 {
     public class CardVm
     {
-        public Guid? CardId { get; set; }
+        public string? CardId { get; set; }
 
         public string? CardName { get; set; }
 
