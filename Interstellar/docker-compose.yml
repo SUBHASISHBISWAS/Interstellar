@@ -1,6 +1,9 @@
 version: '3.4'
 
-services:                 
+services:
+  portainer:
+    image: portainer/portainer-ce
+
   cardsdb:
     image: mongo
 
@@ -11,3 +14,4 @@ services:
       dockerfile: EXPENSE/Cards/Cards.API/Dockerfile
 volumes:
   mongo_data:
+  portainer_data:

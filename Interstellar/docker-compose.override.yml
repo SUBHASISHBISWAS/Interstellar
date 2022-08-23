@@ -9,6 +9,7 @@ services:
     volumes:
       - mongo_data:/data/db
   cards.api:
+    container_name: cards.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=mongodb://cardsdb:27017"
@@ -16,3 +17,13 @@ services:
       - cardsdb
     ports:
       - "8000:80"
+   
+  portainer:
+    container_name: portainer
+    restart: always
+    ports:
+      - "8080:8000"
+      - "8500:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
