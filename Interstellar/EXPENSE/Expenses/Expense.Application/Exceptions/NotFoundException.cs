@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cards.Application.Exceptions
+namespace Expense.Application.Exceptions
 {
     public class NotFoundException : ApplicationException
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using FluentValidation.Results;
 
-namespace Cards.Application.Exceptions
+namespace Expense.Application.Exceptions
 {
     public class ValidationException : ApplicationException
     {
