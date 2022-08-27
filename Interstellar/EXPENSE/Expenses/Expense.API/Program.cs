@@ -1,4 +1,5 @@
 using Expense.Application;
+using Expense.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Configure Custom Services
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 
 // Configure the HTTP request pipeline.
