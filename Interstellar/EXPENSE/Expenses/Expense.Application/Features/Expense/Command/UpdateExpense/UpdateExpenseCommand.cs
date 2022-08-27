@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Expense.Application.Features.Expense.Command.UpdateExpense
 {
-    internal class UpdateExpenseCommand : IRequest
+    public class UpdateExpenseCommand : IRequest
     {
         public int TransactionId { get; set; }
         public double TransactionAmout { get; set; }
