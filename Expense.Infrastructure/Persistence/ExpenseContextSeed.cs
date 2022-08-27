@@ -13,12 +13,12 @@ namespace Expense.Infrastructure.Persistence
     public class ExpenseContextSeed
     {
 
-        public static async Task SeedAsync(ExpenseContext orderContext, ILogger<ExpenseContext> logger)
+        public static async Task SeedAsync(ExpenseContext expenseContext, ILogger<ExpenseContext> logger)
         {
-            if (!orderContext.Transactions.Any())
+            if (!expenseContext.Transactions.Any())
             {
-                orderContext.Transactions.AddRange(GetPreconfiguredOrders());
-                await orderContext.SaveChangesAsync();
+                expenseContext.Transactions.AddRange(GetPreconfiguredOrders());
+                await expenseContext.SaveChangesAsync();
                 logger.LogInformation("Seed database associated with context {DbContextName}", typeof(ExpenseContextSeed).Name);
             }
         }

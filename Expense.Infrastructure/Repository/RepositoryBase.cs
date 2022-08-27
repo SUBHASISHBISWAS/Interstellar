@@ -32,6 +32,11 @@ namespace Expense.Infrastructure.Repository
             return await _dbContext.Set<T>().Where(predicate).ToListAsync();
         }
 
+        public async Task<T> GetByIdAsync(int id)
+        {
+            return await _dbContext.Set<T>().FindAsync(id);
+        }
+
         public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>,
             IOrderedQueryable<T>>? orderBy = null, string? includeString = null, bool disableTracking = true)
         {
@@ -83,10 +88,7 @@ namespace Expense.Infrastructure.Repository
             return await query.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
-        {
-            return await _dbContext.Set<T>().FindAsync(id);
-        }
+       
 
 
         public async Task<T> AddAsync(T entity)

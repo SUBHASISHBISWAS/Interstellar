@@ -13,7 +13,7 @@ namespace Expense.Infrastructure.Persistence
 {
     public class ExpenseContext : DbContext
     {
-        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Transaction>? Transactions { get; set; }
 
         public ExpenseContext(DbContextOptions<ExpenseContext> options) : base(options)
         {
