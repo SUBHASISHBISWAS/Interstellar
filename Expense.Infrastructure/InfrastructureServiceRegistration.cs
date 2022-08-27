@@ -8,6 +8,7 @@ using Expense.Application.Contracts.Persistance;
 using Expense.Infrastructure.Persistence;
 using Expense.Infrastructure.Repository;
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +18,11 @@ namespace Expense.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<ExpenseContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"));
+            });
+
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<ExpenseContext, ExpenseContext>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
