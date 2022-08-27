@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Interstellar\EXPENSE\Expenses\Expense.Application\Expense.Application.csproj" />
+  </ItemGroup>
+
 </Project>
