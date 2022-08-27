@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using Expense.Application.Contracts.Persistance;
+using Expense.Application.Exceptions;
 using Expense.Application.Features.Expense.Command.CreateExpense;
 using Expense.Domain.Entities;
 
@@ -35,6 +36,7 @@ namespace Expense.Application.Features.Expense.Command.UpdateExpense
             if (expenseToUpdate==null)
             {
                 _logger.LogError("Transation does not Exist in Database");
+                throw new NotFoundException(nameof(Transaction), request.TransactionId);
             }
 
             _mapper.Map(request, expenseToUpdate, typeof(UpdateExpenseCommand), typeof(Transaction));

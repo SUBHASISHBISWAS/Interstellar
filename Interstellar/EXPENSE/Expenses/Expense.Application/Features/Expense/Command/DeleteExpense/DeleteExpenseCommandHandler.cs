@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 using Expense.Application.Contracts.Persistance;
+using Expense.Application.Exceptions;
 using Expense.Application.Features.Expense.Command.CreateExpense;
 using Expense.Application.Features.Expense.Command.UpdateExpense;
+using Expense.Domain.Entities;
 
 using MediatR;
 
@@ -36,6 +38,7 @@ namespace Expense.Application.Features.Expense.Command.DeleteExpense
             if (expenseToDelete == null)
             {
                 _logger.LogError("Transation does not Exist in Database");
+                throw new NotFoundException(nameof(Transaction), request.TransactionId);
             }
 
             await _expenseRepository.DeleteAsync(expenseToDelete);
