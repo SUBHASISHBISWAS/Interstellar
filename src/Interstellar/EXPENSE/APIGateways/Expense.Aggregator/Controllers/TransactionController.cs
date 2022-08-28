@@ -30,23 +30,24 @@ namespace Expense.Aggregator.Controllers
             var expenses = new List<ExpenseDetailModel>();
             var transactions = await _expenseService.GetAllTransactions();
 
-            transactions?.ToList().ForEach(async transaction =>
+            foreach (var transaction in transactions)
             {
                 var card = await _cardService.GetCard(transaction.TransactionCard);
                 expenses.Add(new ExpenseDetailModel()
                 {
-                    CardName=card.CardName,
-                    ExpenseAmount=transaction.TransactionAmout,
-                    ExpenseDate=transaction.TransactionDate,
-                    ExpenseDecription=transaction.TransactionDecription,
-                    ExpenseType=transaction.TransactionType
-        
+                    CardName = card.CardName,
+                    ExpenseAmount = transaction.TransactionAmout,
+                    ExpenseDate = transaction.TransactionDate,
+                    ExpenseDecription = transaction.TransactionDecription,
+                    ExpenseType = transaction.TransactionType
+
                 });
-            });
-
-
-            return Ok(expenses);
+            }
             
+            return Ok(expenses);
+
+
+
         }
     }
 }
