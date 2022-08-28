@@ -21,6 +21,13 @@ services:
       context: .
       dockerfile: EXPENSE/Expenses/Expense.API/Dockerfile
 
+  ocelotapigw:
+    image: ${DOCKER_REGISTRY-}ocelotapigw
+    build:
+      context: .
+      dockerfile: EXPENSE/OcelotApiGw/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
+

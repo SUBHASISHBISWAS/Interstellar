@@ -1,0 +1,31 @@
+{
+  "Routes": [
+
+    {
+      "DownstreamPathTemplate": "/api/v1/card",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/Card",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/expense",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": "8001"
+        }
+      ],
+      "UpstreamPathTemplate": "/Expense",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    }
+  ]
+}

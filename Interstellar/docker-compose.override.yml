@@ -48,3 +48,14 @@ services:
     ports:
         - "8001:80"
 
+
+  ocelotapigw:
+    container_name: ocelotapigw
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+        - cards.api
+        - expense.api
+    ports:
+        - "8010:80"
+
