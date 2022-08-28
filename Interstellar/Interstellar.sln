@@ -9,27 +9,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cards", "Cards", "{FD6341CE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Expenses", "Expenses", "{1644730E-8FAB-4761-8952-728D0FB8416D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cards.API", "EXPENSE\Cards\Cards.API\Cards.API.csproj", "{6F9B7DEB-0569-4178-A8A6-507A5BC44E61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cards.API", "EXPENSE\Services\Cards\Cards.API\Cards.API.csproj", "{6F9B7DEB-0569-4178-A8A6-507A5BC44E61}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cards.Application", "EXPENSE\Cards\Cards.Application\Cards.Application.csproj", "{9F8B7631-44DE-4B8B-9CFA-F74F12145E5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cards.Application", "EXPENSE\Services\Cards\Cards.Application\Cards.Application.csproj", "{9F8B7631-44DE-4B8B-9CFA-F74F12145E5B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cards.Domain", "EXPENSE\Cards\Cards.Domain\Cards.Domain.csproj", "{8CAC5FA3-8544-4AC6-8067-70EC32BD3C21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cards.Domain", "EXPENSE\Services\Cards\Cards.Domain\Cards.Domain.csproj", "{8CAC5FA3-8544-4AC6-8067-70EC32BD3C21}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cards.Infrastructure", "EXPENSE\Cards\Cards.Infrastructure\Cards.Infrastructure.csproj", "{CADDCD09-5D39-4AF9-AE42-D7B3F6D3838B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cards.Infrastructure", "EXPENSE\Services\Cards\Cards.Infrastructure\Cards.Infrastructure.csproj", "{CADDCD09-5D39-4AF9-AE42-D7B3F6D3838B}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{383A043D-A9E7-4C0A-B0B5-96177A63409C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expense.API", "EXPENSE\Expenses\Expense.API\Expense.API.csproj", "{F01CC1C5-EB8F-49FB-9D7F-A01EAE36D1A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expense.API", "EXPENSE\Services\Expenses\Expense.API\Expense.API.csproj", "{F01CC1C5-EB8F-49FB-9D7F-A01EAE36D1A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expense.Application", "EXPENSE\Expenses\Expense.Application\Expense.Application.csproj", "{5133B269-F749-41B2-BEEC-54357EBA3E41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expense.Application", "EXPENSE\Services\Expenses\Expense.Application\Expense.Application.csproj", "{5133B269-F749-41B2-BEEC-54357EBA3E41}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expense.Domain", "EXPENSE\Expenses\Expense.Domain\Expense.Domain.csproj", "{321AD513-E56E-4EC6-995B-E993B7F6603F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expense.Domain", "EXPENSE\Services\Expenses\Expense.Domain\Expense.Domain.csproj", "{321AD513-E56E-4EC6-995B-E993B7F6603F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expense.Infrastructure", "EXPENSE\Expenses\Expense.Infrastructure\Expense.Infrastructure.csproj", "{3A24E2ED-CDD0-4C9F-90F0-12224125FE35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expense.Infrastructure", "EXPENSE\Services\Expenses\Expense.Infrastructure\Expense.Infrastructure.csproj", "{3A24E2ED-CDD0-4C9F-90F0-12224125FE35}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", "{6F58BB80-8E7D-4E43-930F-286FDB8277C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGw", "EXPENSE\OcelotApiGw\OcelotApiGw.csproj", "{A3791DA9-3E2A-4198-81F3-CD5F8B7FEE76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGw", "EXPENSE\APIGateways\OcelotApiGw\OcelotApiGw.csproj", "{A3791DA9-3E2A-4198-81F3-CD5F8B7FEE76}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AE10C1A0-7F09-408D-B6EB-BF82E1A8C20A}"
 EndProject
