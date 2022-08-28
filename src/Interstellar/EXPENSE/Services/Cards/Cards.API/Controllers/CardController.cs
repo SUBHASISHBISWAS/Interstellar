@@ -4,6 +4,7 @@ using Cards.Application.Features.Cards.Command.CreateCard;
 using Cards.Application.Features.Cards.Command.DeleteCard;
 using Cards.Application.Features.Cards.Command.UpdateCard;
 using Cards.Application.Features.Cards.Queries.GetCards.GetAllCards;
+using Cards.Application.Features.Cards.Queries.GetCards.GetCardById;
 using Cards.Application.Features.Cards.Queries.GetCards.GetCardListByCardTypeQuery;
 using Cards.Application.Features.Cards.Queries.GetCards.ViewModel;
 using Cards.Domain.Enums;
@@ -36,7 +37,18 @@ namespace Cards.API.Controllers
             return Ok(cards);
         }
 
-        [HttpGet("{cardType}", Name = "GetCardsByCardType")]
+        [HttpGet("GetCardById/{id}", Name = "GetCardById")]
+        [ProducesResponseType(typeof(CardVm), (int)HttpStatusCode.OK)]
+
+        public async Task<ActionResult<CardVm>> GetCardById(string id)
+        {
+          
+            var query = new GetCardByIdQuery(id);
+            var cards = await _mediator.Send(query);
+            return Ok(cards);
+        }
+
+        [HttpGet("GetCardsByCardType/{cardType}", Name = "GetCardsByCardType")]
         [ProducesResponseType(typeof(IEnumerable<CardVm>), (int)HttpStatusCode.OK)]
 
         public async Task<ActionResult<IEnumerable<CardVm>>> GetCardsByCardType(string cardType)

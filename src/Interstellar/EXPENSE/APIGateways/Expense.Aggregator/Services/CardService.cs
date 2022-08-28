@@ -14,7 +14,7 @@ namespace Expense.Aggregator.Services
 
         public async Task<CardModel> GetCard(string id)
         {
-            var response = await _httpClient.GetAsync($"/api/v1/Catalog/{id}");
+            var response = await _httpClient.GetAsync($"/api/v1/card/GetCardById/{id}");
             return await response.ReadContentAs<CardModel>();
         }
 
