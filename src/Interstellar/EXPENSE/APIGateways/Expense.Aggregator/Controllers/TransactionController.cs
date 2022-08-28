@@ -9,7 +9,7 @@ namespace Expense.Aggregator.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class TransactionController
+    public class TransactionController:ControllerBase
     {
 
         private readonly ICardService _cardService;
@@ -23,9 +23,9 @@ namespace Expense.Aggregator.Controllers
 
 
 
-        [HttpGet("{userName}", Name = "GetExpenses")]
+        [HttpGet(Name = "GetExpenses")]
         [ProducesResponseType(typeof(IEnumerable<ExpenseDetailModel>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<ExpenseDetailModel>>> GetExpenses(string userName)
+        public async Task<ActionResult<IEnumerable<ExpenseDetailModel>>> GetExpenses()
         {
             var expenses = new List<ExpenseDetailModel>();
             var transactions = await _expenseService.GetAllTransactions();
@@ -45,7 +45,7 @@ namespace Expense.Aggregator.Controllers
             });
 
 
-            return expenses;
+            return Ok(expenses);
             
         }
     }
