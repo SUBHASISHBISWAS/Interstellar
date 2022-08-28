@@ -12,13 +12,13 @@ namespace Expense.Aggregator.Services
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
-        public async Task<IEnumerable<TransactionModel>> GetAllExpenses()
+        public async Task<IEnumerable<TransactionModel>> GetAllTransactions()
         {
             var response = await _httpClient.GetAsync("api/v1/card");
             return await response.ReadContentAs<List<TransactionModel>>();
         }
 
-        public async Task<TransactionModel> GetExpenseById(int id)
+        public async Task<TransactionModel> GetTransactionById(int id)
         {
             var response = await _httpClient.GetAsync($"/api/v1/Catalog/{id}");
             return await response.ReadContentAs<TransactionModel>();

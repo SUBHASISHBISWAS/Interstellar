@@ -9,7 +9,7 @@
 
         public string? TransactionDecription { get; set; }
 
-        public string? TransactionCard { get; set; }
+        public string TransactionCard { get; set; }
 
         public DateTime TransactionDate { get; set; }
     }
