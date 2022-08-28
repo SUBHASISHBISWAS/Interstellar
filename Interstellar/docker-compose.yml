@@ -6,12 +6,21 @@ services:
 
   cardsdb:
     image: mongo
+  
+  expensedb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
 
   cards.api:
     image: ${DOCKER_REGISTRY-}cardsapi
     build:
       context: .
       dockerfile: EXPENSE/Cards/Cards.API/Dockerfile
+  expense.api:
+    image: ${DOCKER_REGISTRY-}expenseapi
+    build:
+      context: .
+      dockerfile: EXPENSE/Expenses/Expense.API/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:

@@ -34,7 +34,6 @@ namespace Expense.Infrastructure.Persistence
                     TransactionCard="6304d7cb142a8d1bc9a41916",
                     TransactionDecription="Bought Apple Phone",
                     TransactionType="Card",
-                    TransactionId=1
                     
                 }
             };
