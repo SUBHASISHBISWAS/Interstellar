@@ -14,20 +14,22 @@ services:
     image: ${DOCKER_REGISTRY-}cardsapi
     build:
       context: .
-      dockerfile: EXPENSE/Cards/Cards.API/Dockerfile
+      dockerfile: EXPENSE/Services/Cards/Cards.API/Dockerfile
   expense.api:
     image: ${DOCKER_REGISTRY-}expenseapi
     build:
       context: .
-      dockerfile: EXPENSE/Expenses/Expense.API/Dockerfile
+      dockerfile: EXPENSE/Services/Expenses/Expense.API/Dockerfile
 
   ocelotapigw:
     image: ${DOCKER_REGISTRY-}ocelotapigw
     build:
       context: .
-      dockerfile: EXPENSE/OcelotApiGw/Dockerfile
+      dockerfile: EXPENSE/APIGateways/OcelotApiGw/Dockerfile
+
 
 volumes:
   mongo_data:
   portainer_data:
+
 

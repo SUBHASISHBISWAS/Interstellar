@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["EXPENSE/OcelotApiGw/OcelotApiGw.csproj", "EXPENSE/OcelotApiGw/"]
-RUN dotnet restore "EXPENSE/OcelotApiGw/OcelotApiGw.csproj"
+COPY ["EXPENSE/APIGateways/OcelotApiGw/OcelotApiGw.csproj", "EXPENSE/APIGateways/OcelotApiGw/"]
+RUN dotnet restore "EXPENSE/APIGateways/OcelotApiGw/OcelotApiGw.csproj"
 COPY . .
-WORKDIR "/src/EXPENSE/OcelotApiGw"
+WORKDIR "/src/EXPENSE/APIGateways/OcelotApiGw"
 RUN dotnet build "OcelotApiGw.csproj" -c Release -o /app/build
 
 FROM build AS publish
