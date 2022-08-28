@@ -18,13 +18,16 @@ namespace Expense.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
+
+            var assemblyName = typeof(ExpenseContext).Namespace;
             services.AddDbContext<ExpenseContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"));
+                options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString"),options=>options.MigrationsAssembly(assemblyName));
             });
 
-            services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<ExpenseContext, ExpenseContext>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
 
             return services;

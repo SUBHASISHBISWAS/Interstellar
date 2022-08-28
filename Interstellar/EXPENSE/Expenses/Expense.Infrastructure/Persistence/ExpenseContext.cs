@@ -9,7 +9,7 @@ using Expense.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace Expense.Infrastructure.Persistence
+namespace Expense.Infrastructure
 {
     public class ExpenseContext : DbContext
     {
