@@ -13,7 +13,7 @@ namespace Expense.Infrastructure.Persistence
     public class ExpenseContextSeed
     {
 
-        public static async Task SeedAsync(ExpenseContext expenseContext, ILogger<ExpenseContext> logger)
+        public static async Task SeedAsync(ExpenseContext expenseContext, ILogger<ExpenseContextSeed> logger)
         {
             if (!expenseContext.Transactions.Any())
             {

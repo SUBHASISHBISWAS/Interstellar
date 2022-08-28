@@ -1,3 +1,4 @@
+using Expense.API.Extensions;
 using Expense.Application;
 using Expense.Infrastructure;
 using Expense.Infrastructure.Persistence;
@@ -14,17 +15,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configure Custom Services
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
 
 var app = builder.Build();
-var assemblyName = typeof(ExpenseContext).Namespace;
-//builder.Services.AddDbContext<ExpenseContext>(options =>
-//{
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("OrderingConnectionString"), options => options.MigrationsAssembly(assemblyName));
-//});
-// Configure Custom Services
+
+app.MigrateDatabase<ExpenseContext>((context, services) =>
+{
+    var logger= services.GetService<ILogger<ExpenseContextSeed>>();
+    ExpenseContextSeed.SeedAsync(context, logger).Wait();
+});
 
 
 // Configure the HTTP request pipeline.
