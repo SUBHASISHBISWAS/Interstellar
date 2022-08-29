@@ -23,28 +23,28 @@ namespace Expense.Aggregator.Controllers
 
 
 
-        [HttpGet(Name = "GetExpenses")]
+        [HttpGet(Name = "GetTransactions")]
         [ProducesResponseType(typeof(IEnumerable<TransactionModel>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<TransactionModel>>> GetExpenses()
+        public async Task<ActionResult<IEnumerable<TransactionModel>>> GetTransactions()
         {
-            var expenses = new List<TransactionModel>();
-            var transactions = await _expenseService.GetAllExpenses();
+            var tranascions = new List<TransactionModel>();
 
-            foreach (var transaction in transactions)
+            var expenses = await _expenseService.GetAllExpenses();
+            foreach (var expense in expenses)
             {
-                var card = await _cardService.GetCard(transaction.ExpenseCardId);
-                expenses.Add(new TransactionModel()
+                var card = await _cardService.GetCard(expense.ExpenseCardId);
+                tranascions.Add(new TransactionModel()
                 {
                     CardName = card.CardName,
-                    TransactionAmount = transaction.ExpenseAmount,
-                    TransactionDate = transaction.ExpenseDate,
-                    TransactionDecription = transaction.ExpenseDecription,
-                    TransactionType = transaction.ExpenseType
+                    TransactionAmount = expense.ExpenseAmount,
+                    TransactionDate = expense.ExpenseDate,
+                    TransactionDecription = expense.ExpenseDecription,
+                    TransactionType = expense.ExpenseType
 
                 });
             }
             
-            return Ok(expenses);
+            return Ok(tranascions);
 
 
 
