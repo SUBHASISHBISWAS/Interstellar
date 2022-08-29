@@ -14,7 +14,7 @@ namespace Expense.Aggregator.Services
 
         public async Task<IEnumerable<TransactionModel>> GetAllTransactions()
         {
-            var response = await _httpClient.GetAsync("api/v1/expense");
+            var response = await _httpClient.GetAsync("/expense");
             return await response.ReadContentAs<List<TransactionModel>>();
         }
 

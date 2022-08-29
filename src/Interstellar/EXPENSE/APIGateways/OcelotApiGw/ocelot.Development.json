@@ -15,6 +15,19 @@
       "FileCacheOptions": { "TtlSeconds": 30 }
     },
     {
+      "DownstreamPathTemplate": "/api/v1/card/GetCardById/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/Card/GetCardById/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/expense",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
