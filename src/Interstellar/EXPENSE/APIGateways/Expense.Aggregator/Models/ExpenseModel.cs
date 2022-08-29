@@ -2,15 +2,15 @@
 {
     public class ExpenseModel
     {
-        public int TransactionId { get; set; }
-        public double TransactionAmout { get; set; }
+        public int ExpenseId { get; set; }
+        public double ExpenseAmount { get; set; }
 
-        public string? TransactionType { get; set; }
+        public string? ExpenseType { get; set; }
 
-        public string? TransactionDecription { get; set; }
+        public string? ExpenseDecription { get; set; }
 
-        public string TransactionCard { get; set; }
+        public string ExpenseCardId { get; set; }
 
-        public DateTime TransactionDate { get; set; }
+        public DateTime ExpenseDate { get; set; }
     }
 }
