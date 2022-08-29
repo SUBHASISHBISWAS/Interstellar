@@ -4,8 +4,8 @@ namespace Expense.Aggregator.Services
 {
     public interface IExpenseService
     {
-         Task<IEnumerable<ExpenseModel>> GetAllTransactions();
+         Task<IEnumerable<ExpenseModel>> GetAllExpenses();
 
-         Task<ExpenseModel> GetTransactionById(int id);
+         Task<ExpenseModel> GetExpenseById(int id);
     }
 }

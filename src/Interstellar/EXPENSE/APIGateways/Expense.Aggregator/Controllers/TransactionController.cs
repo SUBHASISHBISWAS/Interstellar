@@ -28,7 +28,7 @@ namespace Expense.Aggregator.Controllers
         public async Task<ActionResult<IEnumerable<TransactionModel>>> GetExpenses()
         {
             var expenses = new List<TransactionModel>();
-            var transactions = await _expenseService.GetAllTransactions();
+            var transactions = await _expenseService.GetAllExpenses();
 
             foreach (var transaction in transactions)
             {
