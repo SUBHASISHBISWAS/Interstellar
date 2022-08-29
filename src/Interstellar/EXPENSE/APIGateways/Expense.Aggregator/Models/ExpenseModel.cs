@@ -1,6 +1,6 @@
 ﻿namespace Expense.Aggregator.Models
 {
-    public class TransactionModel
+    public class ExpenseModel
     {
         public int TransactionId { get; set; }
         public double TransactionAmout { get; set; }

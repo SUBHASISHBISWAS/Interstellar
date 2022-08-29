@@ -29,11 +29,11 @@ namespace Expense.Infrastructure.Persistence
             {
                 new ExpenseEntity()
                 {
-                    TransactionAmout=100,
-                    TransactionDate=DateTime.Now,
-                    TransactionCard="6304d7cb142a8d1bc9a41916",
-                    TransactionDecription="Bought Apple Phone",
-                    TransactionType="Card",
+                    ExpenseAmount=100,
+                    ExpenseDate=DateTime.Now,
+                    ExpenseCardId="6304d7cb142a8d1bc9a41916",
+                    ExpenseDecription="Bought Apple Phone",
+                    ExpenseType="Card",
                     
                 }
             };
