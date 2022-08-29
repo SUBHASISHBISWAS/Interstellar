@@ -14,13 +14,13 @@ namespace Expense.Aggregator.Services
 
         public async Task<CardModel> GetCard(string id)
         {
-            var response = await _httpClient.GetAsync($"/card/GetCardById/{id}");
+            var response = await _httpClient.GetAsync(_httpClient.BaseAddress+$"/GetCardById/{id}");
             return await response.ReadContentAs<CardModel>();
         }
 
         public async Task<IEnumerable<CardModel>> GetCards()
         {
-            var response = await _httpClient.GetAsync("/card");
+            var response = await _httpClient.GetAsync("");
             return await response.ReadContentAs<List<CardModel>>();
         }
     }

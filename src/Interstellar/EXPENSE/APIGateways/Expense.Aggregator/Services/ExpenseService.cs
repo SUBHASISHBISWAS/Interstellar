@@ -14,13 +14,13 @@ namespace Expense.Aggregator.Services
 
         public async Task<IEnumerable<TransactionModel>> GetAllTransactions()
         {
-            var response = await _httpClient.GetAsync("/expense");
+            var response = await _httpClient.GetAsync("");
             return await response.ReadContentAs<List<TransactionModel>>();
         }
 
         public async Task<TransactionModel> GetTransactionById(int id)
         {
-            var response = await _httpClient.GetAsync($"/api/v1/expense/{id}");
+            var response = await _httpClient.GetAsync(_httpClient.BaseAddress+$"/{id}");
             return await response.ReadContentAs<TransactionModel>();
         }
     }
