@@ -17,9 +17,9 @@ namespace Expense.Application.Mappings
     {
         public MappingPriofile()
         {
-            CreateMap<Transaction, TransactionVm>().ReverseMap();
-            CreateMap<Transaction, CreateExpenseCommand>().ReverseMap();
-            CreateMap<Transaction, UpdateExpenseCommand>().ReverseMap();
+            CreateMap<ExpenseEntity, TransactionVm>().ReverseMap();
+            CreateMap<ExpenseEntity, CreateExpenseCommand>().ReverseMap();
+            CreateMap<ExpenseEntity, UpdateExpenseCommand>().ReverseMap();
 
         }
     }

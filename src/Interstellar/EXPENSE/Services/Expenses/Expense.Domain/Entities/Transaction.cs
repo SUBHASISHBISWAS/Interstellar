@@ -8,7 +8,7 @@ using Expense.Domain.Common;
 
 namespace Expense.Domain.Entities
 {
-    public class Transaction : EntityBase
+    public class ExpenseEntity : EntityBase
     {
         public double TransactionAmout { get; set; }
 

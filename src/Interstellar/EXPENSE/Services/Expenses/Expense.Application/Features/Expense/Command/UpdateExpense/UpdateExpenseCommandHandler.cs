@@ -36,10 +36,10 @@ namespace Expense.Application.Features.Expense.Command.UpdateExpense
             if (expenseToUpdate==null)
             {
                 _logger.LogError("Transation does not Exist in Database");
-                throw new NotFoundException(nameof(Transaction), request.TransactionId);
+                throw new NotFoundException(nameof(ExpenseEntity), request.TransactionId);
             }
 
-            _mapper.Map(request, expenseToUpdate, typeof(UpdateExpenseCommand), typeof(Transaction));
+            _mapper.Map(request, expenseToUpdate, typeof(UpdateExpenseCommand), typeof(ExpenseEntity));
 
             await _expenseRepository.UpdateAsync(expenseToUpdate);
 

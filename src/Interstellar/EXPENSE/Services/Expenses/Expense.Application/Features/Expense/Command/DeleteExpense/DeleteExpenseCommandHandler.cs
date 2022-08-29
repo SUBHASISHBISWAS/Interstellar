@@ -38,7 +38,7 @@ namespace Expense.Application.Features.Expense.Command.DeleteExpense
             if (expenseToDelete == null)
             {
                 _logger.LogError("Transation does not Exist in Database");
-                throw new NotFoundException(nameof(Transaction), request.TransactionId);
+                throw new NotFoundException(nameof(ExpenseEntity), request.TransactionId);
             }
 
             await _expenseRepository.DeleteAsync(expenseToDelete);

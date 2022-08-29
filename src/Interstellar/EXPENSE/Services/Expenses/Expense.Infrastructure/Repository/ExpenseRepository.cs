@@ -10,14 +10,14 @@ using Expense.Infrastructure.Persistence;
 
 namespace Expense.Infrastructure.Repository
 {
-    public class ExpenseRepository : RepositoryBase<Transaction>, IExpenseRepository
+    public class ExpenseRepository : RepositoryBase<ExpenseEntity>, IExpenseRepository
     {
 
         public ExpenseRepository(ExpenseContext context) : base(context)
         {
 
         }
-        public Task<IEnumerable<Transaction>> GetExpenseByExpenseType(string userName)
+        public Task<IEnumerable<ExpenseEntity>> GetExpenseByExpenseType(string userName)
         {
             throw new NotImplementedException();
         }

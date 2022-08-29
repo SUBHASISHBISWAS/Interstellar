@@ -29,7 +29,7 @@ namespace Expense.Application.Features.Expense.Command.CreateExpense
 
         public async Task<int> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
         {
-            var expenseEntity = _mapper.Map<Transaction>(request);
+            var expenseEntity = _mapper.Map<ExpenseEntity>(request);
             var newExpense=await _expenseRepository.AddAsync(expenseEntity);
             _logger.LogInformation($"Expense {newExpense.TransactionId} is successfully created");
             return newExpense.TransactionId;

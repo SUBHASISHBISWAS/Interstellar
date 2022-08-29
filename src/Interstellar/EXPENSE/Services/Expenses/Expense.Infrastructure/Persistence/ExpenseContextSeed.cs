@@ -23,11 +23,11 @@ namespace Expense.Infrastructure.Persistence
             }
         }
 
-        private static IEnumerable<Transaction> GetPreconfiguredOrders()
+        private static IEnumerable<ExpenseEntity> GetPreconfiguredOrders()
         {
-            return new List<Transaction>
+            return new List<ExpenseEntity>
             {
-                new Transaction()
+                new ExpenseEntity()
                 {
                     TransactionAmout=100,
                     TransactionDate=DateTime.Now,
