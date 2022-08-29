@@ -31,8 +31,8 @@ namespace Expense.Application.Features.Expense.Command.CreateExpense
         {
             var expenseEntity = _mapper.Map<ExpenseEntity>(request);
             var newExpense=await _expenseRepository.AddAsync(expenseEntity);
-            _logger.LogInformation($"Expense {newExpense.TransactionId} is successfully created");
-            return newExpense.TransactionId;
+            _logger.LogInformation($"Expense {newExpense.ExpenseId} is successfully created");
+            return newExpense.ExpenseId;
 
         }
     }

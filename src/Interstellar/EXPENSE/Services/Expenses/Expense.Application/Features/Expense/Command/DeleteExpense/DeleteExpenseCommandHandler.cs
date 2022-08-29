@@ -43,7 +43,7 @@ namespace Expense.Application.Features.Expense.Command.DeleteExpense
 
             await _expenseRepository.DeleteAsync(expenseToDelete);
 
-            _logger.LogInformation($"Expense  {expenseToDelete.TransactionId} is Successfully Deleted");
+            _logger.LogInformation($"Expense  {expenseToDelete.ExpenseId} is Successfully Deleted");
 
             return  Unit.Value;
         }

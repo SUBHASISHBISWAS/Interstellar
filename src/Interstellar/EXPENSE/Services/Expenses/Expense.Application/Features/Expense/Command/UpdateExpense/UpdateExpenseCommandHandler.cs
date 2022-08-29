@@ -43,7 +43,7 @@ namespace Expense.Application.Features.Expense.Command.UpdateExpense
 
             await _expenseRepository.UpdateAsync(expenseToUpdate);
 
-            _logger.LogInformation($"Expense  {expenseToUpdate.TransactionId} is Successfully Updated");
+            _logger.LogInformation($"Expense  {expenseToUpdate.ExpenseId} is Successfully Updated");
 
             return Unit.Value;
         }
