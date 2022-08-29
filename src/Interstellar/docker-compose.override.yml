@@ -68,5 +68,5 @@ services:
       - "ApiSettings:CardUrl=http://ocelotapigw/card"
       - "ApiSettings:ExpenseUrl=http://ocelotapigw/expense"
     ports:
-      - "8005:80"
+      - "10000:80"
 
