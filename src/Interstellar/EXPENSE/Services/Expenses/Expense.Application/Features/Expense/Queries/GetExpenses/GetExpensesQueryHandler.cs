@@ -13,7 +13,7 @@ using MediatR;
 
 namespace Expense.Application.Features.Expense.Queries.GetExpenses
 {
-    public class GetExpensesQueryHandler : IRequestHandler<GetExpensesQuery, List<TransactionVm>>
+    public class GetExpensesQueryHandler : IRequestHandler<GetExpensesQuery, List<ExpenseVm>>
     {
 
         private readonly IExpenseRepository _expenseRepository;
@@ -25,10 +25,10 @@ namespace Expense.Application.Features.Expense.Queries.GetExpenses
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<List<TransactionVm>> Handle(GetExpensesQuery request, CancellationToken cancellationToken)
+        public async Task<List<ExpenseVm>> Handle(GetExpensesQuery request, CancellationToken cancellationToken)
         {
             var expenseList = await _expenseRepository.GetAllAsync();
-            return _mapper.Map<List<TransactionVm>>(expenseList);
+            return _mapper.Map<List<ExpenseVm>>(expenseList);
         }
     }
 }

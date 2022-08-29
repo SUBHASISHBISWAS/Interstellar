@@ -25,8 +25,8 @@ namespace Expense.API.Controllers
         }
 
         [HttpGet(Name = "GetExpenses")]
-        [ProducesResponseType(typeof(IEnumerable<TransactionVm>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<TransactionVm>>> GetAllExpenses()
+        [ProducesResponseType(typeof(IEnumerable<ExpenseVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<ExpenseVm>>> GetAllExpenses()
         {
             var query = new GetExpensesQuery();
             var expenses = await _mediator.Send(query);
