@@ -60,3 +60,13 @@ services:
         - "8010:80"
 
 
+
+  expense.aggregator:
+    container_name: expense.aggregator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:CardUrl=http://ocelotapigw/card"
+      - "ApiSettings:ExpenseUrl=http://ocelotapigw/expense"
+    ports:
+      - "8005:80"
+

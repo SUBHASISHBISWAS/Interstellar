@@ -28,8 +28,15 @@ services:
       dockerfile: EXPENSE/APIGateways/OcelotApiGw/Dockerfile
 
 
+  expense.aggregator:
+    image: ${DOCKER_REGISTRY-}expenseaggregator
+    build:
+      context: .
+      dockerfile: EXPENSE/APIGateways/Expense.Aggregator/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
+
 
 
