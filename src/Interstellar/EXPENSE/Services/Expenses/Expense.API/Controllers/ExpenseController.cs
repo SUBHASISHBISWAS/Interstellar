@@ -35,7 +35,7 @@ namespace Expense.API.Controllers
 
         [HttpPost(Name = "CreateExpense")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<int>> CheckoutOrder([FromBody] CreateExpenseCommand command)
+        public async Task<ActionResult<int>> CreateExpense([FromBody] CreateExpenseCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
@@ -45,7 +45,7 @@ namespace Expense.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> UpdateCard([FromBody] UpdateExpenseCommand command)
+        public async Task<ActionResult> UpdateExpense([FromBody] UpdateExpenseCommand command)
         {
             await _mediator.Send(command);
             return NoContent();
@@ -55,7 +55,7 @@ namespace Expense.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> DeleteCard(int transactionId)
+        public async Task<ActionResult> DeleteExpense(int transactionId)
         {
             var command = new DeleteExpenseCommand() { TransactionId = transactionId };
             await _mediator.Send(command);

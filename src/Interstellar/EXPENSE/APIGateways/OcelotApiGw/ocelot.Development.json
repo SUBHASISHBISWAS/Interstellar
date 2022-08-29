@@ -2,6 +2,19 @@
   "Routes": [
 
     {
+      "DownstreamPathTemplate": "/api/v1/Transaction",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": "8005"
+        }
+      ],
+      "UpstreamPathTemplate": "/Expenses",
+      "UpstreamHttpMethod": [ "GET"],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/card",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
