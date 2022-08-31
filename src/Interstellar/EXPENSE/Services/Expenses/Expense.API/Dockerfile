@@ -10,6 +10,7 @@ COPY ["EXPENSE/Services/Expenses/Expense.API/Expense.API.csproj", "EXPENSE/Servi
 COPY ["EXPENSE/Services/Expenses/Expense.Application/Expense.Application.csproj", "EXPENSE/Services/Expenses/Expense.Application/"]
 COPY ["EXPENSE/Services/Expenses/Expense.Domain/Expense.Domain.csproj", "EXPENSE/Services/Expenses/Expense.Domain/"]
 COPY ["EXPENSE/Services/Expenses/Expense.Infrastructure/Expense.Infrastructure.csproj", "EXPENSE/Services/Expenses/Expense.Infrastructure/"]
+COPY ["EXPENSE/BuildingBlocks/EventBus.Messages/EventBus.Messages.csproj", "EXPENSE/BuildingBlocks/EventBus.Messages/"]
 RUN dotnet restore "EXPENSE/Services/Expenses/Expense.API/Expense.API.csproj"
 COPY . .
 WORKDIR "/src/EXPENSE/Services/Expenses/Expense.API"

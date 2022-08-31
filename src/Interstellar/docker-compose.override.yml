@@ -23,6 +23,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=mongodb://cardsdb:27017"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
       - cardsdb
       - rabbitmq
@@ -44,6 +45,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:OrderingConnectionString=Server=expensedb;Database=ExpenseDb;User Id=sa;Password=SqlServer@2019"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
         - expensedb
         - rabbitmq
