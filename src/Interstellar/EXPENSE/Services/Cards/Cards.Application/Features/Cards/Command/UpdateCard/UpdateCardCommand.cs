@@ -13,7 +13,7 @@ using MongoDB.Bson;
 
 namespace Cards.Application.Features.Cards.Command.UpdateCard
 {
-    public class UpdateCardCommand:IRequest
+    public class UpdateCardCommand:IRequest<string>
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

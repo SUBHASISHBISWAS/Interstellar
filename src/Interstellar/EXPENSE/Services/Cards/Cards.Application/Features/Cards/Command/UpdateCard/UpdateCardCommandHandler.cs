@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Cards.Application.Features.Cards.Command.UpdateCard
 {
-    internal class UpdateCardCommandHandler : IRequestHandler<UpdateCardCommand>
+    internal class UpdateCardCommandHandler : IRequestHandler<UpdateCardCommand,string>
     {
         private readonly ICardRepository _cardRepository;
         private readonly IMapper _mapper;
@@ -29,7 +29,7 @@ namespace Cards.Application.Features.Cards.Command.UpdateCard
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Unit> Handle(UpdateCardCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateCardCommand request, CancellationToken cancellationToken)
         {
             var cardToUpdate = await _cardRepository.GetByIdAsync(request.CardId);
 
@@ -45,7 +45,7 @@ namespace Cards.Application.Features.Cards.Command.UpdateCard
 
             _logger.LogInformation($"Order {cardToUpdate} is successfully updated.");
 
-            return Unit.Value;
+            return cardToUpdate.CardId;
         }
     }
 }

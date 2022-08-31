@@ -25,6 +25,7 @@ services:
       - "DatabaseSettings:ConnectionString=mongodb://cardsdb:27017"
     depends_on:
       - cardsdb
+      - rabbitmq
     ports:
       - "8000:80"
    
@@ -45,6 +46,7 @@ services:
       - "ConnectionStrings:OrderingConnectionString=Server=expensedb;Database=ExpenseDb;User Id=sa;Password=SqlServer@2019"
     depends_on:
         - expensedb
+        - rabbitmq
     ports:
         - "8001:80"
 
