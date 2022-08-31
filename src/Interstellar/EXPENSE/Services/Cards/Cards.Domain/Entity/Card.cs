@@ -24,6 +24,9 @@ namespace Cards.Domain.Entity
 
         public DateTime CardStatementDate { get; set; }
 
+
+        public double CardTotalExpenditure { get; set; }
+
         
     }
 }

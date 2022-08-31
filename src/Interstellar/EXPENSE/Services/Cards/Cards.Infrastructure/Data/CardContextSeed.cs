@@ -33,10 +33,12 @@ namespace Cards.Infrastructure.Data
                     CardType=Domain.Enums.CardTypes.VISA,
                     CardExpieryDate=DateTime.ParseExact("31/12/2022", "dd/MM/yyyy", null).Date,
                     CardStatementDate=DateTime.ParseExact("01/01/2022", "dd/MM/yyyy", null).Date,
+                    CardTotalExpenditure=1,
                     CreatedDate=DateTime.Now.Date,
                     LastModifiedBy="SUBHASISH",
                     LastModifiedDate=DateTime.Now,
-                    CreatedBy="SUBHASISH",
+                    CreatedBy="SUBHASISH"
+
                 },
                 new Card()
                 {
@@ -46,6 +48,7 @@ namespace Cards.Infrastructure.Data
                     CardType=Domain.Enums.CardTypes.VISA,
                     CardExpieryDate=DateTime.ParseExact("31/12/2023", "dd/MM/yyyy", null).Date,
                     CardStatementDate=DateTime.ParseExact("01/01/2023", "dd/MM/yyyy", null).Date,
+                    CardTotalExpenditure=1,
                     CreatedDate=DateTime.Now.Date,
                     LastModifiedBy="SUBHASISH",
                     LastModifiedDate=DateTime.Now,

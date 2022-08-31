@@ -30,5 +30,7 @@ namespace Cards.Application.Features.Cards.Command.UpdateCard
         public DateTime CardExpieryDate { get; set; }
 
         public DateTime CardStatementDate { get; set; }
+
+        public double CardTotalExpenditure { get; set; }
     }
 }

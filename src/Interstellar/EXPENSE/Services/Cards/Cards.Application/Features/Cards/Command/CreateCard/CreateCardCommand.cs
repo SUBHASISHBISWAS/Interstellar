@@ -25,5 +25,7 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
         public DateTime CardExpieryDate { get; set; }
 
         public DateTime CardStatementDate { get; set; }
+
+        public double CardTotalExpenditure { get; set; }
     }
 }

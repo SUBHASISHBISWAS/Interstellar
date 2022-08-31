@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Cards.Application.Features.Cards.Command.UpdateCard;
+
 using FluentValidation;
 
 namespace Cards.Application.Features.Cards.Command.CreateCard
 {
-    public class UpdateCardCommandValidator : AbstractValidator<CreateCardCommand>
+    public class UpdateCardCommandValidator : AbstractValidator<UpdateCardCommand>
     {
         public UpdateCardCommandValidator()
         {
