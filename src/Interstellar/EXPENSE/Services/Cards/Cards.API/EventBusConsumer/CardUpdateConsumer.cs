@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 
 using Cards.Application.Features.Cards.Command.UpdateCard;
+using Cards.Application.Features.Cards.Command.UpdateCardTotalExpenditure;
 
 using EventBus.Messages.Events;
 
@@ -25,7 +26,8 @@ namespace Cards.API.EventBusConsumer
 
         public async Task Consume(ConsumeContext<CardSwipeEvent> context)
         {
-            var command = _mapper.Map<UpdateCardCommand>(context.Message);
+            var command = _mapper.Map<UpdateCardTotalExpenditureCommand
+                >(context.Message);
             var result = await _mediator.Send(command);
             _logger.LogInformation("CardUpdate Event consumed successfully. Updated Card Id : {newOrderId}", result);
             
