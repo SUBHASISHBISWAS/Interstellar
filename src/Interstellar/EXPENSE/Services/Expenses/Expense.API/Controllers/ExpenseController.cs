@@ -48,7 +48,7 @@ namespace Expense.API.Controllers
         public async Task<ActionResult<int>> CreateExpense([FromBody] CreateExpenseCommand command)
         {
             var result = await _mediator.Send(command);
-            var cardToUpdateMessage=_mapper.Map<CardUpdateEvent>(result);
+            var cardToUpdateMessage=_mapper.Map<CardSwipeEvent>(result);
             _publishEndpoint.Publish(cardToUpdateMessage);
             return Ok(result);
         }

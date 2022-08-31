@@ -10,7 +10,7 @@ namespace Expense.API.Mapping
     {
         public ExpenseProfile()
         {
-            CreateMap<ExpenseEntity, CardUpdateEvent>().ReverseMap();
+            CreateMap<ExpenseEntity, CardSwipeEvent>().ForMember(dest => dest.CardId, opt => opt.MapFrom(src => src.ExpenseCardId)).ForMember(dest => dest.CardSwipeAmount, opt => opt.MapFrom(src => src.ExpenseAmount));
         }
     }
 }

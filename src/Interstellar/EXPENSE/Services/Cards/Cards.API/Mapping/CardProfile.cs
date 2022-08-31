@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 
 using Cards.Application.Features.Cards.Command.UpdateCard;
+using Cards.Application.Features.Cards.Command.UpdateCardTotalExpenditure;
 
 using EventBus.Messages.Events;
 
@@ -10,7 +11,7 @@ namespace Cards.API.Mapping
     {
         public CardProfile()
         {
-            CreateMap<UpdateCardCommand, CardUpdateEvent>().ReverseMap();
+            CreateMap<UpdateCardTotalExpenditureCommand, CardSwipeEvent>().ReverseMap();
         }
     }
 }

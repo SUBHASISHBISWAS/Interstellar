@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Cards.API.EventBusConsumer
 {
-    public class CardUpdateConsumer:IConsumer<CardUpdateEvent>
+    public class CardUpdateConsumer:IConsumer<CardSwipeEvent>
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace Cards.API.EventBusConsumer
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task Consume(ConsumeContext<CardUpdateEvent> context)
+        public async Task Consume(ConsumeContext<CardSwipeEvent> context)
         {
             var command = _mapper.Map<UpdateCardCommand>(context.Message);
             var result = await _mediator.Send(command);
