@@ -31,12 +31,12 @@ namespace Expense.Application.Features.Expense.Command.UpdateExpense
 
         public async Task<Unit> Handle(UpdateExpenseCommand request, CancellationToken cancellationToken)
         {
-            var expenseToUpdate = await _expenseRepository.GetByIdAsync(request.TransactionId);
+            var expenseToUpdate = await _expenseRepository.GetByIdAsync(request.ExpenseId);
 
             if (expenseToUpdate==null)
             {
                 _logger.LogError("Transation does not Exist in Database");
-                throw new NotFoundException(nameof(ExpenseEntity), request.TransactionId);
+                throw new NotFoundException(nameof(ExpenseEntity), request.ExpenseId);
             }
 
             _mapper.Map(request, expenseToUpdate, typeof(UpdateExpenseCommand), typeof(ExpenseEntity));

@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Expense.Application.Features.Expense.Command.CreateExpense
 {
-    public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand, int>
+    public class CreateExpenseCommandHandler : IRequestHandler<CreateExpenseCommand, ExpenseEntity>
     {
         private readonly IExpenseRepository _expenseRepository;
         private readonly IMapper _mapper;
@@ -27,12 +27,12 @@ namespace Expense.Application.Features.Expense.Command.CreateExpense
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<int> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
+        public async Task<ExpenseEntity> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
         {
             var expenseEntity = _mapper.Map<ExpenseEntity>(request);
             var newExpense=await _expenseRepository.AddAsync(expenseEntity);
             _logger.LogInformation($"Expense {newExpense.ExpenseId} is successfully created");
-            return newExpense.ExpenseId;
+            return newExpense;
 
         }
     }

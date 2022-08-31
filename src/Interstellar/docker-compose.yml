@@ -34,6 +34,8 @@ services:
       context: .
       dockerfile: EXPENSE/APIGateways/Expense.Aggregator/Dockerfile
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
 volumes:
   mongo_data:
   portainer_data:

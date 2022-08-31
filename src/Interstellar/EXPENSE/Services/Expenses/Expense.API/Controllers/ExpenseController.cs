@@ -1,10 +1,16 @@
 ﻿using System.Net;
 
+using AutoMapper;
+
+using EventBus.Messages.Events;
+
 using Expense.Application.Features.Expense.Command.CreateExpense;
 using Expense.Application.Features.Expense.Command.DeleteExpense;
 using Expense.Application.Features.Expense.Command.UpdateExpense;
 using Expense.Application.Features.Expense.Queries.GetExpenses;
 using Expense.Application.Features.Expense.ViewModels;
+
+using MassTransit;
 
 using MediatR;
 
@@ -17,11 +23,15 @@ namespace Expense.API.Controllers
     [Route("api/v1/[controller]")]
     public class ExpenseController:ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly IMediator _mediator;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public ExpenseController(IMediator mediator)
+        public ExpenseController(IMediator mediator, IPublishEndpoint publishEndpoint, IMapper mapper)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _publishEndpoint = publishEndpoint ?? throw new ArgumentNullException(nameof(publishEndpoint));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet(Name = "GetExpenses")]
@@ -38,6 +48,8 @@ namespace Expense.API.Controllers
         public async Task<ActionResult<int>> CreateExpense([FromBody] CreateExpenseCommand command)
         {
             var result = await _mediator.Send(command);
+            var cardToUpdateMessage=_mapper.Map<CardUpdateEvent>(result);
+            _publishEndpoint.Publish(cardToUpdateMessage);
             return Ok(result);
         }
 

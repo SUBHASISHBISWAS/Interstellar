@@ -14,11 +14,11 @@ namespace Expense.Application.Features.Expense.Command.UpdateExpense
     {
         public UpdateExpenseCommandValidator()
         {
-            RuleFor(p => p.TransactionAmout).NotEmpty().WithMessage("{TransactionAmout} is Required");
+            RuleFor(p => p.ExpenseAmount).NotEmpty().WithMessage("{TransactionAmout} is Required");
 
-            RuleFor(p => p.TransactionCard).NotEmpty().WithMessage("{TransactionCard} is Required");
+            RuleFor(p => p.ExpenseCardId).NotEmpty().WithMessage("{TransactionCard} is Required");
 
-            RuleFor(p => p.TransactionType).NotEmpty().WithMessage("{TransactionType} is Required");
+            RuleFor(p => p.ExpenseAmount).NotEmpty().WithMessage("{TransactionType} is Required");
         }
     }
 }

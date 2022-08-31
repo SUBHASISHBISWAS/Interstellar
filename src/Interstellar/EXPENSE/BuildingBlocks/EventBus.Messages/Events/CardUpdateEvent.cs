@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Expense.Domain.Entities;
-
-using MediatR;
-
-namespace Expense.Application.Features.Expense.Command.CreateExpense
+namespace EventBus.Messages.Events
 {
-    public class CreateExpenseCommand:IRequest<ExpenseEntity>
+    public class CardUpdateEvent:IntegrationBaseEvent
     {
-       
+        public int ExpenseId { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string? LastModifiedBy { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
+
         public double ExpenseAmount { get; set; }
 
         public string? ExpenseType { get; set; }
