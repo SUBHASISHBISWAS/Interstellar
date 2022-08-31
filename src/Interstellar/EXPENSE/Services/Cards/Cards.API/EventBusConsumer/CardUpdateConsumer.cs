@@ -26,9 +26,8 @@ namespace Cards.API.EventBusConsumer
         public async Task Consume(ConsumeContext<CardUpdateEvent> context)
         {
             var command = _mapper.Map<UpdateCardCommand>(context.Message);
-            //var result = await _mediator.Send(command);
-
-            //_logger.LogInformation("BasketCheckoutEvent consumed successfully. Created Order Id : {newOrderId}", result);
+            var result = await _mediator.Send(command);
+            _logger.LogInformation("CardUpdate Event consumed successfully. Updated Card Id : {newOrderId}", result);
             
         }
     }
