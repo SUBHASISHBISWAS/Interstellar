@@ -29,16 +29,6 @@ services:
       - rabbitmq
     ports:
       - "8000:80"
-   
-  portainer:
-    container_name: portainer
-    restart: always
-    ports:
-      - "8080:8000"
-      - "8500:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
 
   expense.api:
     container_name: expense.api
@@ -52,6 +42,14 @@ services:
     ports:
         - "8001:80"
 
+  expense.aggregator:
+    container_name: expense.aggregator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:CardUrl=http://ocelotapigw/card"
+      - "ApiSettings:ExpenseUrl=http://ocelotapigw/expense"
+    ports:
+      - "5000:80"
 
   ocelotapigw:
     container_name: ocelotapigw
@@ -62,18 +60,16 @@ services:
         - expense.api
     ports:
         - "10000:80"
-
-
-
-  expense.aggregator:
-    container_name: expense.aggregator
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "ApiSettings:CardUrl=http://ocelotapigw/card"
-      - "ApiSettings:ExpenseUrl=http://ocelotapigw/expense"
+   
+  portainer:
+    container_name: portainer
+    restart: always
     ports:
-      - "5000:80"
-
+      - "8080:8000"
+      - "8500:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 
   rabbitmq:
     container_name: rabbitmq
