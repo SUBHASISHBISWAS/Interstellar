@@ -23,5 +23,7 @@ namespace Cards.Application.Features.Cards.Queries.GetCards.ViewModel
         public DateTime CardExpieryDate { get; set; }
 
         public DateTime CardStatementDate { get; set; }
+
+        public double CardTotalExpenditure { get; set; }
     }
 }
