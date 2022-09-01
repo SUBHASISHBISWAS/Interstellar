@@ -11,13 +11,13 @@ using MediatR;
 
 namespace Cards.API.EventBusConsumer
 {
-    public class CardUpdateConsumer:IConsumer<CardSwipeEvent>
+    public class CardTotalExpenditureUpdateConsumer:IConsumer<CardSwipeEvent>
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly ILogger<CardUpdateConsumer> _logger;
+        private readonly ILogger<CardTotalExpenditureUpdateConsumer> _logger;
 
-        public CardUpdateConsumer(IMediator mediator, IMapper mapper, ILogger<CardUpdateConsumer> logger)
+        public CardTotalExpenditureUpdateConsumer(IMediator mediator, IMapper mapper, ILogger<CardTotalExpenditureUpdateConsumer> logger)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
