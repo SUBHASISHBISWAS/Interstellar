@@ -15,7 +15,7 @@ namespace Cards.Application.Features.Cards.Command.UpdateCardTotalExpenditure
         {
             RuleFor(p => p.CardId).NotEmpty().WithMessage("{CardId} is Required").NotNull().WithMessage("{CardId} should not be Null");
 
-            RuleFor(p => p.CardTotalTotalExpenditure).NotEmpty().WithMessage("{CardTotalTotalExpenditure} is Required").GreaterThan(0).WithMessage("{CardTotalTotalExpenditure} should not be Empty");
+            RuleFor(p => p.CardSwipeAmount).NotEmpty().WithMessage("{CardTotalTotalExpenditure} is Required").GreaterThan(0).WithMessage("{CardTotalTotalExpenditure} should not be Empty");
         }
     }
 }

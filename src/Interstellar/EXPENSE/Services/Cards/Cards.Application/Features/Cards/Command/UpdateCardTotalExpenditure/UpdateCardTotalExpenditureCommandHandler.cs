@@ -42,7 +42,7 @@ namespace Cards.Application.Features.Cards.Command.UpdateCardTotalExpenditure
                 throw new NotFoundException(nameof(Card), request.CardId);
             }
 
-            cardToUpdate.CardTotalExpenditure += request.CardTotalTotalExpenditure;
+            cardToUpdate.CardTotalExpenditure += request.CardSwipeAmount;
 
 
             await _cardRepository.UpdateAsync(cardToUpdate);

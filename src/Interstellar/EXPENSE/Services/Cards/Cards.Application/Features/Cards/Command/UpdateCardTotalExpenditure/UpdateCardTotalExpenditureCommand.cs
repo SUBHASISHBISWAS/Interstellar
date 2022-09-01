@@ -17,6 +17,6 @@ namespace Cards.Application.Features.Cards.Command.UpdateCardTotalExpenditure
         [BsonRepresentation(BsonType.ObjectId)]
         public string? CardId { get; set; }
 
-        public double CardTotalTotalExpenditure { get; set; }
+        public double CardSwipeAmount { get; set; }
     }
 }
