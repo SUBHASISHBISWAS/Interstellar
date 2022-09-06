@@ -18,5 +18,10 @@ namespace Cards.Application.Features.Cards.Command.UpdateCardTotalExpenditure
         public string? CardId { get; set; }
 
         public double CardSwipeAmount { get; set; }
+
+        public int ExpenseId { get; set; }
+
+        public DateTime ExpenseDate { get; set; }
+
     }
 }
