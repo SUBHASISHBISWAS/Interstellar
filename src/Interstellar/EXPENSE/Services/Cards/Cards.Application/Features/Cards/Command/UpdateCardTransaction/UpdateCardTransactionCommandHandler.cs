@@ -41,6 +41,9 @@ public class UpdateCardTransactionCommandHandler : IRequestHandler<UpdateCardTra
             throw new NotFoundException(nameof(Card), request.CardId!);
         }
 
+        cardToUpdate.LastModifiedBy = "SUBHASISH";
+        cardToUpdate.LastModifiedDate = DateTime.Now;
+
         cardToUpdate.CardTransactions!.Add(request.ExpenseId.ToString());
 
         if (request.ExpenseDate<=cardToUpdate.CardStatementDate)
