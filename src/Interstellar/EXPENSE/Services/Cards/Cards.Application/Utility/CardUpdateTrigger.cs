@@ -19,12 +19,12 @@ namespace Cards.Application.Utility
         /// <summary>
         /// Task cancellation token source to cancel delayed task on disposal
         /// </summary>
-        CancellationTokenSource CancellationToken { get; set; }
+        CancellationTokenSource? CancellationToken { get; set; }
 
         /// <summary>
         /// Reference to the running task
         /// </summary>
-        Task RunningTask { get; set; }
+        Task? RunningTask { get; set; }
 
         /// <summary>
         /// Initiator
@@ -62,7 +62,7 @@ namespace Cards.Application.Utility
         /// <summary>
         /// Triggers once every 24 hours on the specified time
         /// </summary>
-        public event Action<string> OnTimeTriggered;
+        public event Action<string>? OnTimeTriggered;
 
         /// <summary>
         /// Finalized to ensure Dispose is called when out of scope

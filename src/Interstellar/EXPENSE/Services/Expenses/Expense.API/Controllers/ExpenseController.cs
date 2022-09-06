@@ -49,7 +49,7 @@ namespace Expense.API.Controllers
         {
             var result = await _mediator.Send(command);
             var cardToUpdateMessage=_mapper.Map<CardSwipeEvent>(result);
-            _publishEndpoint.Publish(cardToUpdateMessage);
+            await _publishEndpoint.Publish(cardToUpdateMessage);
             return Ok(result);
         }
 
