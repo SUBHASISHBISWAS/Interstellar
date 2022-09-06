@@ -24,6 +24,15 @@ namespace Cards.Application.Features.Cards.Queries.GetCards.ViewModel
 
         public DateTime CardStatementDate { get; set; }
 
+        public DateTime CardNextStatementDate { get; set; }
+        public DateTime CardDueDate { get; set; }
+        
+        public int GracePeriod { get; set; }
+
+        public double CardCurrentMonthExpenditure { get; set; }
+
+        public double CardNextMonthExpenditure { get; set; }
+
         public double CardTotalExpenditure { get; set; }
     }
 }
