@@ -62,7 +62,7 @@ namespace Cards.API.Controllers
 
         [HttpPost(Name = "CreateCard")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<int>> CheckoutOrder([FromBody] CreateCardCommand command)
+        public async Task<ActionResult<int>> CreateCard([FromBody] CreateCardCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

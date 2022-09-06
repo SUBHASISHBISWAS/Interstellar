@@ -12,11 +12,10 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
 {
     public class CreateCardCommand : IRequest<string>
     {
-        public Guid CardId { get; set; }
 
         public string? CardName { get; set; }
 
-        public CardTypes CardType { get; set; }
+        public string CardType { get; set; }
 
         public string? CardNumber { get; set; }
 
@@ -26,6 +25,6 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
 
         public DateTime CardStatementDate { get; set; }
 
-        public double CardTotalExpenditure { get; set; }
+        public int GracePeriod { get; set; }
     }
 }

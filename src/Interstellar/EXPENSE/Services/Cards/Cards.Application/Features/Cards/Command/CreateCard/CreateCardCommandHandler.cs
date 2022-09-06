@@ -31,6 +31,18 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
         public async Task<string> Handle(CreateCardCommand request, CancellationToken cancellationToken)
         {
             var cardEntity = _mapper.Map<Card>(request);
+            
+           
+            //Calculate Due Date and Next Statment Date
+            cardEntity.CardDueDate= request.CardStatementDate.AddDays(+request.GracePeriod).AddMonths(-1);
+            cardEntity.CardNextStatementDate= request.CardStatementDate.AddMonths(1);
+
+            var statementDiffDays = (cardEntity.CardNextStatementDate - request.CardStatementDate).TotalDays;
+
+
+
+            cardEntity.CardTransactions = new List<string>();
+
             var newCard = await _cardRepository.AddAsync(cardEntity);
             _logger.LogInformation($"Card {newCard.CardId} is successfully created");
             return newCard.CardId!;
