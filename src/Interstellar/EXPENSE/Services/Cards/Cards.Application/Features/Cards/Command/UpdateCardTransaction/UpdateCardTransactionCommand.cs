@@ -9,9 +9,9 @@ using MediatR;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace Cards.Application.Features.Cards.Command.UpdateCardTotalExpenditure
+namespace Cards.Application.Features.Cards.Command.UpdateCardTransactions
 {
-    public class UpdateCardTotalExpenditureCommand:IRequest
+    public class UpdateCardTransactionCommand:IRequest
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

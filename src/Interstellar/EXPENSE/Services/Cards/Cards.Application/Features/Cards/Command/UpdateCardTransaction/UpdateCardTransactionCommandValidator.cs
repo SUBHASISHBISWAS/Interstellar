@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Cards.Application.Features.Cards.Command.UpdateCard;
 using FluentValidation;
 
-namespace Cards.Application.Features.Cards.Command.UpdateCardTotalExpenditure
+namespace Cards.Application.Features.Cards.Command.UpdateCardTransactions
 {
-    public class UpdateCardTotalExpenditureCommandValidator : AbstractValidator<UpdateCardTotalExpenditureCommand>
+    public class UpdateCardTransactionCommandValidator : AbstractValidator<UpdateCardTransactionCommand>
     {
-        public UpdateCardTotalExpenditureCommandValidator()
+        public UpdateCardTransactionCommandValidator()
         {
             RuleFor(p => p.CardId).NotEmpty().WithMessage("{CardId} is Required").NotNull().WithMessage("{CardId} should not be Null");
 
