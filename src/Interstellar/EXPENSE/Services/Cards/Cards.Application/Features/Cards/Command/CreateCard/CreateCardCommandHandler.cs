@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics;
+
 using AutoMapper;
 
 using Cards.Application.Contracts.Persistance;
@@ -59,7 +61,7 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
                 throw new NotFoundException(nameof(Card), cardId);
             }
 
-            cardToUpdate.LastModifiedBy = "SUBHASISH";
+            cardToUpdate.LastModifiedBy = Process.GetCurrentProcess().ProcessName;
             cardToUpdate.LastModifiedDate = DateTime.Now;
             cardToUpdate.CardStatementDate = cardToUpdate.CardNextStatementDate;
             cardToUpdate.CardDueDate = cardToUpdate.CardStatementDate.AddDays(+cardToUpdate.GracePeriod).AddMonths(-1);

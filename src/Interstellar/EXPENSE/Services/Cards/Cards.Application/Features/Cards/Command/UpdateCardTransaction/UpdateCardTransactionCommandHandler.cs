@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ public class UpdateCardTransactionCommandHandler : IRequestHandler<UpdateCardTra
             throw new NotFoundException(nameof(Card), request.CardId!);
         }
 
-        cardToUpdate.LastModifiedBy = "SUBHASISH";
+        cardToUpdate.LastModifiedBy = Process.GetCurrentProcess().ProcessName;
         cardToUpdate.LastModifiedDate = DateTime.Now;
 
         cardToUpdate.CardTransactions!.Add(request.ExpenseId.ToString());
