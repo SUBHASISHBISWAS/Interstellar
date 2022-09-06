@@ -31,12 +31,12 @@ namespace Cards.Application.Features.Cards.Command.UpdateCard
 
         public async Task<string> Handle(UpdateCardCommand request, CancellationToken cancellationToken)
         {
-            var cardToUpdate = await _cardRepository.GetByIdAsync(request.CardId);
+            var cardToUpdate = await _cardRepository.GetByIdAsync(request.CardId!);
 
             if (cardToUpdate==null)
             {
                 _logger.LogError("Card does not Exist in database");
-                throw new NotFoundException(nameof(Card), request.CardId);
+                throw new NotFoundException(nameof(Card), request.CardId!);
             }
 
             _mapper.Map(request, cardToUpdate, typeof(UpdateCardCommand), typeof(Card));
@@ -45,7 +45,7 @@ namespace Cards.Application.Features.Cards.Command.UpdateCard
 
             _logger.LogInformation($"Order {cardToUpdate} is successfully updated.");
 
-            return cardToUpdate.CardId;
+            return cardToUpdate.CardId!;
         }
     }
 }
