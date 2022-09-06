@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using AutoMapper;
 
 using Cards.Application.Contracts.Persistance;
 using Cards.Application.Exceptions;
-using Cards.Application.Features.Cards.Command.UpdateCard;
-using Cards.Application.Features.Cards.Queries.GetCards.GetCardById;
 using Cards.Application.Utility;
 using Cards.Domain.Entity;
 
