@@ -66,7 +66,8 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
             cardToUpdate.CardStatementDate = cardToUpdate.CardNextStatementDate;
             cardToUpdate.CardDueDate = cardToUpdate.CardStatementDate.AddDays(+cardToUpdate.GracePeriod).AddMonths(-1);
             cardToUpdate.CardNextStatementDate = cardToUpdate.CardStatementDate.AddMonths(1);
-
+            cardToUpdate.CardCurrentMonthExpenditure = cardToUpdate.CardNextMonthExpenditure;
+            cardToUpdate.CardNextMonthExpenditure = 0;
 
             await _cardRepository.UpdateAsync(cardToUpdate);
 
