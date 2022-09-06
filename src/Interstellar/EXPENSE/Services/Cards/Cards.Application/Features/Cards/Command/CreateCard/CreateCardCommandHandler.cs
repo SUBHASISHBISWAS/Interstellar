@@ -32,20 +32,19 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
 
 
             //Calculate Due Date and Next Statment Date
+            cardEntity.CreatedBy = "SUBHASISH";
+            cardEntity.CreatedDate = DateTime.Now;
             cardEntity.CardDueDate= request.CardStatementDate.AddDays(+request.GracePeriod).AddMonths(-1);
             cardEntity.CardNextStatementDate= request.CardStatementDate.AddMonths(1);
-
             var statementDiffDays = (cardEntity.CardNextStatementDate - request.CardStatementDate).TotalDays;
-
-
-
             cardEntity.CardTransactions = new List<string>();
-
             var newCard = await _cardRepository.AddAsync(cardEntity);
+            
             _logger.LogInformation($"Card {newCard.CardId} is successfully created");
 
             CardUpdateTrigger cardUpdateTrigger = new CardUpdateTrigger(newCard.CardId!,0, 0, 60);
             cardUpdateTrigger.OnTimeTriggered += CardUpdateTrigger_OnTimeTriggered;
+            
             return newCard.CardId!;
         }
 
@@ -60,6 +59,8 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
                 throw new NotFoundException(nameof(Card), cardId);
             }
 
+            cardToUpdate.LastModifiedBy = "SUBHASISH";
+            cardToUpdate.LastModifiedDate = DateTime.Now;
             cardToUpdate.CardStatementDate = cardToUpdate.CardNextStatementDate;
             cardToUpdate.CardDueDate = cardToUpdate.CardStatementDate.AddDays(+cardToUpdate.GracePeriod).AddMonths(-1);
             cardToUpdate.CardNextStatementDate = cardToUpdate.CardStatementDate.AddMonths(1);
