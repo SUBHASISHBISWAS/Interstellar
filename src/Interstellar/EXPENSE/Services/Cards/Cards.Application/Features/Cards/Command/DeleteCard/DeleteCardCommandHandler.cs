@@ -31,12 +31,12 @@ namespace Cards.Application.Features.Cards.Command.DeleteCard
 
         public async Task<Unit> Handle(DeleteCardCommand request, CancellationToken cancellationToken)
         {
-            var cardToDelete = await _cardRepository.GetByIdAsync(request.CardId);
+            var cardToDelete = await _cardRepository.GetByIdAsync(request.CardId!);
 
             if (cardToDelete == null)
             {
                 _logger.LogError("Card does not Exist in database");
-                throw new NotFoundException(nameof(Card), request.CardId);
+                throw new NotFoundException(nameof(Card), request.CardId!);
             }
 
             await _cardRepository.DeleteAsync(cardToDelete);

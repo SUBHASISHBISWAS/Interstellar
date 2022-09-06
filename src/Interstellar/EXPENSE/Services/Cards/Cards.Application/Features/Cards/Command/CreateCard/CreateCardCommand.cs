@@ -15,7 +15,7 @@ namespace Cards.Application.Features.Cards.Command.CreateCard
 
         public string? CardName { get; set; }
 
-        public string CardType { get; set; }
+        public string? CardType { get; set; }
 
         public string? CardNumber { get; set; }
 
