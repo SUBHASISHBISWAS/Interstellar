@@ -23,12 +23,12 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 //
 
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddScoped<CardTotalExpenditureUpdateConsumer>();
+builder.Services.AddScoped<CardTransactionUpdateConsumer>();
 //Mass Transit
 
 builder.Services.AddMassTransit(config =>
 {
-    config.AddConsumer<CardTotalExpenditureUpdateConsumer>();
+    config.AddConsumer<CardTransactionUpdateConsumer>();
 
     config.UsingRabbitMq((ctx, cfg) =>
     {
@@ -36,7 +36,7 @@ builder.Services.AddMassTransit(config =>
 
         cfg.ReceiveEndpoint(EventBusConstants.CardUpdateQueue, c =>
         {
-            c.ConfigureConsumer<CardTotalExpenditureUpdateConsumer>(ctx);
+            c.ConfigureConsumer<CardTransactionUpdateConsumer>(ctx);
         });
     });
 
