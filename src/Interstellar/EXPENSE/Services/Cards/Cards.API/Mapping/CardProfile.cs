@@ -1,17 +1,16 @@
 ﻿using AutoMapper;
 
-using Cards.Application.Features.Cards.Command.UpdateCard;
 using Cards.Application.Features.Cards.Command.UpdateCardTransactions;
 
 using EventBus.Messages.Events;
 
-namespace Cards.API.Mapping
+namespace Cards.API.Mapping;
+
+public class CardProfile : Profile
 {
-    public class CardProfile:Profile
+    public CardProfile()
     {
-        public CardProfile()
-        {
-            CreateMap<UpdateCardTransactionCommand, CardSwipeEvent>().ReverseMap();
-        }
+        CreateMap<UpdateCardTransactionCommand, CardSwipeEvent>().ReverseMap();
     }
+
 }
