@@ -1,10 +1,9 @@
-﻿namespace Expense.Aggregator.Enums
+﻿namespace Expense.Aggregator.Enums;
+
+public enum CardTypes
 {
-    public enum CardTypes
-    {
-        VISA,
-        MASTER,
-        AMEX,
-        RUPAY
-    }
+    VISA,
+    MASTER,
+    AMEX,
+    RUPAY
 }

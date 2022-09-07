@@ -1,27 +1,26 @@
 ﻿using Expense.Aggregator.Extensions;
 using Expense.Aggregator.Models;
 
-namespace Expense.Aggregator.Services
+namespace Expense.Aggregator.Services;
+
+public class CardService : ICardService
 {
-    public class CardService : ICardService
+    private readonly HttpClient _httpClient;
+
+    public CardService(HttpClient httpClient)
     {
-        private readonly HttpClient _httpClient;
+        _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+    }
 
-        public CardService(HttpClient httpClient)
-        {
-            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-        }
+    public async Task<CardModel> GetCard(string id)
+    {
+        var response = await _httpClient.GetAsync(_httpClient.BaseAddress+$"/GetCardById/{id}");
+        return await response.ReadContentAs<CardModel>();
+    }
 
-        public async Task<CardModel> GetCard(string id)
-        {
-            var response = await _httpClient.GetAsync(_httpClient.BaseAddress+$"/GetCardById/{id}");
-            return await response.ReadContentAs<CardModel>();
-        }
-
-        public async Task<IEnumerable<CardModel>> GetCards()
-        {
-            var response = await _httpClient.GetAsync("");
-            return await response.ReadContentAs<List<CardModel>>();
-        }
+    public async Task<IEnumerable<CardModel>> GetCards()
+    {
+        var response = await _httpClient.GetAsync("");
+        return await response.ReadContentAs<List<CardModel>>();
     }
 }
