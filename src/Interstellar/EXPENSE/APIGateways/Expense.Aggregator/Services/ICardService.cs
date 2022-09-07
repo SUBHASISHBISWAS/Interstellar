@@ -1,11 +1,10 @@
 ﻿using Expense.Aggregator.Models;
 
-namespace Expense.Aggregator.Services
-{
-    public interface ICardService
-    {
-         Task<IEnumerable<CardModel>> GetCards();
+namespace Expense.Aggregator.Services;
 
-         Task<CardModel> GetCard(string id);
-    }
+public interface ICardService
+{
+    Task<IEnumerable<CardModel>> GetCards();
+
+    Task<CardModel> GetCard(string id);
 }
