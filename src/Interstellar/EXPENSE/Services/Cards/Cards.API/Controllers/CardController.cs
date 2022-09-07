@@ -12,81 +12,78 @@ using Cards.Domain.Enums;
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
-namespace Cards.API.Controllers
+namespace Cards.API.Controllers;
+
+[ApiController]
+[Route("api/v1/[Controller]")]
+public class CardController : ControllerBase
 {
-    [ApiController]
-    [Route("api/v1/[Controller]")]
-    public class CardController:ControllerBase
+    private readonly IMediator _mediator;
+
+    public CardController(IMediator mediator)
     {
-        private readonly IMediator _mediator;
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+    }
 
-        public CardController(IMediator mediator)
-        {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        }
+    [HttpGet(Name = "GetCards")]
+    [ProducesResponseType(typeof(IEnumerable<CardVm>), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<IEnumerable<CardVm>>> GetAllCards()
+    {
 
-        [HttpGet(Name = "GetCards")]
-        [ProducesResponseType(typeof(IEnumerable<CardVm>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<CardVm>>> GetAllCards()
-        {
-            
-            var query = new GetCardListQuery();
-            var cards = await _mediator.Send(query);
-            return Ok(cards);
-        }
+        var query = new GetCardListQuery();
+        var cards = await _mediator.Send(query);
+        return Ok(cards);
+    }
 
-        [HttpGet("GetCardById/{id}", Name = "GetCardById")]
-        [ProducesResponseType(typeof(CardVm), (int)HttpStatusCode.OK)]
+    [HttpGet("GetCardById/{id}", Name = "GetCardById")]
+    [ProducesResponseType(typeof(CardVm), (int)HttpStatusCode.OK)]
 
-        public async Task<ActionResult<CardVm>> GetCardById(string id)
-        {
-          
-            var query = new GetCardByIdQuery(id);
-            var cards = await _mediator.Send(query);
-            return Ok(cards);
-        }
+    public async Task<ActionResult<CardVm>> GetCardById(string id)
+    {
 
-        [HttpGet("GetCardsByCardType/{cardType}", Name = "GetCardsByCardType")]
-        [ProducesResponseType(typeof(IEnumerable<CardVm>), (int)HttpStatusCode.OK)]
+        var query = new GetCardByIdQuery(id);
+        var cards = await _mediator.Send(query);
+        return Ok(cards);
+    }
 
-        public async Task<ActionResult<IEnumerable<CardVm>>> GetCardsByCardType(string cardType)
-        {
-            CardTypes CardTypeEnum;
-            Enum.TryParse<CardTypes>(cardType, true, out CardTypeEnum);
-            var query = new GetCardListByCardTypeQuery(CardTypeEnum);
-            var cards=await _mediator.Send(query);
-            return Ok(cards);
-        }
+    [HttpGet("GetCardsByCardType/{cardType}", Name = "GetCardsByCardType")]
+    [ProducesResponseType(typeof(IEnumerable<CardVm>), (int)HttpStatusCode.OK)]
 
-        [HttpPost(Name = "CreateCard")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<int>> CreateCard([FromBody] CreateCardCommand command)
-        {
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
+    public async Task<ActionResult<IEnumerable<CardVm>>> GetCardsByCardType(string cardType)
+    {
+        Enum.TryParse<CardTypes>(cardType, true, out CardTypes CardTypeEnum);
+        var query = new GetCardListByCardTypeQuery(CardTypeEnum);
+        var cards = await _mediator.Send(query);
+        return Ok(cards);
+    }
 
-        [HttpPut(Name = "UpdateCard")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesDefaultResponseType]
-        public async Task<ActionResult> UpdateCard([FromBody] UpdateCardCommand command)
-        {
-            await _mediator.Send(command);
-            return NoContent();
-        }
+    [HttpPost(Name = "CreateCard")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    public async Task<ActionResult<int>> CreateCard([FromBody] CreateCardCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
 
-        [HttpDelete("{cardId}", Name = "DeleteCard")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesDefaultResponseType]
-        public async Task<ActionResult> DeleteCard(string cardId)
-        {
-            var command = new DeleteCardCommand() { CardId = cardId };
-            await _mediator.Send(command);
-            return NoContent();
-        }
+    [HttpPut(Name = "UpdateCard")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> UpdateCard([FromBody] UpdateCardCommand command)
+    {
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+    [HttpDelete("{cardId}", Name = "DeleteCard")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> DeleteCard(string cardId)
+    {
+        var command = new DeleteCardCommand() { CardId = cardId };
+        await _mediator.Send(command);
+        return NoContent();
     }
 }
