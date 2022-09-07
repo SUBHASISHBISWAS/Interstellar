@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 using AutoMapper;
 
 using Cards.Application.Contracts.Persistance;
 using Cards.Application.Exceptions;
 using Cards.Application.Features.Cards.Command.CreateCard;
-using Cards.Application.Features.Cards.Command.UpdateCard;
 using Cards.Domain.Entity;
 
 using MediatR;
@@ -47,11 +41,11 @@ public class UpdateCardTransactionCommandHandler : IRequestHandler<UpdateCardTra
 
         cardToUpdate.CardTransactions!.Add(request.ExpenseId.ToString());
 
-        if (request.ExpenseDate<=cardToUpdate.CardStatementDate)
+        if (request.ExpenseDate <= cardToUpdate.CardStatementDate)
         {
             cardToUpdate.CardCurrentMonthExpenditure += request.CardSwipeAmount;
         }
-        else if(request.ExpenseDate>cardToUpdate.CardStatementDate && request.ExpenseDate<=cardToUpdate.CardNextStatementDate)
+        else if (request.ExpenseDate > cardToUpdate.CardStatementDate && request.ExpenseDate <= cardToUpdate.CardNextStatementDate)
         {
             cardToUpdate.CardNextMonthExpenditure += request.CardSwipeAmount;
         }
