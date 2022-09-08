@@ -38,6 +38,8 @@ namespace Cards.Application.Features.Cards.Command.ResetCardBillingCycle
             {
                 cardsToBeRegisteredForBillingCycleReset.ToList().ForEach(card =>
                 {
+
+                    var statementTimeDiff = Convert.ToInt32((card.CardNextStatementDate - card.CardStatementDate).TotalHours);
                     var cardUpdateTrigger = new CardUpdateTrigger(card.CardId!, 0, 0, 5);
                     cardUpdateTrigger.OnTimeTriggered += CardUpdateTrigger_OnTimeTriggered;
                     ModelInstances.CardIdsCache.Add(card.CardId!);
