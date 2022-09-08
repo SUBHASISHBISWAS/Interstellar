@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Cards.Application.Behaviours;
+using Cards.Application.Features.Cards.EventHandlers;
 
 using FluentValidation;
 
@@ -19,7 +20,7 @@ public static class ApplicationServiceRegistration
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-
+        services.AddTransient<CardCreatedEventHandlers>();
         return services;
     }
 }
