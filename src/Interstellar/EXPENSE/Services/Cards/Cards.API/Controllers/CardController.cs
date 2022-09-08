@@ -26,6 +26,8 @@ public class CardController : ControllerBase
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
+
+
     [HttpGet(Name = "GetCards")]
     [ProducesResponseType(typeof(IEnumerable<CardVm>), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<IEnumerable<CardVm>>> GetAllCards()

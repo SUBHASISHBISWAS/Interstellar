@@ -1,4 +1,5 @@
 using Cards.API.EventBusConsumer;
+using Cards.API.HostedService;
 using Cards.Application;
 using Cards.Infrastructure;
 
@@ -57,7 +58,9 @@ builder.Services.AddOptions<MassTransitHostOptions>()
         options.StopTimeout = TimeSpan.FromSeconds(30);
     });
 
+builder.Services.AddSingleton<IWorker, Worker>();
 
+builder.Services.AddHostedService<CardUpdateHostedService>();
 
 var app = builder.Build();
 
