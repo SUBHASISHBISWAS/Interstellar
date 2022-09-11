@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { DisplayCardsComponent } from './display-cards/display-cards.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [
+    DisplayCardsComponent
+  ],
+  imports: [CommonModule],
 })
-export class CardModule { }
+export class CardModule {}
