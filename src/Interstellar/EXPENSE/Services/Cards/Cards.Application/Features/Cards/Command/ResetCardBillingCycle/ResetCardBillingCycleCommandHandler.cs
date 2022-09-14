@@ -40,7 +40,7 @@ namespace Cards.Application.Features.Cards.Command.ResetCardBillingCycle
                 {
 
                     var statementTimeDiff = Convert.ToInt32((card.CardNextStatementDate - card.CardStatementDate).TotalHours);
-                    var cardUpdateTrigger = new CardUpdateTrigger(card.CardId!, 0, 0, 5);
+                    var cardUpdateTrigger = new CardUpdateTrigger(card.CardId!, statementTimeDiff, 0, 0);
                     cardUpdateTrigger.OnTimeTriggered += CardUpdateTrigger_OnTimeTriggered;
                     ModelInstances.CardIdsCache.Add(card.CardId!);
                 });
