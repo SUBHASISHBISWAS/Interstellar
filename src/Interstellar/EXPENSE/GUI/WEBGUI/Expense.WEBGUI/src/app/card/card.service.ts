@@ -8,15 +8,15 @@ import { CardType } from './Models/CardTypes';
   providedIn: 'root',
 })
 export class CardService {
-  private cardUrl = 'api/cards';
-  private cardTypeUrl = 'api/cardtypes';
+  private cardInMemoryDataUrl = 'api/cards';
+  private cardTypeInMemoryDataUrl = 'api/cardtypes';
 
-  cards$ = this.http.get<Card[]>(this.cardUrl).pipe(
+  cards$ = this.http.get<Card[]>(this.cardInMemoryDataUrl).pipe(
     tap((data) => console.log('Cards: ', JSON.stringify(data))),
     catchError(this.handleError)
   );
 
-  cardTypes$ = this.http.get<CardType[]>(this.cardTypeUrl).pipe(
+  cardTypes$ = this.http.get<CardType[]>(this.cardTypeInMemoryDataUrl).pipe(
     tap((data) => console.log('CardTypes: ', JSON.stringify(data))),
     catchError(this.handleError)
   );
