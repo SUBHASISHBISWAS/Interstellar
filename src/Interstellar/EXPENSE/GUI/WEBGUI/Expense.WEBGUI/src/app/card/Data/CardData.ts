@@ -1,4 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { CardType } from '../Models/CardTypes';
+import { Card } from '../Models/Card';
 export class CardData implements InMemoryDbService {
   createDb() {
     const cards: Card[] = [
@@ -34,6 +36,21 @@ export class CardData implements InMemoryDbService {
       },
     ];
 
-    return cards;
+    const cardtypes: CardType[] = [
+      {
+        id: 1,
+        name: 'VISA',
+      },
+      {
+        id: 2,
+        name: 'MASTER',
+      },
+      {
+        id: 3,
+        name: 'AMEX',
+      },
+    ];
+
+    return { cards, cardtypes };
   }
 }
