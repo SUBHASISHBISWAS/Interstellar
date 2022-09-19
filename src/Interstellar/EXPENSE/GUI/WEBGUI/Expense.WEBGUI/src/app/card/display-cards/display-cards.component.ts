@@ -17,7 +17,7 @@ export class DisplayCardsComponent implements OnInit {
       return EMPTY;
     })
   );
-  cards$ = this.cardService.cards$.pipe(
+  cards$ = this.cardService.cardWithCardType$.pipe(
     catchError((err) => {
       this.errorMessage = err;
       return EMPTY;

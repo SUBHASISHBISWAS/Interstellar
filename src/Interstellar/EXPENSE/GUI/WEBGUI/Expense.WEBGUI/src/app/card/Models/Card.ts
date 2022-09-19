@@ -1,7 +1,8 @@
 export interface Card {
   cardId: number;
   cardName: string;
-  cardType: string;
+  cardTypeId: number;
+  cardType?: string;
   cardNumber: string;
   cardDescription?: string;
   cardExpiryDate?: Date;

@@ -7,7 +7,7 @@ export class CardData implements InMemoryDbService {
       {
         cardId: 1,
         cardName: 'HDFC',
-        cardType: 'VISA',
+        cardTypeId: 1,
         cardNumber: '1234-1234-1234-1234',
         cardDescription: 'HDFC BANK CARD',
         cardExpiryDate: new Date('15-10-1983'),
@@ -22,7 +22,7 @@ export class CardData implements InMemoryDbService {
       {
         cardId: 2,
         cardName: 'ICICI',
-        cardType: 'VISA',
+        cardTypeId: 2,
         cardNumber: '1234-1234-1234-1234',
         cardDescription: 'HDFC BANK CARD',
         cardExpiryDate: new Date('15-10-1983'),

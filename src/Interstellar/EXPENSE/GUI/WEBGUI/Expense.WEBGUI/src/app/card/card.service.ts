@@ -1,6 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import {
+  combineLatest,
+  combineLatestInit,
+} from 'rxjs/internal/observable/combineLatest';
 import { Card } from './Models/Card';
 import { CardType } from './Models/CardTypes';
 
@@ -8,7 +12,7 @@ import { CardType } from './Models/CardTypes';
   providedIn: 'root',
 })
 export class CardService {
-  private cardInMemoryDataUrl = 'api/cards';
+  private cardInMemoryDataUrl = '/api/cards';
   private cardTypeInMemoryDataUrl = 'api/cardtypes';
 
   cards$ = this.http.get<Card[]>(this.cardInMemoryDataUrl).pipe(
@@ -19,6 +23,18 @@ export class CardService {
   cardTypes$ = this.http.get<CardType[]>(this.cardTypeInMemoryDataUrl).pipe(
     tap((data) => console.log('CardTypes: ', JSON.stringify(data))),
     catchError(this.handleError)
+  );
+
+  cardWithCardType$ = combineLatest([this.cards$, this.cardTypes$]).pipe(
+    map(([cards, cardTypes]) =>
+      cards.map(
+        (card) =>
+          ({
+            ...card,
+            cardType: cardTypes.find((ct) => card.cardTypeId == ct.id)?.name,
+          } as Card)
+      )
+    )
   );
 
   constructor(private http: HttpClient) {}

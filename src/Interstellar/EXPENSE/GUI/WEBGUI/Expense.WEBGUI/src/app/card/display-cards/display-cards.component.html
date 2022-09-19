@@ -33,22 +33,29 @@
       <table class="table mb-0" *ngIf="cards$ | async as cards">
         <thead>
           <tr>
-            <th>Product</th>
-            <th>Code</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>In Stock</th>
+            <th>Card Name</th>
+            <th>Card Type</th>
+            <th>Card Number</th>
+            <th>Description</th>
+            <th>Total Expenduture</th>
+            <th>Total Expenduture in Current Month</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let card of cards">
-            <td>{{ card.cardId }}</td>
             <td>{{ card.cardName }}</td>
+            <td>{{ card.cardType }}</td>
+            <td>{{ card.cardNumber }}</td>
             <td>{{ card.cardDescription }}</td>
             <td>
-              {{ card.cardTotalExpenditure | currency: "USD":"symbol":"1.2-2" }}
+              {{ card.cardTotalExpenditure | currency: "INR":"symbol":"1.2-2" }}
             </td>
-            <td>{{ card.cardCurrentMonthExpenditure }}</td>
+            <td>
+              {{
+                card.cardCurrentMonthExpenditure
+                  | currency: "INR":"symbol":"1.2-2"
+              }}
+            </td>
           </tr>
         </tbody>
       </table>
