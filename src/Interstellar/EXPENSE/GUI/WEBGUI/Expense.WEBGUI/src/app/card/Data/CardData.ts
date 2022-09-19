@@ -34,6 +34,21 @@ export class CardData implements InMemoryDbService {
         cardNextMonthExpenditure: 1000,
         cardTotalExpenditure: 10000,
       },
+      {
+        cardId: 3,
+        cardName: 'AMEX',
+        cardTypeId: 3,
+        cardNumber: '1234-1234-1234-1234',
+        cardDescription: 'AMEX BANK CARD',
+        cardExpiryDate: new Date('15-10-1983'),
+        cardStatementDate: new Date('15-10-1983'),
+        cardDueDate: new Date('15-10-1983'),
+        cardNextStatementDate: new Date('15-10-1983'),
+        gracePeriod: 50,
+        cardCurrentMonthExpenditure: 100,
+        cardNextMonthExpenditure: 1000,
+        cardTotalExpenditure: 10000,
+      },
     ];
 
     const cardtypes: CardType[] = [
