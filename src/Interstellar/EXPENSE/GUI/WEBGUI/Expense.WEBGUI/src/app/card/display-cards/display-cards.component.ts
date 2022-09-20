@@ -20,7 +20,7 @@ import { CardService } from '../card.service';
 export class DisplayCardsComponent implements OnInit {
   pageTitle = 'Cards';
 
-  private cardTypeSelectedSubject = new Subject<number>();
+  private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
   cardTypeSelectedAction$ = this.cardTypeSelectedSubject.asObservable();
 
   cardTypes$ = this.cardService.cardTypes$.pipe(
