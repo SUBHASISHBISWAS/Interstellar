@@ -13,10 +13,10 @@
           >
             <option value="0">- Display All -</option>
             <option
-              *ngFor="let cardtype of cardTypes$ | async"
-              [value]="cardtype.id"
+              *ngFor="let cardType of cardTypes$ | async"
+              [value]="cardType.id"
             >
-              {{ cardtype.name }}
+              {{ cardType.name }}
             </option>
           </select>
         </div>

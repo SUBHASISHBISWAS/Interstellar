@@ -19,6 +19,8 @@ import { CardService } from '../card.service';
 })
 export class DisplayCardsComponent implements OnInit {
   pageTitle = 'Cards';
+  errorMessage = '';
+  cardForm!: FormGroup;
 
   private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
   cardTypeSelectedAction$ = this.cardTypeSelectedSubject.asObservable();
@@ -48,9 +50,6 @@ export class DisplayCardsComponent implements OnInit {
       return EMPTY;
     })
   );
-
-  errorMessage = '';
-  cardForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private cardService: CardService) {}
 
