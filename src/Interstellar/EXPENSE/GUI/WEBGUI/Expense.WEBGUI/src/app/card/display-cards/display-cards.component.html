@@ -6,13 +6,16 @@
   <div class="card-body">
     <div class="container">
       <div class="row justify-content-between">
-        <div class="col-3" *ngIf="cardtypes$ | async as cardtypes">
+        <div class="col-3">
           <select
             class="form-control"
             (change)="onSelected($any($event.target).value)"
           >
             <option value="0">- Display All -</option>
-            <option *ngFor="let cardtype of cardtypes" [value]="cardtype.id">
+            <option
+              *ngFor="let cardtype of cardTypes$ | async"
+              [value]="cardtype.id"
+            >
               {{ cardtype.name }}
             </option>
           </select>

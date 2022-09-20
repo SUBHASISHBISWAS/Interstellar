@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { catchError, EMPTY } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  EMPTY,
+  filter,
+  map,
+  Subject,
+  tap,
+} from 'rxjs';
+import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import { CardService } from '../card.service';
 
 @Component({
@@ -11,18 +20,35 @@ import { CardService } from '../card.service';
 export class DisplayCardsComponent implements OnInit {
   pageTitle = 'Cards';
 
-  cardtypes$ = this.cardService.cardTypes$.pipe(
+  private cardTypeSelectedSubject = new Subject<number>();
+  cardTypeSelectedAction$ = this.cardTypeSelectedSubject.asObservable();
+
+  cardTypes$ = this.cardService.cardTypes$.pipe(
     catchError((err) => {
       this.errorMessage = err;
       return EMPTY;
     })
   );
-  cards$ = this.cardService.cardWithCardType$.pipe(
+
+  cards$ = combineLatest([
+    this.cardService.cards$,
+    this.cardTypeSelectedAction$,
+  ]).pipe(
+    tap(([cards, selectedCardTypeId]) => {
+      console.log(cards);
+      console.log('Selected Card Type:: ' + selectedCardTypeId);
+    }),
+    map(([products, selectedCardTypeId]) =>
+      products.filter((card) =>
+        selectedCardTypeId ? card.cardTypeId === selectedCardTypeId : true
+      )
+    ),
     catchError((err) => {
       this.errorMessage = err;
       return EMPTY;
     })
   );
+
   errorMessage = '';
   cardForm!: FormGroup;
 
@@ -40,7 +66,7 @@ export class DisplayCardsComponent implements OnInit {
     console.log('Not yet implemented');
   }
 
-  onSelected(categoryId: string): void {
-    console.log('Not yet implemented');
+  onSelected(cardTypeId: string): void {
+    this.cardTypeSelectedSubject.next(+cardTypeId);
   }
 }
