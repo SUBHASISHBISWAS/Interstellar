@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DisplayCardsComponent } from './card/display-cards/display-cards.component';
 import { CreateCardComponent } from './card/create-card/create-card.component';
+import { RegisterUserComponent } from './Login/register-user/register-user.component';
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import { CreateCardComponent } from './card/create-card/create-card.component';
       },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: 'CreateCard', component: CreateCardComponent },
+      { path: 'RegisterUser', component: RegisterUserComponent },
     ]),
     CommonModule,
   ],

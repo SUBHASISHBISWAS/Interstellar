@@ -6,10 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CardModule } from './card/card.module';
+import { LoginModule } from './Login/login.module';
+import { RegisterUserComponent } from './Login/register-user/register-user.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, CardModule],
+  imports: [BrowserModule, AppRoutingModule, CardModule, LoginModule],
   providers: [],
   bootstrap: [AppComponent],
 })
