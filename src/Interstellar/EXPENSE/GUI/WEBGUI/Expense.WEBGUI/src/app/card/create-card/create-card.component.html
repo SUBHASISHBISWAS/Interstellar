@@ -3,18 +3,17 @@
 
   <div class="card-body">
     <form novalidate (ngSubmit)="save()" [formGroup]="cardForm">
+      <!-- Card Name -->
       <div class="form-group row mb-2">
-        <label class="col-md-2 col-form-label" for="firstNameId"
+        <label class="col-md-2 col-form-label" for="cardNameId"
           >First Name</label
         >
         <div class="col-md-8">
           <input
             class="form-control"
-            id="firstNameId"
+            id="cardNameId"
             type="text"
             placeholder="Card Name (required)"
-            required
-            minlength="3"
             formControlName="cardName"
             [ngClass]="{
               'is-invalid':
@@ -33,7 +32,126 @@
           </span>
         </div>
       </div>
+      <!-- Card Name -->
 
+      <!-- Email -->
+      <div formGroupName="emailGroup">
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId">Email</label>
+          <div class="col-md-8">
+            <input
+              class="form-control"
+              id="emailId"
+              type="email"
+              placeholder="Email (required)"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid':
+                  cardForm.get('emailGroup')?.errors ||
+                  ((cardForm.get('emailGroup.email')?.touched ||
+                    cardForm.get('emailGroup.email')?.dirty) &&
+                    !cardForm.get('emailGroup.email')?.valid)
+              }"
+            />
+            <span class="invalid-feedback">
+              <span
+                *ngIf="cardForm.get('emailGroup.email')?.errors?.['required']"
+              >
+                Please enter your email address.
+              </span>
+              <span *ngIf="cardForm.get('emailGroup.email')?.errors?.['email']">
+                Please enter a valid email address.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="confirmEmailId"
+            >Confirm Email</label
+          >
+          <div class="col-md-8">
+            <input
+              class="form-control"
+              id="confirmEmailId"
+              type="email"
+              placeholder="Confirm Email (required)"
+              formControlName="confirmEmail"
+              [ngClass]="{
+                'is-invalid':
+                  cardForm.get('emailGroup')?.errors ||
+                  ((cardForm.get('emailGroup.confirmEmail')?.touched ||
+                    cardForm.get('emailGroup.confirmEmail')?.dirty) &&
+                    !cardForm.get('emailGroup.confirmEmail')?.valid)
+              }"
+            />
+            <span class="invalid-feedback">
+              <span
+                *ngIf="cardForm.get('emailGroup.confirmEmail')?.errors?.['required']"
+              >
+                Please confirm your email address.
+              </span>
+              <span *ngIf="cardForm.get('emailGroup')?.errors?.['match']">
+                The confirmation does not match the email address.
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- Email -->
+
+      <!-- Phone-->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="phoneId">Phone</label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="phoneId"
+            type="tel"
+            placeholder="Phone"
+            formControlName="phone"
+            [ngClass]="{ 'is-invalid': !cardForm.get('phone')?.valid }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="cardForm.get('phone')?.errors?.['required']">
+              Please enter your phone number.
+            </span>
+          </span>
+        </div>
+      </div>
+      <!-- Phone-->
+
+      <!-- Notification-->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label pt-0">Send Notifications</label>
+        <div class="col-md-8">
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="email"
+                formControlName="notification"
+                (click)="setNotification('email')"
+              />Email
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="text"
+                formControlName="notification"
+                (click)="setNotification('text')"
+              />Text
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- Notification-->
+
+      <!-- Save Button-->
       <div class="form-group row mb-2">
         <div class="offset-md-2 col-md-4">
           <button
@@ -58,6 +176,7 @@
           </button>
         </div>
       </div>
+      <!-- Save Button-->
     </form>
   </div>
 </div>

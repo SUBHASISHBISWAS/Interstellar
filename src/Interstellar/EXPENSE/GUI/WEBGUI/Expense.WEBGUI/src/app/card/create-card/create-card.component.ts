@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CardService } from '../card.service';
 
 @Component({
@@ -13,8 +13,10 @@ export class CreateCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.cardForm = this.fb.group({
-      cardName: null,
-      cardNumber: null,
+      cardName: [null, [Validators.required, Validators.minLength(3)]],
+      email: [null, [Validators.required, Validators.email]],
+      phone: [null],
+      notification: 'email',
     });
   }
   save() {
@@ -27,5 +29,15 @@ export class CreateCardComponent implements OnInit {
       lastName: 'Harkness',
       sendCatalog: false,
     });
+  }
+
+  setNotification(notifyVia: string): void {
+    const phoneControl = this.cardForm.get('phone');
+    if (notifyVia === 'text') {
+      phoneControl?.setValidators(Validators.required);
+    } else {
+      phoneControl?.clearValidators();
+    }
+    phoneControl?.updateValueAndValidity();
   }
 }
