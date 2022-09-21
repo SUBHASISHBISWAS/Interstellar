@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DisplayCardsComponent } from './card/display-cards/display-cards.component';
+import { CreateCardComponent } from './card/create-card/create-card.component';
 
 @NgModule({
   declarations: [],
@@ -12,6 +13,7 @@ import { DisplayCardsComponent } from './card/display-cards/display-cards.compon
         component: DisplayCardsComponent,
       },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: 'CreateCard', component: CreateCardComponent },
     ]),
     CommonModule,
   ],

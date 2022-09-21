@@ -1,1 +1,66 @@
-<p>create-card works!</p>
+<div class="card">
+  <div class="card-header">Sign Up!</div>
+
+  <div class="card-body">
+    <form novalidate (ngSubmit)="save()" [formGroup]="cardForm">
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="firstNameId"
+          >First Name</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="firstNameId"
+            type="text"
+            placeholder="Card Name (required)"
+            required
+            minlength="3"
+            formControlName="cardName"
+            [ngClass]="{
+              'is-invalid':
+                (cardForm.get('cardName')?.touched ||
+                  cardForm.get('cardName')?.dirty) &&
+                !cardForm.get('cardName')?.valid
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="cardForm.get('cardName')?.errors?.['required']">
+              Please enter your first name.
+            </span>
+            <span *ngIf="cardForm.get('cardName')?.errors?.['minlength']">
+              The first name must be longer than 3 characters.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button
+            class="btn btn-primary mr-3"
+            type="submit"
+            style="width: 80px"
+            [title]="
+              cardForm.valid
+                ? 'Save your entered data'
+                : 'Disabled until the form data is valid'
+            "
+            [disabled]="!cardForm.valid"
+          >
+            Save
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="populateTestData()"
+          >
+            Test Data
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br />Dirty: {{ cardForm.dirty }} <br />Touched: {{ cardForm.touched }}
+<br />Valid: {{ cardForm.valid }} <br />Value:
+{{ cardForm.value | json }}
