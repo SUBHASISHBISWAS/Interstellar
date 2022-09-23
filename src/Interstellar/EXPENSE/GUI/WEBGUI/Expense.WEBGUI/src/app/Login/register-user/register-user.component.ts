@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validator,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-register-user',
@@ -10,11 +17,42 @@ export class RegisterUserComponent implements OnInit {
   userRegistrationForm!: FormGroup;
   constructor(private fb: FormBuilder) {}
 
+  emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
+    const emailControl = c.get('email');
+    const emailConfimControl = c.get('confirmEmail');
+    if (emailControl?.pristine || emailConfimControl?.pristine) {
+      return null;
+    }
+    if (emailControl?.value === emailConfimControl?.value) {
+      return null;
+    }
+    return { match: true };
+  }
+
+  ageRange(min: number, max: number): ValidatorFn {
+    return (c: AbstractControl): { [key: string]: boolean } | null => {
+      if (
+        c.value != null &&
+        (isNaN(c.value) || c.value < min || c.value > max)
+      ) {
+        return { range: true };
+      }
+      return null;
+    };
+  }
+
   ngOnInit(): void {
     this.userRegistrationForm = this.fb.group({
       firstName: [null, [Validators.required, Validators.minLength(3)]],
-      email: [null, [Validators.required, Validators.email]],
+      emailGroup: this.fb.group(
+        {
+          email: ['', Validators.required, Validators.email],
+          confirmEmail: ['', Validators.required],
+        },
+        { validator: this.emailMatcher }
+      ),
       phone: [null],
+      age: [null, this.ageRange(1, 5)],
       notification: 'email',
     });
   }

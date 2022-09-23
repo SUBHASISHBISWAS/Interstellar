@@ -135,6 +135,29 @@
       </div>
       <!-- Phone-->
 
+      <!-- Age-->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="ageId">Age</label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="ageId"
+            type="tel"
+            placeholder="Age"
+            formControlName="age"
+            [ngClass]="{
+              'is-invalid': !userRegistrationForm.get('age')?.valid
+            }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="userRegistrationForm.get('age')?.errors?.['range']">
+              Please enter valid Age.
+            </span>
+          </span>
+        </div>
+      </div>
+      <!-- Age-->
+
       <!-- Notification-->
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label pt-0">Send Notifications</label>

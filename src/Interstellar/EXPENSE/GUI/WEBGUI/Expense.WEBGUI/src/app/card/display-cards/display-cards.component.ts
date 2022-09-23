@@ -51,15 +51,9 @@ export class DisplayCardsComponent implements OnInit {
     })
   );
 
-  constructor(private fb: FormBuilder, private cardService: CardService) {}
+  constructor(private cardService: CardService) {}
 
-  ngOnInit(): void {
-    this.cardService.cards$.subscribe((card) => console.log(card));
-    this.cardForm = this.fb.group({
-      cardName: null,
-      cardNumber: null,
-    });
-  }
+  ngOnInit(): void {}
 
   onAdd(): void {
     console.log('Not yet implemented');
