@@ -1,8 +1,8 @@
 <div class="card">
-  <div class="card-header">Create Card!</div>
+  <div class="card-header">{{ pageTitle }}!</div>
 
   <div class="card-body">
-    <form novalidate (ngSubmit)="save()" [formGroup]="cardForm">
+    <form novalidate (ngSubmit)="saveCard()" [formGroup]="cardForm">
       <!-- Card Number -->
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="cardNumberId"
@@ -82,13 +82,6 @@
             [disabled]="!cardForm.valid"
           >
             Save
-          </button>
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            (click)="populateTestData()"
-          >
-            Test Data
           </button>
         </div>
       </div>

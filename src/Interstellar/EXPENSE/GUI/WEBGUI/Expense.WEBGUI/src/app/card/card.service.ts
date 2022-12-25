@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import {
   combineLatest,
   combineLatestInit,
@@ -38,6 +38,36 @@ export class CardService {
   );
 
   constructor(private http: HttpClient) {}
+
+  getCard(cardId: number): Observable<Card> {
+    if (cardId === 0) {
+      return of(this.initializeCard());
+    }
+    const url = `${this.cardInMemoryDataUrl}/${cardId}`;
+    return this.http.get<Card>(url).pipe(
+      tap((data) => console.log('getCard: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  private initializeCard(): Card {
+    // Return an initialized object
+    return {
+      cardId: 0,
+      cardName: 'HDFC',
+      cardTypeId: 1,
+      cardNumber: '1234-1234-1234-1234',
+      cardDescription: 'HDFC BANK CARD',
+      cardExpiryDate: new Date('15-10-1983'),
+      cardStatementDate: new Date('15-10-1983'),
+      cardDueDate: new Date('15-10-1983'),
+      cardNextStatementDate: new Date('15-10-1983'),
+      gracePeriod: 50,
+      cardCurrentMonthExpenditure: 100,
+      cardNextMonthExpenditure: 1000,
+      cardTotalExpenditure: 10000,
+    };
+  }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     // in a real world app, we may send the server to some remote logging infrastructure

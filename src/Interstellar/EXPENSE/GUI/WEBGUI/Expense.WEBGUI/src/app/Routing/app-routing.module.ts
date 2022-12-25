@@ -16,7 +16,7 @@ import { CardGuard } from '../card/Guards/card.guard';
       },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       {
-        path: 'cards/:id/edit',
+        path: 'cards/:cardId/edit',
         canDeactivate: [CardGuard],
         component: CreateCardComponent,
       },

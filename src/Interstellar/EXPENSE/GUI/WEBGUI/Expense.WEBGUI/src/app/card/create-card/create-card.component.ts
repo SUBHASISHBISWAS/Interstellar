@@ -12,6 +12,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   BehaviorSubject,
   catchError,
@@ -20,6 +21,7 @@ import {
   fromEvent,
   merge,
   Observable,
+  Subscription,
 } from 'rxjs';
 import { GenericValidator } from 'src/app/shared/generic-validator';
 import { CardService } from '../card.service';
@@ -38,10 +40,12 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
   private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
+  private sub!: Subscription;
 
+  pageTitle = 'Card Edit';
   displayMessage: { [key: string]: string } = {};
   cardForm!: FormGroup;
-  cardModel!: Card;
+  cardFormModel!: Card;
   errorMessage = '';
   cardTypeSelectedAction$ = this.cardTypeSelectedSubject.asObservable();
 
@@ -52,7 +56,12 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     })
   );
 
-  constructor(private fb: FormBuilder, private cardService: CardService) {
+  constructor(
+    private fb: FormBuilder,
+    private cardService: CardService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
     this.validationMessages = {
       cardNumber: {
         required: 'Card Number is required.',
@@ -71,19 +80,39 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.cardForm = this.fb.group({
-      cardId: [null],
       cardName: [null, [Validators.required, Validators.minLength(3)]],
       cardNumber: [
         null,
-        [
-          Validators.required,
-          Validators.minLength(12),
-          Validators.maxLength(12),
-        ],
+        [Validators.required, Validators.minLength(2), Validators.maxLength(2)],
       ],
       cardTypeId: [null],
     });
+    this.sub = this.activatedRoute.paramMap.subscribe((params) => {
+      const cardId = +params.get('cardId')!;
+      this.getCard(cardId);
+    });
   }
+
+  getCard(cardId: number): void {
+    this.cardService.getCard(cardId).subscribe({
+      next: (card: Card) => this.displayCard(card),
+      error: (err) => (this.errorMessage = err),
+    });
+  }
+
+  displayCard(card: Card): void {
+    if (this.cardForm) {
+      this.cardForm.reset();
+    }
+    this.cardFormModel = card;
+    console.log(this.cardFormModel);
+    if (this.cardFormModel.cardId === 0) {
+      this.pageTitle = 'Add Card';
+    } else {
+      this.pageTitle = `Edit Card: ${this.cardFormModel.cardName}`;
+    }
+  }
+
   ngAfterViewInit(): void {
     // Watch for the blur event from any input element on the form.
     // This is required because the valueChanges does not provide notification on blur
@@ -109,20 +138,25 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     this.cardForm.patchValue({ cardTypeId: +cardTypeId });
   }
 
-  save() {
+  saveCard() {
     if (this.cardForm.valid) {
       if (this.cardForm.dirty) {
-        const card = { ...this.cardModel };
+        const card = { ...this.cardFormModel, ...this.cardForm.value };
+
+        if (card.cardId === 0) {
+          console.log('IT Saved: ' + JSON.stringify(card!));
+        }
+      } else {
+        this.onSaveComplete();
       }
+    } else {
+      this.errorMessage = 'Please correct the validation errors.';
     }
     console.log(this.cardForm);
     console.log('Saved: ' + JSON.stringify(this.cardForm.value));
   }
-  populateTestData(): void {
-    this.cardForm.patchValue({
-      firstName: 'Jack',
-      lastName: 'Harkness',
-      sendCatalog: false,
-    });
+  onSaveComplete(): void {
+    this.cardForm.reset();
+    console.log('onSaveComplete');
   }
 }
