@@ -21,4 +21,14 @@ import { RegisterUserComponent } from './Login/register-user/register-user.compo
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+  paths = [
+    {
+      path: 'welcome',
+      component: DisplayCardsComponent,
+    },
+    { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+    { path: 'CreateCard', component: CreateCardComponent },
+    { path: 'RegisterUser', component: RegisterUserComponent },
+  ];
+}
