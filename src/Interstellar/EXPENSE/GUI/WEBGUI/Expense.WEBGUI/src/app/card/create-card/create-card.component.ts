@@ -62,7 +62,12 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
-    this.validationMessages = {
+    this.validationMessages = this.getValidationMessage();
+    this.genericValidator = new GenericValidator(this.validationMessages);
+  }
+
+  getValidationMessage(): { [key: string]: { [key: string]: string } } {
+    return {
       cardNumber: {
         required: 'Card Number is required.',
         minlength: 'Card Number must be at least 12 characters.',
@@ -75,7 +80,6 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
         range: 'Rate the product between 1 (lowest) and 5 (highest).',
       },
     };
-    this.genericValidator = new GenericValidator(this.validationMessages);
   }
 
   ngOnInit(): void {
@@ -132,8 +136,7 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       });
   }
 
-  onSelected(cardTypeId: string): void {
-    console.log(+cardTypeId);
+  onCardTypeSelected(cardTypeId: string): void {
     this.cardTypeSelectedSubject.next(+cardTypeId);
     this.cardForm.patchValue({ cardTypeId: +cardTypeId });
   }
@@ -144,7 +147,10 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
         const card = { ...this.cardFormModel, ...this.cardForm.value };
 
         if (card.cardId === 0) {
-          console.log('IT Saved: ' + JSON.stringify(card!));
+          this.cardService.createCard(card).subscribe({
+            next: () => this.onSaveComplete(),
+            error: (err) => (this.errorMessage = err),
+          });
         }
       } else {
         this.onSaveComplete();
@@ -152,11 +158,10 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     } else {
       this.errorMessage = 'Please correct the validation errors.';
     }
-    console.log(this.cardForm);
     console.log('Saved: ' + JSON.stringify(this.cardForm.value));
   }
   onSaveComplete(): void {
     this.cardForm.reset();
-    console.log('onSaveComplete');
+    this.router.navigate(['/']);
   }
 }

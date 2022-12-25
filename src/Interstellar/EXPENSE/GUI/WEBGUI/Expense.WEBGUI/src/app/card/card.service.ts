@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import {
@@ -41,7 +45,7 @@ export class CardService {
 
   getCard(cardId: number): Observable<Card> {
     if (cardId === 0) {
-      return of(this.initializeCard());
+      return of(this.initializeEmptyCard());
     }
     const url = `${this.cardInMemoryDataUrl}/${cardId}`;
     return this.http.get<Card>(url).pipe(
@@ -50,7 +54,17 @@ export class CardService {
     );
   }
 
-  private initializeCard(): Card {
+  createCard(card: Card): Observable<Card> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http
+      .post<Card>(this.cardInMemoryDataUrl, card, { headers })
+      .pipe(
+        tap((data) => console.log('create Card: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  private initializeEmptyCard(): Card {
     // Return an initialized object
     return {
       cardId: 0,

@@ -68,4 +68,10 @@ export class CardData implements InMemoryDbService {
 
     return { cards, cardtypes };
   }
+
+  genId(cards: Card[]): number {
+    return cards.length > 0
+      ? Math.max(...cards.map((hero) => hero.cardId)) + 1
+      : 11;
+  }
 }
