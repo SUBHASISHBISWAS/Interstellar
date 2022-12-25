@@ -34,13 +34,15 @@ import { Card } from '../Models/Card';
 export class CreateCardComponent implements OnInit, AfterViewInit {
   @ViewChildren(FormControlName, { read: ElementRef })
   formInputElements!: ElementRef[];
-  displayMessage: { [key: string]: string } = {};
+
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
+  private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
+
+  displayMessage: { [key: string]: string } = {};
   cardForm!: FormGroup;
   cardModel!: Card;
   errorMessage = '';
-  private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
   cardTypeSelectedAction$ = this.cardTypeSelectedSubject.asObservable();
 
   cardTypes$ = this.cardService.cardTypes$.pipe(
@@ -85,6 +87,7 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Watch for the blur event from any input element on the form.
     // This is required because the valueChanges does not provide notification on blur
+    console.log(this.formInputElements);
     const controlBlurs: Observable<any>[] = this.formInputElements.map(
       (formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur')
     );
@@ -99,7 +102,7 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
         );
       });
   }
-  
+
   onSelected(cardTypeId: string): void {
     console.log(+cardTypeId);
     this.cardTypeSelectedSubject.next(+cardTypeId);
