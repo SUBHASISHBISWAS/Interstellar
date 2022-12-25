@@ -147,12 +147,14 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
         const card = { ...this.cardFormModel, ...this.cardForm.value };
 
         if (card.cardId === 0) {
+          // Create New Card
           this.cardService.createCard(card).subscribe({
             next: () => this.onSaveComplete(),
             error: (err) => (this.errorMessage = err),
           });
         }
       } else {
+        //Update The Card
         this.onSaveComplete();
       }
     } else {
@@ -160,6 +162,7 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     }
     console.log('Saved: ' + JSON.stringify(this.cardForm.value));
   }
+
   onSaveComplete(): void {
     this.cardForm.reset();
     this.router.navigate(['/']);
