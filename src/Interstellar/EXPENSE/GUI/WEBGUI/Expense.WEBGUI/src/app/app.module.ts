@@ -8,11 +8,12 @@ import { AppComponent } from './app.component';
 import { CardModule } from './card/card.module';
 import { LoginModule } from './Login/login.module';
 import { RegisterUserComponent } from './Login/register-user/register-user.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, CardModule, LoginModule],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

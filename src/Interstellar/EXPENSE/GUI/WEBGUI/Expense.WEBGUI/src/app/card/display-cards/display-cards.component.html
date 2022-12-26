@@ -51,13 +51,24 @@
             <td>{{ card.cardNumber }}</td>
             <td>{{ card.cardDescription }}</td>
             <td>
-              {{ card.cardTotalExpenditure | currency: "INR":"symbol":"1.2-2" }}
+              {{
+                card.cardTotalExpenditure
+                  | currency : "INR" : "symbol" : "1.2-2"
+              }}
             </td>
             <td>
               {{
                 card.cardCurrentMonthExpenditure
-                  | currency: "INR":"symbol":"1.2-2"
+                  | currency : "INR" : "symbol" : "1.2-2"
               }}
+            </td>
+            <td>
+              <button
+                class="btn btn-outline-primary btn-sm"
+                [routerLink]="['/cards', card.cardId, 'edit']"
+              >
+                Edit
+              </button>
             </td>
           </tr>
         </tbody>

@@ -74,6 +74,7 @@
         <div class="col-md-8">
           <select
             class="form-control"
+            formControlName="cardType"
             (change)="onCardTypeSelected($any($event.target).value)"
           >
             <option value="0">- Select CardType -</option>

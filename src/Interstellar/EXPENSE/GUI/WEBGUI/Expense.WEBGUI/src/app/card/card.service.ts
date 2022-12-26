@@ -48,6 +48,7 @@ export class CardService {
       return of(this.initializeEmptyCard());
     }
     const url = `${this.cardInMemoryDataUrl}/${cardId}`;
+    console.log(url);
     return this.http.get<Card>(url).pipe(
       tap((data) => console.log('getCard: ' + JSON.stringify(data))),
       catchError(this.handleError)
@@ -67,6 +68,7 @@ export class CardService {
   private initializeEmptyCard(): Card {
     // Return an initialized object
     return {
+      id: 0,
       cardId: 0,
       cardName: '',
       cardTypeId: 0,

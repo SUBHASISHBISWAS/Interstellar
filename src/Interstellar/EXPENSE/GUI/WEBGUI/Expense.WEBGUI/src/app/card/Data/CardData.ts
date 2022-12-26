@@ -1,16 +1,19 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { CardType } from '../Models/CardTypes';
 import { Card } from '../Models/Card';
+import { formatDate } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
 export class CardData implements InMemoryDbService {
   createDb() {
     const cards: Card[] = [
       {
+        id: 1,
         cardId: 1,
         cardName: 'HDFC',
         cardTypeId: 1,
         cardNumber: '1234-1234-1234-1234',
         cardDescription: 'HDFC BANK CARD',
-        cardExpiryDate: new Date('15-10-1983'),
+        cardExpiryDate: new Date(1983, 10, 15),
         cardStatementDate: new Date('15-10-1983'),
         cardDueDate: new Date('15-10-1983'),
         cardNextStatementDate: new Date('15-10-1983'),
@@ -20,6 +23,7 @@ export class CardData implements InMemoryDbService {
         cardTotalExpenditure: 10000,
       },
       {
+        id: 2,
         cardId: 2,
         cardName: 'ICICI',
         cardTypeId: 2,
@@ -35,12 +39,13 @@ export class CardData implements InMemoryDbService {
         cardTotalExpenditure: 10000,
       },
       {
+        id: 3,
         cardId: 3,
         cardName: 'AMEX',
         cardTypeId: 3,
         cardNumber: '1234-1234-1234-1234',
         cardDescription: 'AMEX BANK CARD',
-        cardExpiryDate: new Date('15-10-1983'),
+        cardExpiryDate: new Date('1983/10/15'),
         cardStatementDate: new Date('15-10-1983'),
         cardDueDate: new Date('15-10-1983'),
         cardNextStatementDate: new Date('15-10-1983'),

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -32,6 +33,7 @@ declare var $: any;
   selector: 'app-create-card',
   templateUrl: './create-card.component.html',
   styleUrls: ['./create-card.component.css'],
+  providers: [DatePipe],
 })
 export class CreateCardComponent implements OnInit, AfterViewInit {
   @ViewChildren(FormControlName, { read: ElementRef })
@@ -60,7 +62,8 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private cardService: CardService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
   ) {
     this.validationMessages = this.getValidationMessage();
     this.genericValidator = new GenericValidator(this.validationMessages);
@@ -148,6 +151,18 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     } else {
       this.pageTitle = `Edit Card: ${this.cardFormModel.cardName}`;
     }
+    //Update the Card From with Data from Server
+    this.cardForm.patchValue({
+      cardName: this.cardFormModel.cardName,
+      cardNumber: this.cardFormModel.cardNumber,
+      cardDescription: this.cardFormModel.cardDescription,
+      cardType: this.cardFormModel.cardTypeId,
+      cardExpiryDate: this.cardFormModel.cardExpiryDate,
+      cardDueDate: this.cardFormModel.cardDueDate,
+      cardStatementDate: this.cardFormModel.cardStatementDate,
+      cardNextStatementDate: this.cardFormModel.cardNextStatementDate,
+      gracePeriod: this.cardFormModel.gracePeriod,
+    });
   }
 
   private onSaveComplete(): void {
@@ -181,9 +196,13 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
           Validators.maxLength(12),
         ],
       ],
+      cardType: [null, Validators.required],
       cardTypeId: [null, Validators.required],
       cardExpiryDate: [null, Validators.required],
-      cardDueDate: [null, Validators.required],
+      cardDueDate: [
+        this.datePipe.transform(new Date(), 'short'),
+        Validators.required,
+      ],
       cardStatementDate: [null, Validators.required],
       cardNextStatementDate: [null, Validators.required],
       gracePeriod: [null, Validators.required],

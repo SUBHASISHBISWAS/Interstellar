@@ -9,6 +9,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CreateCardComponent } from './create-card/create-card.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [DisplayCardsComponent, CreateCardComponent],
   imports: [
@@ -19,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     TextMaskModule,
+    RouterModule,
     InMemoryWebApiModule.forRoot(CardData),
   ],
 })
