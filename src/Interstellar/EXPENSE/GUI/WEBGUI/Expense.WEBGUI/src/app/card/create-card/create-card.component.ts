@@ -74,6 +74,58 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getCard(cardId: number): void {
+    this.cardService.getCard(cardId).subscribe({
+      next: (card: Card) => this.displayCard(card),
+      error: (err) => (this.errorMessage = err),
+    });
+  }
+
+  displayCard(card: Card): void {
+    if (this.cardForm) {
+      this.cardForm.reset();
+    }
+    this.cardFormModel = card;
+    console.log(this.cardFormModel);
+    if (this.cardFormModel.cardId === 0) {
+      this.pageTitle = 'Add Card';
+    } else {
+      this.pageTitle = `Edit Card: ${this.cardFormModel.cardName}`;
+    }
+  }
+
+  onCardTypeSelected(cardTypeId: string): void {
+    this.cardTypeSelectedSubject.next(+cardTypeId);
+    this.cardForm.patchValue({ cardTypeId: +cardTypeId });
+  }
+
+  saveCard() {
+    if (this.cardForm.valid) {
+      if (this.cardForm.dirty) {
+        const card = { ...this.cardFormModel, ...this.cardForm.value };
+
+        if (card.cardId === 0) {
+          // Create New Card
+          this.cardService.createCard(card).subscribe({
+            next: () => this.onSaveComplete(),
+            error: (err) => (this.errorMessage = err),
+          });
+        }
+      } else {
+        //Update The Card
+        this.onSaveComplete();
+      }
+    } else {
+      this.errorMessage = 'Please correct the validation errors.';
+    }
+    console.log('Saved: ' + JSON.stringify(this.cardForm.value));
+  }
+
+  onSaveComplete(): void {
+    this.cardForm.reset();
+    this.router.navigate(['/']);
+  }
+  
   private InitilizeControls() {
     this.cardForm = this.fb.group({
       cardName: [
@@ -108,77 +160,6 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       gracePeriod: [null, Validators.required],
     });
   }
-
-  getCard(cardId: number): void {
-    this.cardService.getCard(cardId).subscribe({
-      next: (card: Card) => this.displayCard(card),
-      error: (err) => (this.errorMessage = err),
-    });
-  }
-
-  displayCard(card: Card): void {
-    if (this.cardForm) {
-      this.cardForm.reset();
-    }
-    this.cardFormModel = card;
-    console.log(this.cardFormModel);
-    if (this.cardFormModel.cardId === 0) {
-      this.pageTitle = 'Add Card';
-    } else {
-      this.pageTitle = `Edit Card: ${this.cardFormModel.cardName}`;
-    }
-  }
-
-  ngAfterViewInit(): void {
-    // Watch for the blur event from any input element on the form.
-    // This is required because the valueChanges does not provide notification on blur
-    console.log(this.formInputElements);
-    const controlBlurs: Observable<any>[] = this.formInputElements.map(
-      (formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur')
-    );
-
-    // Merge the blur event observable with the valueChanges observable
-    // so we only need to subscribe once.
-    merge(this.cardForm.valueChanges, ...controlBlurs)
-      .pipe(debounceTime(800))
-      .subscribe((value) => {
-        this.displayMessage = this.genericValidator.processMessages(
-          this.cardForm
-        );
-      });
-  }
-
-  onCardTypeSelected(cardTypeId: string): void {
-    this.cardTypeSelectedSubject.next(+cardTypeId);
-    this.cardForm.patchValue({ cardTypeId: +cardTypeId });
-  }
-
-  saveCard() {
-    if (this.cardForm.valid) {
-      if (this.cardForm.dirty) {
-        const card = { ...this.cardFormModel, ...this.cardForm.value };
-
-        if (card.cardId === 0) {
-          // Create New Card
-          this.cardService.createCard(card).subscribe({
-            next: () => this.onSaveComplete(),
-            error: (err) => (this.errorMessage = err),
-          });
-        }
-      } else {
-        //Update The Card
-        this.onSaveComplete();
-      }
-    } else {
-      this.errorMessage = 'Please correct the validation errors.';
-    }
-    console.log('Saved: ' + JSON.stringify(this.cardForm.value));
-  }
-
-  onSaveComplete(): void {
-    this.cardForm.reset();
-    this.router.navigate(['/']);
-  }
   getValidationMessage(): { [key: string]: { [key: string]: string } } {
     return {
       cardNumber: {
@@ -212,5 +193,23 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
         required: 'GracePeriod is required.',
       },
     };
+  }
+  ngAfterViewInit(): void {
+    // Watch for the blur event from any input element on the form.
+    // This is required because the valueChanges does not provide notification on blur
+    console.log(this.formInputElements);
+    const controlBlurs: Observable<any>[] = this.formInputElements.map(
+      (formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur')
+    );
+
+    // Merge the blur event observable with the valueChanges observable
+    // so we only need to subscribe once.
+    merge(this.cardForm.valueChanges, ...controlBlurs)
+      .pipe(debounceTime(800))
+      .subscribe((value) => {
+        this.displayMessage = this.genericValidator.processMessages(
+          this.cardForm
+        );
+      });
   }
 }
