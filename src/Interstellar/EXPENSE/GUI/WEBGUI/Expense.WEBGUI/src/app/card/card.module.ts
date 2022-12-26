@@ -10,6 +10,10 @@ import { CreateCardComponent } from './create-card/create-card.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [DisplayCardsComponent, CreateCardComponent],
@@ -23,6 +27,9 @@ import { RouterModule } from '@angular/router';
     TextMaskModule,
     RouterModule,
     InMemoryWebApiModule.forRoot(CardData),
+    ButtonsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule,
   ],
 })
 export class CardModule {}

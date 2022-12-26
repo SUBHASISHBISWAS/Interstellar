@@ -1,3 +1,7 @@
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css"
+/>
 <div class="card">
   <div class="card-header">{{ pageTitle }}!</div>
 
@@ -96,12 +100,26 @@
         >
         <div class="col-md-8">
           <input
-            class="form-control date"
-            type="date"
-            placeholder="dd/mm/yyyy"
+            class="form-control"
+            type="text"
+            placeholder="DD-MM-YYYY"
             id="cardDueDateId"
             formControlName="cardDueDate"
-            [ngClass]="{ 'is-invalid': displayMessage['cardDueDate'] }"
+            [ngClass]="{
+              'is-invalid': displayMessage['cardDueDate']
+            }"
+            bsDatepicker
+            [bsConfig]="{
+              containerClass: 'theme-green',
+              isAnimated: true,
+              adaptivePosition: true,
+              dateInputFormat: 'DD-MM-YYYY',
+              showTodayButton: true,
+              todayPosition: 'left',
+              showClearButton: true,
+              clearPosition: 'right'
+            }"
+            triggers="click:click"
           />
           <span class="invalid-feedback">
             {{ displayMessage["cardDueDate"] }}
@@ -117,12 +135,26 @@
         >
         <div class="col-md-8">
           <input
-            class="form-control date"
-            type="date"
-            placeholder="dd/mm/yyyy"
+            class="form-control"
+            type="text"
+            placeholder="DD-MM-YYYY"
             id="cardExpiryDateId"
             formControlName="cardExpiryDate"
-            [ngClass]="{ 'is-invalid': displayMessage['cardExpiryDate'] }"
+            [ngClass]="{
+              'is-invalid': displayMessage['cardExpiryDate']
+            }"
+            bsDatepicker
+            [bsConfig]="{
+              containerClass: 'theme-green',
+              isAnimated: true,
+              adaptivePosition: true,
+              dateInputFormat: 'DD-MM-YYYY',
+              showTodayButton: true,
+              todayPosition: 'left',
+              showClearButton: true,
+              clearPosition: 'right'
+            }"
+            triggers="click:click"
           />
           <span class="invalid-feedback">
             {{ displayMessage["cardExpiryDate"] }}
@@ -138,12 +170,26 @@
         >
         <div class="col-md-8">
           <input
-            class="form-control date"
-            type="date"
-            placeholder="dd/mm/yyyy"
+            class="form-control"
+            type="text"
+            placeholder="DD-MM-YYYY"
             id="cardStatementDateId"
             formControlName="cardStatementDate"
-            [ngClass]="{ 'is-invalid': displayMessage['cardStatementDate'] }"
+            [ngClass]="{
+              'is-invalid': displayMessage['cardStatementDate']
+            }"
+            bsDatepicker
+            [bsConfig]="{
+              containerClass: 'theme-green',
+              isAnimated: true,
+              adaptivePosition: true,
+              dateInputFormat: 'DD-MM-YYYY',
+              showTodayButton: true,
+              todayPosition: 'left',
+              showClearButton: true,
+              clearPosition: 'right'
+            }"
+            triggers="click:click"
           />
           <span class="invalid-feedback">
             {{ displayMessage["cardStatementDate"] }}
@@ -159,15 +205,28 @@
         >
         <div class="col-md-8">
           <input
-            class="form-control date"
-            type="date"
-            placeholder="dd/mm/yyyy"
+            class="form-control"
+            type="text"
+            placeholder="DD-MM-YYYY"
             id="cardNextStatementDateId"
             formControlName="cardNextStatementDate"
             [ngClass]="{
               'is-invalid': displayMessage['cardNextStatementDate']
             }"
+            bsDatepicker
+            [bsConfig]="{
+              containerClass: 'theme-green',
+              isAnimated: true,
+              adaptivePosition: true,
+              dateInputFormat: 'DD-MM-YYYY',
+              showTodayButton: true,
+              todayPosition: 'left',
+              showClearButton: true,
+              clearPosition: 'right'
+            }"
+            triggers="click:click"
           />
+
           <span class="invalid-feedback">
             {{ displayMessage["cardNextStatementDate"] }}
           </span>

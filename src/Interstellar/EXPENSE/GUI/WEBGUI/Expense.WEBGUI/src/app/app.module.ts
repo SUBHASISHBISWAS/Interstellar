@@ -9,10 +9,12 @@ import { CardModule } from './card/card.module';
 import { LoginModule } from './Login/login.module';
 import { RegisterUserComponent } from './Login/register-user/register-user.component';
 import { DatePipe } from '@angular/common';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, CardModule, LoginModule],
+  imports: [BrowserModule, AppRoutingModule, CardModule, LoginModule, BsDatepickerModule.forRoot(), BrowserAnimationsModule],
   providers: [DatePipe],
   bootstrap: [AppComponent],
 })

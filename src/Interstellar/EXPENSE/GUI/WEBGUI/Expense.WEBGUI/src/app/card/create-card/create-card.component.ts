@@ -5,6 +5,8 @@ import {
   ElementRef,
   OnInit,
   ViewChildren,
+  ViewChild,
+  HostListener,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -24,10 +26,12 @@ import {
   Observable,
   Subscription,
 } from 'rxjs';
+
 import { GenericValidator } from 'src/app/shared/generic-validator';
 import { CardService } from '../card.service';
 import { luhnValidator } from '../Helpers/luhn.validators';
 import { Card } from '../Models/Card';
+import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 declare var $: any;
 @Component({
   selector: 'app-create-card',
@@ -38,11 +42,16 @@ declare var $: any;
 export class CreateCardComponent implements OnInit, AfterViewInit {
   @ViewChildren(FormControlName, { read: ElementRef })
   formInputElements!: ElementRef[];
+  @ViewChild(BsDatepickerDirective, { static: false })
+  datepicker?: BsDatepickerDirective;
 
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
   private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
   private sub!: Subscription;
+  private dateFormat = 'dd-MM-yyyy';
+
+  bsInlineValue = new Date();
 
   pageTitle = 'Card Edit';
   displayMessage: { [key: string]: string } = {};
@@ -110,6 +119,25 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
   saveCard() {
     if (this.cardForm.valid) {
       if (this.cardForm.dirty) {
+        this.cardForm.patchValue({
+          cardStatementDate: this.datePipe.transform(
+            this.cardForm.get('cardStatementDate')?.value,
+            this.dateFormat
+          ),
+          cardNextStatementDate: this.datePipe.transform(
+            this.cardForm.get('cardNextStatementDate')?.value,
+            this.dateFormat
+          ),
+          cardExpiryDate: this.datePipe.transform(
+            this.cardForm.get('cardExpiryDate')?.value,
+            this.dateFormat
+          ),
+          cardDueDate: this.datePipe.transform(
+            this.cardForm.get('cardDueDate')?.value,
+            this.dateFormat
+          ),
+        });
+
         const card = { ...this.cardFormModel, ...this.cardForm.value };
 
         if (card.cardId === 0) {
@@ -128,11 +156,16 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     }
     console.log('Saved: ' + JSON.stringify(this.cardForm.value));
   }
+  @HostListener('window:scroll')
+  onScrollEvent() {
+    this.datepicker?.hide();
+  }
 
   //#endregion
 
   //#region private method
 
+  private convertDateToFromat() {}
   private getCard(cardId: number): void {
     this.cardService.getCard(cardId).subscribe({
       next: (card: Card) => this.displayCard(card),
@@ -198,13 +231,10 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       ],
       cardType: [null, Validators.required],
       cardTypeId: [null, Validators.required],
-      cardExpiryDate: [null, Validators.required],
-      cardDueDate: [
-        this.datePipe.transform(new Date(), 'short'),
-        Validators.required,
-      ],
-      cardStatementDate: [null, Validators.required],
-      cardNextStatementDate: [null, Validators.required],
+      cardExpiryDate: [new Date(), Validators.required],
+      cardDueDate: [new Date(), Validators.required],
+      cardStatementDate: [new Date(), Validators.required],
+      cardNextStatementDate: [new Date(), Validators.required],
       gracePeriod: [null, Validators.required],
     });
   }
