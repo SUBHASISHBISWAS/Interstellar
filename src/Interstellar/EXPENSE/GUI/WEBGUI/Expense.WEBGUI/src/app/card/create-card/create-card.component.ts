@@ -27,7 +27,7 @@ import { GenericValidator } from 'src/app/shared/generic-validator';
 import { CardService } from '../card.service';
 import { luhnValidator } from '../Helpers/luhn.validators';
 import { Card } from '../Models/Card';
-
+declare var $: any;
 @Component({
   selector: 'app-create-card',
   templateUrl: './create-card.component.html',
@@ -75,21 +75,64 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       },
       cardName: {
         required: 'Card Name is required.',
+        minlength: 'Card Number must be at least 4 characters.',
+        maxlength: 'Card Number cannot exceed 15 characters.',
       },
-      starRating: {
-        range: 'Rate the product between 1 (lowest) and 5 (highest).',
+      cardDescription: {
+        required: 'Card Description is required.',
+        minlength: 'Card Number must be at least 4 characters.',
+        maxlength: 'Card Number cannot exceed 15 characters.',
+      },
+      cardExpiryDate: {
+        required: 'Expiry Date is required.',
+      },
+      cardDueDate: {
+        required: 'Due Date is required.',
+      },
+      cardStatementDate: {
+        required: 'Statement Date is required.',
+      },
+      cardNextStatementDate: {
+        required: 'Next Statement Date is required.',
+      },
+      gracePeriod: {
+        required: 'GracePeriod is required.',
       },
     };
   }
 
   ngOnInit(): void {
     this.cardForm = this.fb.group({
-      cardName: [null, [Validators.required, Validators.minLength(3)]],
+      cardName: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(15),
+        ],
+      ],
+      cardDescription: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(15),
+        ],
+      ],
       cardNumber: [
         null,
-        [Validators.required, Validators.minLength(2), Validators.maxLength(2)],
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(12),
+        ],
       ],
-      cardTypeId: [null],
+      cardTypeId: [null, Validators.required],
+      cardExpiryDate: [null, Validators.required],
+      cardDueDate: [null, Validators.required],
+      cardStatementDate: [null, Validators.required],
+      cardNextStatementDate: [null, Validators.required],
+      gracePeriod: [null, Validators.required],
     });
     this.sub = this.activatedRoute.paramMap.subscribe((params) => {
       const cardId = +params.get('cardId')!;

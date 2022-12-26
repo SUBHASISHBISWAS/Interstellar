@@ -68,18 +68,18 @@ export class CardService {
     // Return an initialized object
     return {
       cardId: 0,
-      cardName: 'HDFC',
-      cardTypeId: 1,
-      cardNumber: '1234-1234-1234-1234',
-      cardDescription: 'HDFC BANK CARD',
-      cardExpiryDate: new Date('15-10-1983'),
-      cardStatementDate: new Date('15-10-1983'),
-      cardDueDate: new Date('15-10-1983'),
-      cardNextStatementDate: new Date('15-10-1983'),
-      gracePeriod: 50,
-      cardCurrentMonthExpenditure: 100,
-      cardNextMonthExpenditure: 1000,
-      cardTotalExpenditure: 10000,
+      cardName: '',
+      cardTypeId: 0,
+      cardNumber: '',
+      cardDescription: '',
+      cardExpiryDate: undefined,
+      cardStatementDate: undefined,
+      cardDueDate: undefined,
+      cardNextStatementDate: undefined,
+      gracePeriod: 0,
+      cardCurrentMonthExpenditure: 0,
+      cardNextMonthExpenditure: 0,
+      cardTotalExpenditure: 0,
     };
   }
 

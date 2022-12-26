@@ -45,6 +45,27 @@
       </div>
       <!-- Card Name -->
 
+      <!-- Card Description -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="cardDescriptionId"
+          >Card Description</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="cardDescriptionId"
+            type="text"
+            placeholder="Card Description (required)"
+            formControlName="cardDescription"
+            [ngClass]="{ 'is-invalid': displayMessage['cardDescription'] }"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["cardDescription"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Description -->
+
       <!-- Card Type -->
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="cardNameId"
@@ -66,6 +87,113 @@
         </div>
       </div>
       <!-- Card Type -->
+
+      <!-- Card Due Date -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="cardDueDateId"
+          >Due Date</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control date"
+            type="date"
+            placeholder="dd/mm/yyyy"
+            id="cardDueDateId"
+            formControlName="cardDueDate"
+            [ngClass]="{ 'is-invalid': displayMessage['cardDueDate'] }"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["cardDueDate"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Due Date -->
+
+      <!-- Card Expiry Date -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="cardExpiryDateId"
+          >Expiry Date</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control date"
+            type="date"
+            placeholder="dd/mm/yyyy"
+            id="cardExpiryDateId"
+            formControlName="cardExpiryDate"
+            [ngClass]="{ 'is-invalid': displayMessage['cardExpiryDate'] }"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["cardExpiryDate"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Expiry Date -->
+
+      <!-- Card Statement Date -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="cardStatementDateId"
+          >Statement Date</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control date"
+            type="date"
+            placeholder="dd/mm/yyyy"
+            id="cardStatementDateId"
+            formControlName="cardStatementDate"
+            [ngClass]="{ 'is-invalid': displayMessage['cardStatementDate'] }"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["cardStatementDate"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Statement Date -->
+
+      <!-- Card Next Statement Date -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="cardNextStatementDateId"
+          >Next Statement Date</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control date"
+            type="date"
+            placeholder="dd/mm/yyyy"
+            id="cardNextStatementDateId"
+            formControlName="cardNextStatementDate"
+            [ngClass]="{
+              'is-invalid': displayMessage['cardNextStatementDate']
+            }"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["cardNextStatementDate"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Statement Date -->
+
+      <!-- Card gracePeriod -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="gracePeriodId"
+          >Card Grace Period</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="gracePeriodId"
+            type="number"
+            placeholder="Card Grace Period (required)"
+            formControlName="gracePeriod"
+            [ngClass]="{ 'is-invalid': displayMessage['gracePeriod'] }"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["gracePeriod"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Description -->
 
       <!-- Save Button-->
       <div class="form-group row mb-2">
