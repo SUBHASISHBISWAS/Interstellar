@@ -66,6 +66,8 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     this.genericValidator = new GenericValidator(this.validationMessages);
   }
 
+  //#region Life Cycle method
+
   ngOnInit(): void {
     this.InitilizeControls();
     this.sub = this.activatedRoute.paramMap.subscribe((params) => {
@@ -74,25 +76,28 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getCard(cardId: number): void {
-    this.cardService.getCard(cardId).subscribe({
-      next: (card: Card) => this.displayCard(card),
-      error: (err) => (this.errorMessage = err),
-    });
+  ngAfterViewInit(): void {
+    // Watch for the blur event from any input element on the form.
+    // This is required because the valueChanges does not provide notification on blur
+    console.log(this.formInputElements);
+    const controlBlurs: Observable<any>[] = this.formInputElements.map(
+      (formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur')
+    );
+
+    // Merge the blur event observable with the valueChanges observable
+    // so we only need to subscribe once.
+    merge(this.cardForm.valueChanges, ...controlBlurs)
+      .pipe(debounceTime(800))
+      .subscribe((value) => {
+        this.displayMessage = this.genericValidator.processMessages(
+          this.cardForm
+        );
+      });
   }
 
-  displayCard(card: Card): void {
-    if (this.cardForm) {
-      this.cardForm.reset();
-    }
-    this.cardFormModel = card;
-    console.log(this.cardFormModel);
-    if (this.cardFormModel.cardId === 0) {
-      this.pageTitle = 'Add Card';
-    } else {
-      this.pageTitle = `Edit Card: ${this.cardFormModel.cardName}`;
-    }
-  }
+  //#endregion
+
+  //#region Public method
 
   onCardTypeSelected(cardTypeId: string): void {
     this.cardTypeSelectedSubject.next(+cardTypeId);
@@ -121,11 +126,35 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     console.log('Saved: ' + JSON.stringify(this.cardForm.value));
   }
 
-  onSaveComplete(): void {
+  //#endregion
+
+  //#region private method
+
+  private getCard(cardId: number): void {
+    this.cardService.getCard(cardId).subscribe({
+      next: (card: Card) => this.displayCard(card),
+      error: (err) => (this.errorMessage = err),
+    });
+  }
+
+  private displayCard(card: Card): void {
+    if (this.cardForm) {
+      this.cardForm.reset();
+    }
+    this.cardFormModel = card;
+    console.log(this.cardFormModel);
+    if (this.cardFormModel.cardId === 0) {
+      this.pageTitle = 'Add Card';
+    } else {
+      this.pageTitle = `Edit Card: ${this.cardFormModel.cardName}`;
+    }
+  }
+
+  private onSaveComplete(): void {
     this.cardForm.reset();
     this.router.navigate(['/']);
   }
-  
+
   private InitilizeControls() {
     this.cardForm = this.fb.group({
       cardName: [
@@ -160,7 +189,8 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       gracePeriod: [null, Validators.required],
     });
   }
-  getValidationMessage(): { [key: string]: { [key: string]: string } } {
+
+  private getValidationMessage(): { [key: string]: { [key: string]: string } } {
     return {
       cardNumber: {
         required: 'Card Number is required.',
@@ -194,22 +224,5 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       },
     };
   }
-  ngAfterViewInit(): void {
-    // Watch for the blur event from any input element on the form.
-    // This is required because the valueChanges does not provide notification on blur
-    console.log(this.formInputElements);
-    const controlBlurs: Observable<any>[] = this.formInputElements.map(
-      (formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur')
-    );
-
-    // Merge the blur event observable with the valueChanges observable
-    // so we only need to subscribe once.
-    merge(this.cardForm.valueChanges, ...controlBlurs)
-      .pipe(debounceTime(800))
-      .subscribe((value) => {
-        this.displayMessage = this.genericValidator.processMessages(
-          this.cardForm
-        );
-      });
-  }
+  //#endregion
 }
