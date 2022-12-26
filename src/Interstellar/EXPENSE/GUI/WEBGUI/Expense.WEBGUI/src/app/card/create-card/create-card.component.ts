@@ -66,42 +66,15 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     this.genericValidator = new GenericValidator(this.validationMessages);
   }
 
-  getValidationMessage(): { [key: string]: { [key: string]: string } } {
-    return {
-      cardNumber: {
-        required: 'Card Number is required.',
-        minlength: 'Card Number must be at least 12 characters.',
-        maxlength: 'Card Number cannot exceed 12 characters.',
-      },
-      cardName: {
-        required: 'Card Name is required.',
-        minlength: 'Card Number must be at least 4 characters.',
-        maxlength: 'Card Number cannot exceed 15 characters.',
-      },
-      cardDescription: {
-        required: 'Card Description is required.',
-        minlength: 'Card Number must be at least 4 characters.',
-        maxlength: 'Card Number cannot exceed 15 characters.',
-      },
-      cardExpiryDate: {
-        required: 'Expiry Date is required.',
-      },
-      cardDueDate: {
-        required: 'Due Date is required.',
-      },
-      cardStatementDate: {
-        required: 'Statement Date is required.',
-      },
-      cardNextStatementDate: {
-        required: 'Next Statement Date is required.',
-      },
-      gracePeriod: {
-        required: 'GracePeriod is required.',
-      },
-    };
+  ngOnInit(): void {
+    this.InitilizeControls();
+    this.sub = this.activatedRoute.paramMap.subscribe((params) => {
+      const cardId = +params.get('cardId')!;
+      this.getCard(cardId);
+    });
   }
 
-  ngOnInit(): void {
+  private InitilizeControls() {
     this.cardForm = this.fb.group({
       cardName: [
         null,
@@ -133,10 +106,6 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       cardStatementDate: [null, Validators.required],
       cardNextStatementDate: [null, Validators.required],
       gracePeriod: [null, Validators.required],
-    });
-    this.sub = this.activatedRoute.paramMap.subscribe((params) => {
-      const cardId = +params.get('cardId')!;
-      this.getCard(cardId);
     });
   }
 
@@ -209,5 +178,39 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
   onSaveComplete(): void {
     this.cardForm.reset();
     this.router.navigate(['/']);
+  }
+  getValidationMessage(): { [key: string]: { [key: string]: string } } {
+    return {
+      cardNumber: {
+        required: 'Card Number is required.',
+        minlength: 'Card Number must be at least 12 characters.',
+        maxlength: 'Card Number cannot exceed 12 characters.',
+      },
+      cardName: {
+        required: 'Card Name is required.',
+        minlength: 'Card Number must be at least 4 characters.',
+        maxlength: 'Card Number cannot exceed 15 characters.',
+      },
+      cardDescription: {
+        required: 'Card Description is required.',
+        minlength: 'Card Number must be at least 4 characters.',
+        maxlength: 'Card Number cannot exceed 15 characters.',
+      },
+      cardExpiryDate: {
+        required: 'Expiry Date is required.',
+      },
+      cardDueDate: {
+        required: 'Due Date is required.',
+      },
+      cardStatementDate: {
+        required: 'Statement Date is required.',
+      },
+      cardNextStatementDate: {
+        required: 'Next Statement Date is required.',
+      },
+      gracePeriod: {
+        required: 'GracePeriod is required.',
+      },
+    };
   }
 }
