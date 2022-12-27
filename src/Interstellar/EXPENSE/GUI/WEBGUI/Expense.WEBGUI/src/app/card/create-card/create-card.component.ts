@@ -161,6 +161,12 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     this.datepicker?.hide();
   }
 
+  formatNumber(event: any) {
+    let value = event.target.value || '';
+    value = value.replace(/[^0-9 ]/, '');
+    event.target.value = value;
+  }
+
   //#endregion
 
   //#region private method
@@ -224,9 +230,10 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       cardNumber: [
         null,
         [
+          Validators.pattern('^[ 0-9]*$'),
           Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(12),
+          Validators.minLength(19),
+          //Validators.maxLength(15),
         ],
       ],
       cardType: [null, Validators.required],

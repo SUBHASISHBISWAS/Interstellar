@@ -14,9 +14,16 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CreditCardDirective } from './Directives/CreditCardNumber';
+import { OnlyNumberDirective } from './Directives/OnlyNuberForCardNumber';
 
 @NgModule({
-  declarations: [DisplayCardsComponent, CreateCardComponent],
+  declarations: [
+    DisplayCardsComponent,
+    CreateCardComponent,
+    CreditCardDirective,
+    OnlyNumberDirective,
+  ],
   imports: [
     SharedModule,
     BrowserModule,

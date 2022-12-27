@@ -72,7 +72,7 @@ export class CardService {
       cardId: 0,
       cardName: '',
       cardTypeId: 0,
-      cardNumber: '',
+      cardNumber: ' ',
       cardDescription: '',
       cardExpiryDate: undefined,
       cardStatementDate: undefined,
