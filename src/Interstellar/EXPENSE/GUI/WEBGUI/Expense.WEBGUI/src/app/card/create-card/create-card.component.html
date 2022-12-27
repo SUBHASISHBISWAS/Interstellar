@@ -21,7 +21,6 @@
             formControlName="cardNumber"
             [ngClass]="{ 'is-invalid': displayMessage['cardNumber'] }"
             credit-card
-            pattern="[0-9\s]*"
             [OnlyNumber]="true"
           />
           <span class="invalid-feedback">
