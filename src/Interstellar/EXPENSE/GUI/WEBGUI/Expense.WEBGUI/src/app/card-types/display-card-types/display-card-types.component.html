@@ -45,7 +45,7 @@
           <tr *ngFor="let cardType of cardTypes$ | async as CardType">
             <td>{{ cardType.name }}</td>
             <td>{{ cardType.description }}</td>
-            <td>{{ cardType.createdDate }}</td>
+            <td>{{ cardType.createdDate | date : "dd-MM-yyyy" }}</td>
             <td>
               <button
                 class="btn btn-outline-primary btn-sm"
