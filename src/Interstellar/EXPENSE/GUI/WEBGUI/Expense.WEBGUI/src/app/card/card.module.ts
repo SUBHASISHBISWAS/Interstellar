@@ -26,17 +26,8 @@ import { OnlyNumberDirective } from './Directives/OnlyNuberForCardNumber';
   ],
   imports: [
     SharedModule,
-    BrowserModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     TextMaskModule,
-    RouterModule,
     InMemoryWebApiModule.forRoot(CardData),
-    ButtonsModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule,
   ],
 })
 export class CardModule {}
