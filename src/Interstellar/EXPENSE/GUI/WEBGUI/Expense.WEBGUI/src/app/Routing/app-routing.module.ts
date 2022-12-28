@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DisplayCardsComponent } from '../card/display-cards/display-cards.component';
+import { CreateCardTypesComponent } from '../card-types/create-card-types/create-card-types.component';
+import { DisplayCardTypesComponent } from '../card-types/display-card-types/display-card-types.component';
 import { CreateCardComponent } from '../card/create-card/create-card.component';
-import { RegisterUserComponent } from '../Login/register-user/register-user.component';
+import { DisplayCardsComponent } from '../card/display-cards/display-cards.component';
 import { CardGuard } from '../card/Guards/card.guard';
+import { RegisterUserComponent } from '../Login/register-user/register-user.component';
 
 @NgModule({
   declarations: [],
@@ -19,6 +21,16 @@ import { CardGuard } from '../card/Guards/card.guard';
         path: 'cards/:cardId/edit',
         canDeactivate: [CardGuard],
         component: CreateCardComponent,
+      },
+      {
+        path: 'cardtypes/:id/edit',
+        canDeactivate: [CardGuard],
+        component: CreateCardTypesComponent,
+      },
+      {
+        path: 'cardtypes',
+        canDeactivate: [CardGuard],
+        component: DisplayCardTypesComponent,
       },
       { path: 'RegisterUser', component: RegisterUserComponent },
     ]),

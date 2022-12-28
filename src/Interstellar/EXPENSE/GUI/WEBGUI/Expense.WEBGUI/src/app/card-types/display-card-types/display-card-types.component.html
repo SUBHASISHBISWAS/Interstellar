@@ -1,1 +1,66 @@
-<p>display-card-types works!</p>
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle }}
+  </div>
+
+  <div class="card-body">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-3">
+          <select
+            class="form-control"
+            (change)="onSelected($any($event.target).value)"
+          >
+            <option value="0">- Display All -</option>
+            <option
+              *ngFor="let cardType of allCardTypes$ | async"
+              [value]="cardType.id"
+            >
+              {{ cardType.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="onAdd()"
+          >
+            Add Product
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table mb-0" *ngIf="cardTypes$ | async as CardType">
+        <thead>
+          <tr>
+            <th>Card Type</th>
+            <th>Description</th>
+            <th>Created Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cardType of cardTypes$ | async as CardType">
+            <td>{{ cardType.name }}</td>
+            <td>{{ cardType.description }}</td>
+            <td>{{ cardType.createdDate }}</td>
+            <td>
+              <button
+                class="btn btn-outline-primary btn-sm"
+                [routerLink]="['/cards', cardType.id, 'edit']"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>
