@@ -24,7 +24,7 @@ import {
   Observable,
   Subscription,
 } from 'rxjs';
-import { CardType } from 'src/app/card/Models/CardTypes';
+import { CardType } from 'src/app/card-types/Models/CardTypes';
 import { GenericValidator } from 'src/app/shared/generic-validator';
 import { CardTypeService } from '../card-type.service';
 

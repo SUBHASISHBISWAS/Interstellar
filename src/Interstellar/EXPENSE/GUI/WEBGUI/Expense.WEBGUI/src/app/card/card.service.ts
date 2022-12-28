@@ -10,7 +10,7 @@ import {
   combineLatestInit,
 } from 'rxjs/internal/observable/combineLatest';
 import { Card } from './Models/Card';
-import { CardType } from './Models/CardTypes';
+import { CardType } from '../card-types/Models/CardTypes';
 
 @Injectable({
   providedIn: 'root',

@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap, throwError } from 'rxjs';
-import { CardType } from '../card/Models/CardTypes';
+import { CardType } from './Models/CardTypes';
 
 @Injectable({
   providedIn: 'root',
