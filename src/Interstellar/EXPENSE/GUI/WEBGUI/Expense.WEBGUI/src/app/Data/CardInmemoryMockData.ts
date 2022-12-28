@@ -1,3 +1,6 @@
+//https://stackoverflow.com/questions/41458040/how-to-in-memory-web-api-for-two-different-jsons
+//https:stackoverflow.com/questions/40146811/multiple-collections-in-angular-in-memory-web-api
+
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { CardType } from '../card-types/Models/CardTypes';
 import { Card } from '../card/Models/Card';
@@ -78,9 +81,14 @@ export class CardInMemoryMockData implements InMemoryDbService {
     return { cards, cardtypes };
   }
 
+  /*
   genId(cards: Card[]): number {
     return cards.length > 0
       ? Math.max(...cards.map((hero) => hero.cardId)) + 1
       : 11;
+  }
+  */
+  genId<T extends Card | CardType>(myTable: T[]): number {
+    return myTable.length > 0 ? Math.max(...myTable.map((t) => t.id)) + 1 : 11;
   }
 }
