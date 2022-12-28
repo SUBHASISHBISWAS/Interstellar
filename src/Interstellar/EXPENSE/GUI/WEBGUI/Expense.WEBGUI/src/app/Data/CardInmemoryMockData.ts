@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { CardType } from '../../card-types/Models/CardTypes';
-import { Card } from '../Models/Card';
+import { CardType } from '../card-types/Models/CardTypes';
+import { Card } from '../card/Models/Card';
 export class CardInMemoryMockData implements InMemoryDbService {
   createDb() {
     const cards: Card[] = [
