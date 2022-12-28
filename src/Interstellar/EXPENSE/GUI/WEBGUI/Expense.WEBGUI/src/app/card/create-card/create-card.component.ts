@@ -3,19 +3,19 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  OnInit,
-  ViewChildren,
-  ViewChild,
   HostListener,
+  OnInit,
+  ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormControlName,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 import {
   BehaviorSubject,
   catchError,
@@ -26,12 +26,10 @@ import {
   Observable,
   Subscription,
 } from 'rxjs';
-
 import { GenericValidator } from 'src/app/shared/generic-validator';
 import { CardService } from '../card.service';
-import { luhnValidator } from '../Helpers/luhn.validators';
 import { Card } from '../Models/Card';
-import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
+
 declare var $: any;
 @Component({
   selector: 'app-create-card',
