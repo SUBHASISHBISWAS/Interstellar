@@ -24,12 +24,10 @@ import { RegisterUserComponent } from '../Login/register-user/register-user.comp
       },
       {
         path: 'cardtypes/:id/edit',
-        canDeactivate: [CardGuard],
         component: CreateCardTypesComponent,
       },
       {
         path: 'cardtypes',
-        canDeactivate: [CardGuard],
         component: DisplayCardTypesComponent,
       },
       { path: 'RegisterUser', component: RegisterUserComponent },

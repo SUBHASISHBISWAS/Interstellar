@@ -1,1 +1,109 @@
-<p>create-card-types works!</p>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css"
+/>
+<div class="card">
+  <div class="card-header">{{ pageTitle }}!</div>
+
+  <div class="card-body">
+    <form novalidate (ngSubmit)="saveCardType()" [formGroup]="cardTypeForm">
+      <!-- Card Name -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="nameId">Name</label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="nameId"
+            type="text"
+            placeholder="Name (required)"
+            formControlName="name"
+            [ngClass]="{ 'is-invalid': displayMessage['name'] }"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["name"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Name -->
+
+      <!-- Card Description -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="decriptionId"
+          >Description</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="decriptionId"
+            type="text"
+            placeholder="Description (required)"
+            formControlName="description"
+            [ngClass]="{ 'is-invalid': displayMessage['description'] }"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["description"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Description -->
+
+      <!-- Card Due Date -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="createdDateId"
+          >Created Date</label
+        >
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="DD-MM-YYYY"
+            id="createdDateId"
+            formControlName="createdDate"
+            [ngClass]="{
+              'is-invalid': displayMessage['createdDate']
+            }"
+            bsDatepicker
+            [bsConfig]="{
+              containerClass: 'theme-green',
+              isAnimated: true,
+              adaptivePosition: true,
+              dateInputFormat: 'DD-MM-YYYY',
+              showTodayButton: true,
+              todayPosition: 'left',
+              showClearButton: true,
+              clearPosition: 'right'
+            }"
+            triggers="click:click"
+          />
+          <span class="invalid-feedback">
+            {{ displayMessage["createdDate"] }}
+          </span>
+        </div>
+      </div>
+      <!-- Card Due Date -->
+
+      <!-- Save Button-->
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button
+            class="btn btn-primary mr-3"
+            type="submit"
+            style="width: 80px"
+            [title]="
+              cardTypeForm.valid
+                ? 'Save your entered data'
+                : 'Disabled until the form data is valid'
+            "
+            [disabled]="!cardTypeForm.valid"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+      <!-- Save Button-->
+    </form>
+  </div>
+</div>
+<br />Dirty: {{ cardTypeForm.dirty }} <br />Touched: {{ cardTypeForm.touched }}
+<br />Valid: {{ cardTypeForm.valid }} <br />Value:
+{{ cardTypeForm.value | json }}

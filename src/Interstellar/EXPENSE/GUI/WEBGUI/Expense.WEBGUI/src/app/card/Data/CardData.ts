@@ -1,8 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { CardType } from '../Models/CardTypes';
 import { Card } from '../Models/Card';
-import { formatDate } from '@angular/common';
-import { LOCALE_ID } from '@angular/core';
+import { CardType } from '../Models/CardTypes';
 export class CardData implements InMemoryDbService {
   createDb() {
     const cards: Card[] = [
@@ -60,14 +58,20 @@ export class CardData implements InMemoryDbService {
       {
         id: 1,
         name: 'VISA',
+        description: 'My VISA',
+        createdDate: new Date(1983, 10, 15),
       },
       {
         id: 2,
         name: 'MASTER',
+        description: 'My MASTER',
+        createdDate: new Date(1983, 10, 15),
       },
       {
         id: 3,
         name: 'AMEX',
+        description: 'My AMEX',
+        createdDate: new Date(1983, 10, 15),
       },
     ];
 
