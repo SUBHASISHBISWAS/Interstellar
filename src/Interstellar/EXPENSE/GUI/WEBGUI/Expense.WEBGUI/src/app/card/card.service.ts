@@ -5,12 +5,9 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
-import {
-  combineLatest,
-  combineLatestInit,
-} from 'rxjs/internal/observable/combineLatest';
+import { combineLatest } from 'rxjs/internal/observable/combineLatest';
+import { CardTypeService } from '../card-types/card-type.service';
 import { Card } from './Models/Card';
-import { CardType } from '../card-types/Models/CardTypes';
 
 @Injectable({
   providedIn: 'root',
@@ -24,10 +21,13 @@ export class CardService {
     catchError(this.handleError)
   );
 
+  cardTypes$ = this.cardTypeService.cardTypes$;
+  /*
   cardTypes$ = this.http.get<CardType[]>(this.cardTypeInMemoryDataUrl).pipe(
     tap((data) => console.log('CardTypes: ', JSON.stringify(data))),
     catchError(this.handleError)
   );
+  */
 
   cardWithCardType$ = combineLatest([this.cards$, this.cardTypes$]).pipe(
     map(([cards, cardTypes]) =>
@@ -41,7 +41,10 @@ export class CardService {
     )
   );
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private cardTypeService: CardTypeService
+  ) {}
 
   getCard(cardId: number): Observable<Card> {
     if (cardId === 0) {

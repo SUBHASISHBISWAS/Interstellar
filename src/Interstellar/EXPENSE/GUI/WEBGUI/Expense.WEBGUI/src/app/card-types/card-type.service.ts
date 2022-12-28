@@ -14,6 +14,11 @@ export class CardTypeService {
   private cardTypeInMemoryDataUrl = 'api/cardtypes';
   constructor(private http: HttpClient) {}
 
+  cardTypes$ = this.http.get<CardType[]>(this.cardTypeInMemoryDataUrl).pipe(
+    tap((data) => console.log('CardTypes: ', JSON.stringify(data))),
+    catchError(this.handleError)
+  );
+
   getCardType(id: number): Observable<CardType> {
     if (id === 0) {
       return of(this.initializeEmptyCardType());
