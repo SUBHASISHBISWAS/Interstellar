@@ -146,11 +146,22 @@ export class CreateCardTypesComponent implements OnInit, AfterViewInit {
       this.pageTitle = `Edit Card: ${this.cardTypeFormModel.name}`;
     }
     //Update the Card From with Data from Server
+    console.log('SUBHASISH' + this.cardTypeFormModel.createdDate);
     this.cardTypeForm.patchValue({
       name: this.cardTypeFormModel.name,
       description: this.cardTypeFormModel.description,
-      createdDate: this.cardTypeFormModel.createdDate,
+      createdDate: this.datePipe.transform(
+        this.cardTypeFormModel.createdDate,
+        this.dateFormat
+      ),
     });
+    console.log(
+      'SUBHASISH' +
+        this.datePipe.transform(
+          this.cardTypeFormModel.createdDate,
+          this.dateFormat
+        )
+    );
   }
 
   private onSaveComplete(): void {

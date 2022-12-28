@@ -1,5 +1,6 @@
 //https://stackoverflow.com/questions/41458040/how-to-in-memory-web-api-for-two-different-jsons
 //https:stackoverflow.com/questions/40146811/multiple-collections-in-angular-in-memory-web-api
+//https://stackoverflow.com/questions/439630/create-a-date-with-a-set-timezone-without-using-a-string-representation
 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { CardType } from '../card-types/Models/CardTypes';
@@ -14,10 +15,10 @@ export class CardInMemoryMockData implements InMemoryDbService {
         cardTypeId: 1,
         cardNumber: '1234-1234-1234-1234',
         cardDescription: 'HDFC BANK CARD',
-        cardExpiryDate: new Date(1983, 10, 15),
-        cardStatementDate: new Date(1983, 10, 15),
-        cardDueDate: new Date(1983, 10, 15),
-        cardNextStatementDate: new Date(1983, 10, 15),
+        cardExpiryDate: new Date(Date.UTC(1983, 9, 15)),
+        cardStatementDate: new Date(Date.UTC(1983, 9, 15)),
+        cardDueDate: new Date(Date.UTC(1983, 9, 15)),
+        cardNextStatementDate: new Date(Date.UTC(1983, 9, 15)),
         gracePeriod: 50,
         cardCurrentMonthExpenditure: 100,
         cardNextMonthExpenditure: 1000,
@@ -30,10 +31,10 @@ export class CardInMemoryMockData implements InMemoryDbService {
         cardTypeId: 2,
         cardNumber: '1234-1234-1234-1234',
         cardDescription: 'HDFC BANK CARD',
-        cardExpiryDate: new Date(1983, 10, 15),
-        cardStatementDate: new Date(1983, 10, 15),
-        cardDueDate: new Date(1983, 10, 15),
-        cardNextStatementDate: new Date(1983, 10, 15),
+        cardExpiryDate: new Date(Date.UTC(1983, 9, 15)),
+        cardStatementDate: new Date(Date.UTC(1983, 9, 15)),
+        cardDueDate: new Date(Date.UTC(1983, 9, 15)),
+        cardNextStatementDate: new Date(Date.UTC(1983, 9, 15)),
         gracePeriod: 50,
         cardCurrentMonthExpenditure: 100,
         cardNextMonthExpenditure: 1000,
@@ -46,10 +47,10 @@ export class CardInMemoryMockData implements InMemoryDbService {
         cardTypeId: 3,
         cardNumber: '1234-1234-1234-1234',
         cardDescription: 'AMEX BANK CARD',
-        cardExpiryDate: new Date(1983, 10, 15),
-        cardStatementDate: new Date(1983, 10, 15),
-        cardDueDate: new Date(1983, 10, 15),
-        cardNextStatementDate: new Date(1983, 10, 15),
+        cardExpiryDate: new Date(Date.UTC(1983, 9, 15)),
+        cardStatementDate: new Date(Date.UTC(1983, 9, 15)),
+        cardDueDate: new Date(Date.UTC(1983, 9, 15)),
+        cardNextStatementDate: new Date(Date.UTC(1983, 9, 15)),
         gracePeriod: 50,
         cardCurrentMonthExpenditure: 100,
         cardNextMonthExpenditure: 1000,
@@ -62,19 +63,19 @@ export class CardInMemoryMockData implements InMemoryDbService {
         id: 1,
         name: 'VISA',
         description: 'My VISA',
-        createdDate: new Date(1983, 10, 15),
+        createdDate: new Date(Date.UTC(1983, 9, 15)),
       },
       {
         id: 2,
         name: 'MASTER',
         description: 'My MASTER',
-        createdDate: new Date(1983, 10, 15),
+        createdDate: new Date(Date.UTC(1983, 9, 15)),
       },
       {
         id: 3,
         name: 'AMEX',
         description: 'My AMEX',
-        createdDate: new Date(1983, 10, 15),
+        createdDate: new Date(Date.UTC(1983, 9, 15)),
       },
     ];
 

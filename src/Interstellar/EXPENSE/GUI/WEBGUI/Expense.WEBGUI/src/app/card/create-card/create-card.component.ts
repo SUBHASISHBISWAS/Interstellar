@@ -194,10 +194,22 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
       cardNumber: this.cardFormModel.cardNumber,
       cardDescription: this.cardFormModel.cardDescription,
       cardType: this.cardFormModel.cardTypeId,
-      cardExpiryDate: this.cardFormModel.cardExpiryDate,
-      cardDueDate: this.cardFormModel.cardDueDate,
-      cardStatementDate: this.cardFormModel.cardStatementDate,
-      cardNextStatementDate: this.cardFormModel.cardNextStatementDate,
+      cardExpiryDate: this.datePipe.transform(
+        this.cardFormModel.cardExpiryDate,
+        this.dateFormat
+      ),
+      cardDueDate: this.datePipe.transform(
+        this.cardFormModel.cardDueDate,
+        this.dateFormat
+      ),
+      cardStatementDate: this.datePipe.transform(
+        this.cardFormModel.cardStatementDate,
+        this.dateFormat
+      ),
+      cardNextStatementDate: this.datePipe.transform(
+        this.cardFormModel.cardNextStatementDate,
+        this.dateFormat
+      ),
       gracePeriod: this.cardFormModel.gracePeriod,
     });
   }
