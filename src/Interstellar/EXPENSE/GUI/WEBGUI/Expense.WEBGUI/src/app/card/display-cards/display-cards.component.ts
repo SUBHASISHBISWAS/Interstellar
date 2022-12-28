@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import {
-  BehaviorSubject,
-  catchError,
-  EMPTY,
-  filter,
-  map,
-  Subject,
-  tap,
-} from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { BehaviorSubject, catchError, EMPTY, map, tap } from 'rxjs';
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import { CardService } from '../card.service';
 
