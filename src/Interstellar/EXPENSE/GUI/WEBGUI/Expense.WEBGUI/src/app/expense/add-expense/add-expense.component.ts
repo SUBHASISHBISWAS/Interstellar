@@ -40,7 +40,7 @@ export class AddExpenseComponent {
 
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
-  private cardSelectedSubject = new BehaviorSubject<number>(0);
+  private cardSelectedSubject = new BehaviorSubject<string>('');
   private sub!: Subscription;
   private dateFormat = 'dd-MM-yyyy';
 
@@ -92,8 +92,8 @@ export class AddExpenseComponent {
   }
 
   onCardSelected(cardId: string): void {
-    this.cardSelectedSubject.next(+cardId);
-    this.expenseForm.patchValue({ expenseCardId: +cardId });
+    this.cardSelectedSubject.next(cardId);
+    this.expenseForm.patchValue({ expenseCardId: cardId });
   }
 
   saveExpense() {
