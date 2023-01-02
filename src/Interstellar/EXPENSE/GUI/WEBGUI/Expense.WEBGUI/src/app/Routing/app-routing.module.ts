@@ -7,6 +7,8 @@ import { CreateCardComponent } from '../card/create-card/create-card.component';
 import { DisplayCardsComponent } from '../card/display-cards/display-cards.component';
 import { CardGuard } from '../card/Guards/card.guard';
 import { RegisterUserComponent } from '../Login/register-user/register-user.component';
+import { AddExpenseComponent } from './../expense/add-expense/add-expense.component';
+import { DisplayExpensesComponent } from './../expense/display-expenses/display-expenses.component';
 
 @NgModule({
   declarations: [],
@@ -29,6 +31,14 @@ import { RegisterUserComponent } from '../Login/register-user/register-user.comp
       {
         path: 'cardtypes',
         component: DisplayCardTypesComponent,
+      },
+      {
+        path: 'expenses/:id/edit',
+        component: AddExpenseComponent,
+      },
+      {
+        path: 'expenses',
+        component: DisplayExpensesComponent,
       },
       { path: 'RegisterUser', component: RegisterUserComponent },
     ]),

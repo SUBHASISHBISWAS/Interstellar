@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-header">
+    {{ pageTitle }}
+  </div>
+
+  <div class="card-body">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-3">
+          <select
+            class="form-control"
+            (change)="onSelected($any($event.target).value)"
+          >
+            <option value="0">- Display All -</option>
+            <option
+              *ngFor="let expense of allExpenses$ | async"
+              [value]="expense.id"
+            >
+              {{ expense.expenseDescription }}
+            </option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="onAdd()"
+          >
+            Add Product
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table mb-0" *ngIf="expenses$ | async as Expense">
+        <thead>
+          <tr>
+            <th>Expense Amount</th>
+            <th>Expense Description</th>
+            <th>Expense Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let expense of expenses$ | async as Expense">
+            <td>{{ expense.expenseAmount }}</td>
+            <td>{{ expense.expenseDescription }}</td>
+            <td>{{ expense.expenseDate | date : "dd-MM-yyyy" }}</td>
+            <td>
+              <button
+                class="btn btn-outline-primary btn-sm"
+                [routerLink]="['/expenses', expense.id, 'edit']"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{ errorMessage }}
+</div>

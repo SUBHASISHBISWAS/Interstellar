@@ -5,6 +5,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { CardType } from '../card-types/Models/CardTypes';
 import { Card } from '../card/Models/Card';
+import { Expense } from '../expense/Models/Expense';
 export class CardInMemoryMockData implements InMemoryDbService {
   createDb() {
     const cards: Card[] = [
@@ -79,7 +80,28 @@ export class CardInMemoryMockData implements InMemoryDbService {
       },
     ];
 
-    return { cards, cardtypes };
+    const expenses: Expense[] = [
+      {
+        id: 1,
+        expenseAmount: 1000,
+        expenseDescription: 'FreshCo',
+        expenseDate: new Date(Date.UTC(2023, 9, 15)),
+      },
+      {
+        id: 2,
+        expenseAmount: 2000,
+        expenseDescription: 'ShopON',
+        expenseDate: new Date(Date.UTC(2024, 9, 15)),
+      },
+      {
+        id: 3,
+        expenseAmount: 3000,
+        expenseDescription: 'HyperBazar',
+        expenseDate: new Date(Date.UTC(2025, 9, 15)),
+      },
+    ];
+
+    return { cards, cardtypes, expenses };
   }
 
   /*
@@ -89,7 +111,7 @@ export class CardInMemoryMockData implements InMemoryDbService {
       : 11;
   }
   */
-  genId<T extends Card | CardType>(myTable: T[]): number {
+  genId<T extends Card | CardType | Expense>(myTable: T[]): number {
     return myTable.length > 0 ? Math.max(...myTable.map((t) => t.id)) + 1 : 11;
   }
 }

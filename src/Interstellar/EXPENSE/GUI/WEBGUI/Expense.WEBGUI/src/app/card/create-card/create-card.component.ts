@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  Directive,
   ElementRef,
   HostListener,
   OnInit,
