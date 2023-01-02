@@ -1,5 +1,5 @@
 export interface CardType {
-  id: number;
+  id: string;
   name: string;
   description?: string;
   createdDate?: Date;

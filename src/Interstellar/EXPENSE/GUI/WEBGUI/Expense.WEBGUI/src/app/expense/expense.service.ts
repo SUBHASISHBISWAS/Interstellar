@@ -4,7 +4,18 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, tap, throwError } from 'rxjs';
+import { Guid } from 'guid-typescript';
+import {
+  catchError,
+  combineLatest,
+  EMPTY,
+  map,
+  Observable,
+  of,
+  tap,
+  throwError,
+} from 'rxjs';
+import { CardService } from '../card/card.service';
 import { Expense } from './Models/Expense';
 
 @Injectable({
@@ -12,15 +23,38 @@ import { Expense } from './Models/Expense';
 })
 export class ExpenseService {
   private expensesInMemoryDataUrl = 'api/expenses';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cardService: CardService) {}
 
-  expenses$ = this.http.get<Expense[]>(this.expensesInMemoryDataUrl).pipe(
-    tap((data) => console.log('CardTypes: ', JSON.stringify(data))),
-    catchError(this.handleError)
+  private expenses = this.http
+    .get<Expense[]>(this.expensesInMemoryDataUrl)
+    .pipe(
+      tap((data) => console.log('expenses: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+
+  cards$ = this.cardService.cards$;
+  expenses$ = combineLatest([this.expenses, this.cards$]).pipe(
+    tap(([expenses, cards]) => {
+      console.log(expenses);
+      console.log('Selected Expense Id:: ' + cards);
+    }),
+    map(([expenses, cards]) =>
+      expenses.map(
+        (expense) =>
+          ({
+            ...expense,
+            expenseCard: cards.find((c) => expense.expenseCardId === c.cardId)
+              ?.cardName,
+          } as Expense)
+      )
+    ),
+    catchError((err) => {
+      return EMPTY;
+    })
   );
 
-  getExpense(id: number): Observable<Expense> {
-    if (id === 0) {
+  getExpense(id: string): Observable<Expense> {
+    if (Guid.parse(id).isEmpty()) {
       return of(this.initializeExpense());
     }
     const url = `${this.expensesInMemoryDataUrl}/${id}`;
@@ -44,10 +78,11 @@ export class ExpenseService {
   private initializeExpense(): Expense {
     // Return an initialized object
     return {
-      id: 0,
+      id: Guid.createEmpty().toString(),
       expenseAmount: 0,
       expenseDescription: '',
       expenseDate: undefined,
+      expenseCardId: Guid.createEmpty().toString(),
     };
   }
 

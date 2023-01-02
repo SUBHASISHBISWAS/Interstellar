@@ -4,6 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Guid } from 'guid-typescript';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import { CardTypeService } from '../card-types/card-type.service';
@@ -46,8 +47,8 @@ export class CardService {
     private cardTypeService: CardTypeService
   ) {}
 
-  getCard(cardId: number): Observable<Card> {
-    if (cardId === 0) {
+  getCard(cardId: string): Observable<Card> {
+    if (Guid.parse(cardId).isEmpty()) {
       return of(this.initializeEmptyCard());
     }
     const url = `${this.cardInMemoryDataUrl}/${cardId}`;
@@ -71,10 +72,10 @@ export class CardService {
   private initializeEmptyCard(): Card {
     // Return an initialized object
     return {
-      id: 0,
-      cardId: 0,
+      id: Guid.createEmpty().toString(),
+      cardId: Guid.createEmpty().toString(),
       cardName: '',
-      cardTypeId: 0,
+      cardTypeId: Guid.createEmpty().toString(),
       cardNumber: ' ',
       cardDescription: '',
       cardExpiryDate: undefined,

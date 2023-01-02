@@ -38,6 +38,7 @@
           <tr>
             <th>Expense Amount</th>
             <th>Expense Description</th>
+            <th>Expense Card</th>
             <th>Expense Date</th>
           </tr>
         </thead>
@@ -45,6 +46,7 @@
           <tr *ngFor="let expense of expenses$ | async as Expense">
             <td>{{ expense.expenseAmount }}</td>
             <td>{{ expense.expenseDescription }}</td>
+            <td>{{ expense.expenseCard }}</td>
             <td>{{ expense.expenseDate | date : "dd-MM-yyyy" }}</td>
             <td>
               <button

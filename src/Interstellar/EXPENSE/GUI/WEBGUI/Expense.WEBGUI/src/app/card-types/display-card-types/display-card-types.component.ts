@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Guid } from 'guid-typescript';
 import {
   BehaviorSubject,
   catchError,
@@ -17,7 +18,7 @@ import { CardService } from 'src/app/card/card.service';
 export class DisplayCardTypesComponent {
   pageTitle = 'Card Types';
   errorMessage = '';
-  private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
+  private cardTypeSelectedSubject = new BehaviorSubject<string>('');
   cardTypeSelectedAction$ = this.cardTypeSelectedSubject.asObservable();
   allCardTypes$ = this.cardService.cardTypes$.pipe(
     catchError((err) => {
@@ -48,7 +49,8 @@ export class DisplayCardTypesComponent {
   constructor(private cardService: CardService) {}
 
   onSelected(cardTypeId: string): void {
-    this.cardTypeSelectedSubject.next(+cardTypeId);
+    console.log('Hello' + Guid.isGuid(cardTypeId) + cardTypeId);
+    this.cardTypeSelectedSubject.next(cardTypeId);
   }
   onAdd(): void {
     console.log('Not yet implemented');

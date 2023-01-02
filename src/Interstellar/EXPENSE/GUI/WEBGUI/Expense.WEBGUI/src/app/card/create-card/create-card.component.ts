@@ -2,7 +2,6 @@ import { DatePipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
-  Directive,
   ElementRef,
   HostListener,
   OnInit,
@@ -82,7 +81,7 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.InitilizeControls();
     this.sub = this.activatedRoute.paramMap.subscribe((params) => {
-      const cardId = +params.get('cardId')!;
+      const cardId = params.get('cardId')!;
       this.getCard(cardId);
     });
   }
@@ -171,7 +170,7 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
   //#region private method
 
   private convertDateToFromat() {}
-  private getCard(cardId: number): void {
+  private getCard(cardId: string): void {
     this.cardService.getCard(cardId).subscribe({
       next: (card: Card) => this.displayCard(card),
       error: (err) => (this.errorMessage = err),
@@ -184,7 +183,7 @@ export class CreateCardComponent implements OnInit, AfterViewInit {
     }
     this.cardFormModel = card;
     console.log(this.cardFormModel);
-    if (this.cardFormModel.cardId === 0) {
+    if (this.cardFormModel.cardId === '') {
       this.pageTitle = 'Add Card';
     } else {
       this.pageTitle = `Edit Card: ${this.cardFormModel.cardName}`;

@@ -14,7 +14,7 @@ export class DisplayCardsComponent implements OnInit {
   errorMessage = '';
   cardForm!: FormGroup;
 
-  private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
+  private cardTypeSelectedSubject = new BehaviorSubject<string>('');
   cardTypeSelectedAction$ = this.cardTypeSelectedSubject.asObservable();
 
   cardTypes$ = this.cardService.cardTypes$.pipe(
@@ -34,7 +34,9 @@ export class DisplayCardsComponent implements OnInit {
     }),
     map(([products, selectedCardTypeId]) =>
       products.filter((card) =>
-        selectedCardTypeId ? card.cardTypeId === selectedCardTypeId : true
+        selectedCardTypeId
+          ? card.cardTypeId.toString() === selectedCardTypeId.toString()
+          : true
       )
     ),
     catchError((err) => {
@@ -52,6 +54,6 @@ export class DisplayCardsComponent implements OnInit {
   }
 
   onSelected(cardTypeId: string): void {
-    this.cardTypeSelectedSubject.next(+cardTypeId);
+    this.cardTypeSelectedSubject.next(cardTypeId);
   }
 }

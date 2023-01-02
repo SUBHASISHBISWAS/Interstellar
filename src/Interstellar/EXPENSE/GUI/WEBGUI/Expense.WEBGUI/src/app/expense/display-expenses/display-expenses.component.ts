@@ -17,7 +17,7 @@ import { ExpenseService } from '../expense.service';
 export class DisplayExpensesComponent {
   pageTitle = 'Expenses';
   errorMessage = '';
-  private expenseSelectedSubject = new BehaviorSubject<number>(0);
+  private expenseSelectedSubject = new BehaviorSubject<string>('');
   expenseSelectedAction$ = this.expenseSelectedSubject.asObservable();
   allExpenses$ = this.expenseService.expenses$.pipe(
     catchError((err) => {
@@ -30,13 +30,15 @@ export class DisplayExpensesComponent {
     this.expenseService.expenses$,
     this.expenseSelectedAction$,
   ]).pipe(
-    tap(([cardtypes, selectedCardTypeId]) => {
-      console.log(cardtypes);
-      console.log('Selected Card Type:: ' + selectedCardTypeId);
+    tap(([expenses, selectedCardTypeId]) => {
+      console.log(expenses);
+      console.log('Selected Expense Id:: ' + selectedCardTypeId);
     }),
-    map(([cardtypes, selectedCardTypeId]) =>
-      cardtypes.filter((cardtype) =>
-        selectedCardTypeId ? cardtype.id === selectedCardTypeId : true
+    map(([expenses, selectedExpenseId]) =>
+      expenses.filter((expense) =>
+        selectedExpenseId
+          ? expense.id.toString() === selectedExpenseId.toString()
+          : true
       )
     ),
     catchError((err) => {
@@ -48,7 +50,7 @@ export class DisplayExpensesComponent {
   constructor(private expenseService: ExpenseService) {}
 
   onSelected(expenseId: string): void {
-    this.expenseSelectedSubject.next(+expenseId);
+    this.expenseSelectedSubject.next(expenseId);
   }
   onAdd(): void {
     console.log('Not yet implemented');

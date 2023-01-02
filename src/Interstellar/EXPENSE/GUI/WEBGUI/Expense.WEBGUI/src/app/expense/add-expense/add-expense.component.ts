@@ -13,6 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
 import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 import {
   BehaviorSubject,
@@ -39,7 +40,7 @@ export class AddExpenseComponent {
 
   private validationMessages: { [key: string]: { [key: string]: string } };
   private genericValidator: GenericValidator;
-  private cardTypeSelectedSubject = new BehaviorSubject<number>(0);
+  private cardSelectedSubject = new BehaviorSubject<number>(0);
   private sub!: Subscription;
   private dateFormat = 'dd-MM-yyyy';
 
@@ -51,10 +52,12 @@ export class AddExpenseComponent {
   expenseFormModel!: Expense;
   errorMessage = '';
 
+  cards$ = this.expenseService.cards$;
+
   ngOnInit(): void {
     this.InitilizeControls();
     this.sub = this.activatedRoute.paramMap.subscribe((params) => {
-      const id = +params.get('id')!;
+      const id = params.get('id')!;
       this.getExpense(id);
     });
   }
@@ -88,6 +91,11 @@ export class AddExpenseComponent {
     this.genericValidator = new GenericValidator(this.validationMessages);
   }
 
+  onCardSelected(cardId: string): void {
+    this.cardSelectedSubject.next(+cardId);
+    this.expenseForm.patchValue({ expenseCardId: +cardId });
+  }
+
   saveExpense() {
     if (this.expenseForm.valid) {
       if (this.expenseForm.dirty) {
@@ -97,22 +105,21 @@ export class AddExpenseComponent {
             this.dateFormat
           ),
         });
-
+        console.log(Guid.create());
         const cardType = {
           ...this.expenseFormModel,
           ...this.expenseForm.value,
         };
 
         if (cardType.id === 0) {
-          console.log('hello');
-          // Create New Card
+          // Add new Expense
           this.expenseService.addExpense(cardType).subscribe({
             next: () => this.onSaveComplete(),
             error: (err: string) => (this.errorMessage = err),
           });
         }
       } else {
-        //Update The Card
+        //Update Expense
         this.onSaveComplete();
       }
     } else {
@@ -124,7 +131,7 @@ export class AddExpenseComponent {
   onScrollEvent() {
     this.datepicker?.hide();
   }
-  private getExpense(id: number): void {
+  private getExpense(id: string): void {
     this.expenseService.getExpense(id).subscribe({
       next: (expense: Expense) => this.displayExpense(expense),
       error: (err: string) => (this.errorMessage = err),
@@ -137,7 +144,7 @@ export class AddExpenseComponent {
     }
     this.expenseFormModel = expense;
     console.log(this.expenseFormModel);
-    if (this.expenseFormModel.id === 0) {
+    if (this.expenseFormModel.id === '') {
       this.pageTitle = 'Add Expense';
     } else {
       this.pageTitle = `Edit Expense: ${this.expenseFormModel.expenseDescription}`;
@@ -147,6 +154,7 @@ export class AddExpenseComponent {
     this.expenseForm.patchValue({
       expenseAmount: this.expenseFormModel.expenseAmount,
       expenseDescription: this.expenseFormModel.expenseDescription,
+      expenseCardId: this.expenseFormModel.expenseCardId,
       expenseDate: this.datePipe.transform(
         this.expenseFormModel.expenseDate,
         this.dateFormat
@@ -177,6 +185,7 @@ export class AddExpenseComponent {
           Validators.maxLength(15),
         ],
       ],
+      expenseCardId: [],
       expenseDate: [new Date(), Validators.required],
     });
   }
@@ -190,6 +199,9 @@ export class AddExpenseComponent {
         required: 'Description is required.',
         minlength: 'Description must be at least 4 characters.',
         maxlength: 'Description cannot exceed 15 characters.',
+      },
+      expenseCardId: {
+        required: 'Expense Card is required.',
       },
       expenseDate: {
         required: 'Expense Date is required.',

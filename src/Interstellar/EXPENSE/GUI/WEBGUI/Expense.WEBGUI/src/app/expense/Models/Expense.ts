@@ -1,6 +1,8 @@
 export interface Expense {
-  id: number;
+  id: string;
   expenseAmount: number;
   expenseDescription?: string;
   expenseDate?: Date;
+  expenseCardId: string;
+  expenseCard?: string;
 }

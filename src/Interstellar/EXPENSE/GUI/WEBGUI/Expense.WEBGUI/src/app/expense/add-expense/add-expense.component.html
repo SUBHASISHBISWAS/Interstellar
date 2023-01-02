@@ -49,6 +49,26 @@
       </div>
       <!-- Expense Description -->
 
+      <!-- Card Type -->
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="expenseCardId"
+          >Expense Card</label
+        >
+        <div class="col-md-8">
+          <select
+            class="form-control"
+            formControlName="expenseCardId"
+            (change)="onCardSelected($any($event.target).value)"
+          >
+            <option value="0">- Select Card -</option>
+            <option *ngFor="let card of cards$ | async" [value]="card.cardId">
+              {{ card.cardName }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <!-- Card Type -->
+
       <!-- Expense Date -->
       <div class="form-group row mb-2">
         <label class="col-md-2 col-form-label" for="expenseDateId"

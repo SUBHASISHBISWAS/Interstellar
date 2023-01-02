@@ -15,6 +15,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
 import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 import {
   BehaviorSubject,
@@ -57,7 +58,7 @@ export class CreateCardTypesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.InitilizeControls();
     this.sub = this.activatedRoute.paramMap.subscribe((params) => {
-      const id = +params.get('id')!;
+      const id = params.get('id')!;
       this.getCardType(id);
     });
   }
@@ -127,7 +128,7 @@ export class CreateCardTypesComponent implements OnInit, AfterViewInit {
   onScrollEvent() {
     this.datepicker?.hide();
   }
-  private getCardType(id: number): void {
+  private getCardType(id: string): void {
     this.cardTypeService.getCardType(id).subscribe({
       next: (cardType: CardType) => this.displayCardType(cardType),
       error: (err: string) => (this.errorMessage = err),
@@ -140,7 +141,7 @@ export class CreateCardTypesComponent implements OnInit, AfterViewInit {
     }
     this.cardTypeFormModel = cardType;
     console.log(this.cardTypeFormModel);
-    if (this.cardTypeFormModel.id === 0) {
+    if (Guid.parse(this.cardTypeFormModel.id).isEmpty()) {
       this.pageTitle = 'Add Card Type';
     } else {
       this.pageTitle = `Edit Card: ${this.cardTypeFormModel.name}`;
