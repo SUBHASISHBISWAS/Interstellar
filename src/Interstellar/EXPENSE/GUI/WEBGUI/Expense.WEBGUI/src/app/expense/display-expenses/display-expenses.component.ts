@@ -30,15 +30,13 @@ export class DisplayExpensesComponent {
     this.expenseService.expenses$,
     this.expenseSelectedAction$,
   ]).pipe(
-    tap(([expenses, selectedCardTypeId]) => {
+    tap(([expenses, selectedExpenseId]) => {
       console.log(expenses);
-      console.log('Selected Expense Id:: ' + selectedCardTypeId);
+      console.log('Selected Expense Id:: ' + selectedExpenseId);
     }),
     map(([expenses, selectedExpenseId]) =>
       expenses.filter((expense) =>
-        selectedExpenseId
-          ? expense.id.toString() === selectedExpenseId.toString()
-          : true
+        selectedExpenseId != '0' ? expense.id === selectedExpenseId : true
       )
     ),
     catchError((err) => {
