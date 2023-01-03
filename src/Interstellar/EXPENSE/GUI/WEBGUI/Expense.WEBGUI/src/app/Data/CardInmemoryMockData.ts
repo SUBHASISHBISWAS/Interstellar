@@ -1,6 +1,8 @@
 //https://stackoverflow.com/questions/41458040/how-to-in-memory-web-api-for-two-different-jsons
 //https:stackoverflow.com/questions/40146811/multiple-collections-in-angular-in-memory-web-api
 //https://stackoverflow.com/questions/439630/create-a-date-with-a-set-timezone-without-using-a-string-representation
+//https://www.npmjs.com/package/guid-typescript?activeTab=readme
+
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Guid } from 'guid-typescript';
 import { CardType } from '../card-types/Models/CardTypes';
