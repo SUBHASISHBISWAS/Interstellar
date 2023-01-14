@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CardType.Application.Features.CardType.Commands.CreateCardType
 {
-    internal class CreateCardTypeCommandHandler : IRequestHandler<CreateCardTypeCommand, string>
+    public class CreateCardTypeCommandHandler : IRequestHandler<CreateCardTypeCommand, string>
     {
         private readonly ICardTypeRepository _cardTypeRepository;
         private readonly IMapper _mapper;
