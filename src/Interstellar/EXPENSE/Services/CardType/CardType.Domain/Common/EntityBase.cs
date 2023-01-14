@@ -13,7 +13,7 @@ public class EntityBase
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string? CardId { get; protected set; }
+    public string? Id { get; protected set; }
     public string? CreatedBy { get; set; }
     public DateTime CreatedDate { get; set; }
     public string? LastModifiedBy { get; set; }
