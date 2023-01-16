@@ -1,4 +1,5 @@
 using CardType.Application;
+using CardType.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddSwaggerGen();
 
 //Custom Service Registration
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddAutoMapper(typeof(Program));
 
