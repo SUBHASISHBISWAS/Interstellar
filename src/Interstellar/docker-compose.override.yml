@@ -18,6 +18,14 @@ services:
     ports:
         - '1433:1433'
 
+  cardtypedb:
+    container_name: cardtypedb
+    restart: always
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo_data_cardtypedb:/data/db
+
   cards.api:
     container_name: cards.api
     environment:
@@ -41,6 +49,18 @@ services:
         - rabbitmq
     ports:
         - "8001:80"
+
+  cardtype.api:
+    container_name: cardtype.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://cardtypedb:27017"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+        - cardtypedb
+        - rabbitmq
+    ports:
+       - "8002:80"
 
   expense.aggregator:
     container_name: expense.aggregator
@@ -77,4 +97,7 @@ services:
     ports:
         - "5672:5672"
         - "15672:15672" 
+
+
+  
 

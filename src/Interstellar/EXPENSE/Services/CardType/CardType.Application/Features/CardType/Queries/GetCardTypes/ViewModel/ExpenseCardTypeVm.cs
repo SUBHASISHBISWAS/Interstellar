@@ -12,8 +12,8 @@ namespace CardType.Application.Features.CardType.Queries.GetCardTypes.ViewModel
 
         public string? Name { get; set; }
 
-        public string? CardDescription { get; set; }
+        public string? Description { get; set; }
 
-        public DateTime CreatdDate { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

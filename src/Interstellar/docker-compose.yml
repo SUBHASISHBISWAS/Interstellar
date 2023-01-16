@@ -10,16 +10,26 @@ services:
   expensedb:
     image: mcr.microsoft.com/mssql/server:2019-latest
 
+  cardtypedb:
+    image: mongo
+
   cards.api:
     image: ${DOCKER_REGISTRY-}cardsapi
     build:
       context: .
       dockerfile: EXPENSE/Services/Cards/Cards.API/Dockerfile
+
   expense.api:
     image: ${DOCKER_REGISTRY-}expenseapi
     build:
       context: .
       dockerfile: EXPENSE/Services/Expenses/Expense.API/Dockerfile
+
+  cardtype.api:
+    image: ${DOCKER_REGISTRY-}cardtypeapi
+    build:
+      context: .
+      dockerfile: EXPENSE/Services/CardType/CardType.API/Dockerfile
 
   ocelotapigw:
     image: ${DOCKER_REGISTRY-}ocelotapigw
@@ -36,9 +46,14 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
+
+  
+
 volumes:
   mongo_data:
+  mongo_data_cardtypedb:
   portainer_data:
+
 
 
 
