@@ -9,6 +9,8 @@ using CardType.Domain.Common;
 using CardType.Domain.Entity;
 using CardType.Infrastructure.Data;
 
+using MongoDB.Driver;
+
 namespace CardType.Infrastructure.Repository
 {
     public class RepositoryBase<T> : IAsyncRepository<ExpenseCardType> where T : EntityBase
@@ -24,6 +26,30 @@ namespace CardType.Infrastructure.Repository
         {
             await _context.CardTypes.InsertOneAsync(entity);
             return entity;
+        }
+
+        public async Task<bool?> DeleteAsync(ExpenseCardType entity)
+        {
+            FilterDefinition<ExpenseCardType> filter = Builders<ExpenseCardType>.Filter.Eq(p => p.Id, entity.Id);
+
+            var deleteResult = await _context.CardTypes.DeleteOneAsync(filter);
+
+            return deleteResult.IsAcknowledged && deleteResult.DeletedCount > 0;
+        }
+        public async Task<IEnumerable<ExpenseCardType>> GetAllAsync()
+        {
+            return await _context.CardTypes.Find(prop => true).ToListAsync();
+        }
+        public async Task<ExpenseCardType> GetByIdAsync(string id)
+        {
+            return await _context.CardTypes.Find(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool?> UpdateAsync(ExpenseCardType entity)
+        {
+            var updateResult = await _context.CardTypes.ReplaceOneAsync(filter: p => p.Id == entity.Id, replacement: entity);
+
+            return updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
         }
     }
 }
