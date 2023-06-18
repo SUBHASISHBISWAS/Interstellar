@@ -2,5 +2,7 @@
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",
         ".vscode{,/**}"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/ab47d4c6-aa42-4b26-95fa-953b8ed93a69/resourceGroups/rg_subhasish_expensetracker/providers/Microsoft.Web/sites/sbexpensetracker",
+    "appService.deploySubpath": "."
 }
